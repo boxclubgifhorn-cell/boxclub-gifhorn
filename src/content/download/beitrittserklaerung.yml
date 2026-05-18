@@ -1,6 +1,7 @@
-titel: "Beitrittserklärung"
-beschreibung: "Mitgliedsantrag inkl. SEPA-Lastschriftmandat. Ausgefüllt per Mail oder persönlich zurückgeben."
-datei: "/uploads/anmeldung/Boxclub_Gifhorn_Beitrittserklaerung.pdf"
-kategorie: "Mitgliedschaft"
-stand: "Mai 2026"
+titel: Beitrittserklärung
+beschreibung: Mitgliedsantrag inkl. SEPA-Lastschriftmandat. Ausgefüllt per Mail
+  oder persönlich zurückgeben.
+datei: /uploads/downloads/beitrittserklaerung_boxclub_gifhorn.pdf
+kategorie: Mitgliedschaft
+stand: Mai 2026
 reihenfolge: 10
