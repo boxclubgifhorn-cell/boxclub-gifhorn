@@ -24,7 +24,7 @@ backend:
   repo: boxclubgifhorn-cell/boxclub-gifhorn
   branch: main
   # OAuth-Proxy: eigene Vercel-Function im selben Projekt
-  base_url: https://om-boxclub-gifhorn.vercel.app
+  base_url: https://boxclub-gifhorn.vercel.app
   auth_endpoint: api/auth
 
 # Lokale Entwicklung (Decap erkennt localhost automatisch)
