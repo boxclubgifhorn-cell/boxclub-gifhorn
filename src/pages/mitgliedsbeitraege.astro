@@ -1,0 +1,313 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { getEntry } from 'astro:content';
+
+const entry = await getEntry('beitraege', 'aktuell');
+const data = entry?.data ?? {
+  titel: 'Mitgliedsbeiträge',
+  intro: '',
+  monatsbeitraege: [],
+  aufnahmegebuehr: undefined,
+  zahlung_info: '',
+  cta: undefined,
+  faq: [],
+};
+
+const anmeldung = (await getEntry('anmeldung', 'aktuell'))?.data;
+const formularPdf = anmeldung?.formular_pdf || '';
+
+const monats = data.monatsbeitraege || [];
+const aufnahme = data.aufnahmegebuehr;
+const cta = data.cta;
+const faqs = data.faq || [];
+
+const siteUrl = 'https://boxclub-gifhorn.de';
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${siteUrl}/` },
+    { '@type': 'ListItem', position: 2, name: 'Mitgliedsbeiträge', item: `${siteUrl}/mitgliedsbeitraege` },
+  ],
+};
+
+const faqJsonLd =
+  faqs.length >= 2
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faqs.map((item) => ({
+          '@type': 'Question',
+          name: item.frage,
+          acceptedAnswer: { '@type': 'Answer', text: item.antwort },
+        })),
+      }
+    : null;
+---
+
+<Layout
+  title={`${data.titel} — Boxclub Gifhorn e.V.`}
+  description="Mitgliedsbeiträge des Boxclub Gifhorn e.V.: 15 € Kinder/Jugendliche, 25 € Erwachsene, 50 € Familien (2 Erw. + bis zu 3 Kinder), 20 € einmalige Aufnahmegebühr. SEPA-Lastschrift, keine versteckten Kosten."
+  jsonLd={breadcrumb}
+>
+  <Header />
+
+  {faqJsonLd && (
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(faqJsonLd)} />
+  )}
+
+  <main id="main-content">
+    <!-- ===== Page Hero ===== -->
+    <section class="relative py-24 md:py-32 bg-stone-50 dark:bg-primary overflow-hidden">
+      <div class="absolute inset-0 opacity-[0.07] dark:opacity-5 pointer-events-none">
+        <div class="absolute inset-0 dark:hidden" style="background-image: radial-gradient(circle at 1px 1px, #0B0B0F 1px, transparent 0); background-size: 40px 40px;"></div>
+        <div class="absolute inset-0 hidden dark:block" style="background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 40px 40px;"></div>
+      </div>
+
+      <div class="container-custom relative z-10">
+        <nav class="mb-8" aria-label="Breadcrumb">
+          <ol class="flex items-center gap-2 text-sm text-stone-500 dark:text-gray-500">
+            <li><a href="/" class="hover:text-secondary transition-colors">Startseite</a></li>
+            <li><span class="text-stone-400 dark:text-gray-600">/</span></li>
+            <li class="text-secondary">Mitgliedsbeiträge</li>
+          </ol>
+        </nav>
+
+        <div class="inline-flex items-center gap-3 mb-6">
+          <div class="w-12 h-px bg-secondary"></div>
+          <span class="text-secondary font-bold text-sm uppercase tracking-[0.3em]">Beiträge & Konditionen</span>
+        </div>
+        <h1 class="heading-xl text-stone-900 dark:text-white mb-6">{data.titel}</h1>
+        {data.intro && (
+          <p class="text-stone-600 dark:text-gray-400 text-xl max-w-2xl whitespace-pre-line">
+            {data.intro}
+          </p>
+        )}
+      </div>
+    </section>
+
+    <!-- ===== Beitragstabelle ===== -->
+    {monats.length > 0 && (
+      <section class="section-padding bg-white dark:bg-gray-900">
+        <div class="container-custom">
+          <div class="grid md:grid-cols-3 gap-6 mb-10">
+            {monats.map((item, i) => (
+              <div
+                class={`relative bg-white dark:bg-gray-900 border ${i === 2 ? 'border-secondary shadow-lg' : 'border-stone-200 dark:border-gray-800'} p-8 flex flex-col reveal`}
+                style={`transition-delay: ${i * 80}ms`}
+              >
+                {i === 2 && (
+                  <span class="absolute -top-3 left-8 inline-block px-3 py-1 bg-secondary text-white text-[10px] font-bold uppercase tracking-wider">
+                    Familien­tarif
+                  </span>
+                )}
+                <h3 class="text-stone-500 dark:text-gray-500 text-xs font-bold uppercase tracking-[0.2em] mb-4">
+                  {item.gruppe}
+                </h3>
+                <div class="flex items-baseline gap-2 mb-3">
+                  <span class="font-display font-black text-5xl text-stone-900 dark:text-white">{item.preis}</span>
+                  <span class="text-stone-500 dark:text-gray-500 text-sm font-semibold">/ Monat</span>
+                </div>
+                {item.hinweis && (
+                  <p class="text-stone-600 dark:text-gray-400 text-sm leading-relaxed mt-auto">
+                    {item.hinweis}
+                  </p>
+                )}
+              </div>
+            ))}
+          </div>
+
+          <!-- Aufnahmegebühr + Zahlungsinfo -->
+          <div class="grid md:grid-cols-2 gap-6">
+            {aufnahme && (
+              <div class="bg-stone-50 dark:bg-primary border-l-4 border-accent p-6 flex items-start gap-4">
+                <div class="w-12 h-12 flex-shrink-0 bg-accent/10 border border-accent/30 text-accent flex items-center justify-center">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-stone-500 dark:text-gray-500 text-xs font-bold uppercase tracking-[0.2em] mb-1">
+                    {aufnahme.label}
+                  </p>
+                  <p class="text-stone-900 dark:text-white font-display font-black text-2xl mb-1">
+                    {aufnahme.preis}
+                  </p>
+                  {aufnahme.hinweis && (
+                    <p class="text-stone-600 dark:text-gray-400 text-sm">{aufnahme.hinweis}</p>
+                  )}
+                </div>
+              </div>
+            )}
+            {data.zahlung_info && (
+              <div class="bg-stone-50 dark:bg-primary border-l-4 border-secondary p-6 flex items-start gap-4">
+                <div class="w-12 h-12 flex-shrink-0 bg-secondary/10 border border-secondary/30 text-secondary flex items-center justify-center">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-stone-500 dark:text-gray-500 text-xs font-bold uppercase tracking-[0.2em] mb-2">
+                    Zahlung
+                  </p>
+                  <p class="text-stone-700 dark:text-gray-300 text-sm leading-relaxed whitespace-pre-line">
+                    {data.zahlung_info}
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- ===== CTA ===== -->
+    {cta && (
+      <section class="relative section-padding bg-primary text-white overflow-hidden">
+        <div class="absolute inset-0 opacity-10 pointer-events-none">
+          <div class="absolute inset-0" style="background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 32px 32px;"></div>
+        </div>
+        <div class="container-custom relative z-10">
+          <div class="max-w-3xl mx-auto text-center reveal">
+            <div class="inline-flex items-center gap-3 mb-6 justify-center">
+              <div class="w-12 h-px bg-secondary"></div>
+              <span class="text-secondary font-bold text-sm uppercase tracking-[0.3em]">{cta.kicker}</span>
+              <div class="w-12 h-px bg-secondary"></div>
+            </div>
+            <h2 class="heading-lg mb-6">{cta.headline}</h2>
+            {cta.text && (
+              <p class="text-gray-300 text-lg mb-10 whitespace-pre-line">{cta.text}</p>
+            )}
+            <div class="flex flex-wrap justify-center gap-4">
+              <a href={cta.primary_href} class="btn-primary group">
+                {cta.primary_label}
+                <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+              {cta.secondary_label && cta.secondary_href && (
+                <a href={cta.secondary_href} class="inline-flex items-center gap-2 px-6 py-3 text-sm font-bold uppercase tracking-wider text-white border border-white/30 hover:border-white hover:bg-white/5 transition-colors">
+                  {cta.secondary_label}
+                </a>
+              )}
+              {formularPdf && (
+                <a href={formularPdf} download class="inline-flex items-center gap-2 px-6 py-3 text-sm font-bold uppercase tracking-wider text-white border border-white/30 hover:border-white hover:bg-white/5 transition-colors">
+                  Beitrittserklärung (PDF)
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                  </svg>
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- ===== FAQ ===== -->
+    {faqs.length > 0 && (
+      <section id="beitrag-faq" class="section-padding bg-stone-50 dark:bg-primary">
+        <div class="container-custom">
+          <div class="grid lg:grid-cols-2 gap-16 items-start">
+            <div class="lg:sticky lg:top-32 reveal">
+              <div class="inline-flex items-center gap-3 mb-6">
+                <div class="w-12 h-px bg-secondary"></div>
+                <span class="text-secondary font-bold text-sm uppercase tracking-[0.3em]">FAQ</span>
+              </div>
+              <h2 class="heading-lg text-stone-900 dark:text-white mb-6">
+                Fragen zu den <span class="text-secondary">Beiträgen</span>
+              </h2>
+              <p class="text-stone-600 dark:text-gray-400 text-lg mb-8">
+                Antworten auf die häufigsten Fragen rund um Mitgliedschaft,
+                Bezahlung und Kündigung.
+              </p>
+              <a href="/kontakt" class="btn-primary text-sm">
+                Noch Fragen? Kontakt
+              </a>
+            </div>
+
+            <div class="space-y-4" id="beitrag-faq-accordion">
+              {faqs.map((faq, index) => (
+                <div
+                  class="faq-item bg-white dark:bg-transparent border border-stone-200 dark:border-gray-800 hover:border-stone-300 dark:hover:border-gray-700 shadow-sm dark:shadow-none transition-colors duration-300 reveal"
+                  style={`transition-delay: ${index * 100}ms`}
+                >
+                  <button
+                    class="faq-trigger w-full flex items-center justify-between p-6 text-left group"
+                    aria-expanded="false"
+                    aria-controls={`beitrag-faq-content-${index}`}
+                  >
+                    <div class="flex items-center gap-4">
+                      <span class="text-secondary font-black text-sm min-w-[2rem]">0{index + 1}</span>
+                      <span class="text-stone-900 dark:text-white font-bold text-lg group-hover:text-secondary transition-colors duration-300">
+                        {faq.frage}
+                      </span>
+                    </div>
+                    <div class="faq-icon w-10 h-10 border border-stone-300 dark:border-gray-700 flex items-center justify-center flex-shrink-0 ml-4 transition-all duration-300 group-hover:border-secondary">
+                      <svg class="w-4 h-4 text-stone-500 dark:text-gray-400 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </div>
+                  </button>
+                  <div
+                    id={`beitrag-faq-content-${index}`}
+                    class="faq-content overflow-hidden max-h-0 transition-all duration-500 ease-out"
+                  >
+                    <div class="px-6 pb-6 pl-[4.5rem]">
+                      <p class="text-stone-600 dark:text-gray-400 leading-relaxed whitespace-pre-line">
+                        {faq.antwort}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    )}
+  </main>
+  <Footer />
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const accordion = document.getElementById('beitrag-faq-accordion');
+      if (!accordion) return;
+      const triggers = accordion.querySelectorAll('.faq-trigger');
+      triggers.forEach((trigger) => {
+        trigger.addEventListener('click', () => {
+          const item = trigger.closest('.faq-item');
+          const content = item?.querySelector('.faq-content') as HTMLElement;
+          const icon = trigger.querySelector('.faq-icon svg') as HTMLElement;
+          const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+
+          triggers.forEach((other) => {
+            if (other !== trigger) {
+              const oItem = other.closest('.faq-item');
+              const oContent = oItem?.querySelector('.faq-content') as HTMLElement;
+              const oIcon = other.querySelector('.faq-icon svg') as HTMLElement;
+              other.setAttribute('aria-expanded', 'false');
+              if (oContent) oContent.style.maxHeight = '0';
+              if (oIcon) oIcon.style.transform = 'rotate(0deg)';
+              oItem?.classList.remove('border-secondary/50');
+            }
+          });
+
+          if (isOpen) {
+            trigger.setAttribute('aria-expanded', 'false');
+            if (content) content.style.maxHeight = '0';
+            if (icon) icon.style.transform = 'rotate(0deg)';
+            item?.classList.remove('border-secondary/50');
+          } else {
+            trigger.setAttribute('aria-expanded', 'true');
+            if (content) content.style.maxHeight = content.scrollHeight + 'px';
+            if (icon) icon.style.transform = 'rotate(180deg)';
+            item?.classList.add('border-secondary/50');
+          }
+        });
+      });
+    });
+  </script>
+</Layout>

@@ -1,0 +1,487 @@
+---
+// Admin-Audit-Log
+// Liegt absichtlich außerhalb von /admin/ damit Decap das Routing nicht stört.
+// Liest den OAuth-Token, den Decap CMS im LocalStorage ablegt, und ruft damit
+// die GitHub-API auf — Commits + Collaborators. 100% clientseitig.
+
+const REPO = 'schurick1502/onemillion-web-factory';
+const CONTENT_PATH = 'sites/boxclub-gifhorn/project/src/content';
+---
+
+<!doctype html>
+<html lang="de" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Audit-Log | Boxclub Gifhorn CMS</title>
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <!-- Auto-Logout bei Inaktivität -->
+    <script src="/admin/idle-logout.js" is:inline defer></script>
+    <script is:inline>
+      // No-Flash Theme
+      (function () {
+        try {
+          const stored = localStorage.getItem('theme');
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (stored ? stored === 'dark' : prefersDark) {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        } catch (_) {}
+      })();
+    </script>
+    <style>
+      :root {
+        --bg: #fafaf7;
+        --fg: #1c1917;
+        --muted: #57534e;
+        --card: #fff;
+        --border: #e7e5e4;
+        --accent: #FF6B00;
+        --accent-soft: rgba(255, 107, 0, 0.1);
+        --gold: #C8A14A;
+      }
+      .dark {
+        --bg: #0B0B0F;
+        --fg: #f5f2ec;
+        --muted: #a8a29e;
+        --card: #18181b;
+        --border: #27272a;
+      }
+      * { box-sizing: border-box; }
+      html, body {
+        margin: 0;
+        padding: 0;
+        background: var(--bg);
+        color: var(--fg);
+        font-family: 'Inter', system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      header.top {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: color-mix(in srgb, var(--bg) 95%, transparent);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+      }
+      .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+      .topbar {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 1rem 0; gap: 1rem;
+      }
+      .brand { display: flex; align-items: center; gap: 0.75rem; }
+      .brand img { width: 36px; height: 36px; border-radius: 50%; }
+      .brand-text { line-height: 1; }
+      .brand-name { font-weight: 900; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem; }
+      .brand-sub { color: var(--gold); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.25em; margin-top: 2px; }
+      .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+      .nav-links a {
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      .nav-links a:hover { color: var(--fg); }
+      .nav-links a.primary {
+        background: var(--accent);
+        color: #fff;
+        padding: 0.5rem 1rem;
+        transition: background 0.2s;
+      }
+      .nav-links a.primary:hover { background: #e25e00; color: #fff; }
+
+      h1 { font-family: 'Oswald', sans-serif; font-weight: 800; font-size: 2.5rem; margin: 2rem 0 0.5rem; letter-spacing: -0.01em; }
+      .sub { color: var(--muted); font-size: 1.05rem; margin: 0 0 2rem; }
+      h2 { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 1.5rem; margin: 2.5rem 0 1rem; }
+
+      .auth-gate {
+        background: var(--card);
+        border: 1px solid var(--border);
+        padding: 3rem 2rem;
+        text-align: center;
+        max-width: 480px;
+        margin: 4rem auto;
+      }
+      .auth-gate h2 { margin-top: 0; }
+      .btn {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        background: var(--accent);
+        color: #fff;
+        text-decoration: none;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: 0.85rem;
+        margin-top: 1rem;
+        transition: background 0.2s;
+      }
+      .btn:hover { background: #e25e00; }
+
+      .toolbar {
+        display: flex; flex-wrap: wrap; gap: 0.5rem;
+        margin: 1rem 0 1.5rem;
+        align-items: center;
+      }
+      .filter-btn {
+        background: var(--card);
+        border: 1px solid var(--border);
+        color: var(--muted);
+        padding: 0.4rem 0.9rem;
+        font-size: 0.82rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.15s;
+        font-family: inherit;
+      }
+      .filter-btn:hover { color: var(--fg); border-color: var(--accent); }
+      .filter-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+      .collaborators-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 0.75rem;
+        margin: 1rem 0 2rem;
+      }
+      .collab-card {
+        display: flex; align-items: center; gap: 0.75rem;
+        background: var(--card); border: 1px solid var(--border); padding: 0.75rem;
+      }
+      .collab-card img { width: 40px; height: 40px; border-radius: 50%; }
+      .collab-name { font-weight: 700; font-size: 0.9rem; }
+      .collab-role { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+
+      .commits-list { display: flex; flex-direction: column; gap: 0.5rem; }
+      .commit-row {
+        display: grid;
+        grid-template-columns: 44px 1fr auto;
+        gap: 1rem;
+        background: var(--card);
+        border: 1px solid var(--border);
+        padding: 1rem;
+        transition: border-color 0.15s;
+      }
+      .commit-row:hover { border-color: var(--accent); }
+      .commit-row .avatar img { width: 40px; height: 40px; border-radius: 50%; display: block; }
+      .commit-body { min-width: 0; }
+      .commit-message {
+        font-weight: 600;
+        font-size: 0.95rem;
+        line-height: 1.4;
+        margin: 0 0 0.35rem;
+        word-break: break-word;
+      }
+      .commit-meta {
+        display: flex; gap: 0.75rem; align-items: center;
+        font-size: 0.78rem; color: var(--muted); flex-wrap: wrap;
+      }
+      .commit-meta strong { color: var(--fg); font-weight: 600; }
+      .commit-meta time { font-variant-numeric: tabular-nums; }
+      .commit-meta .tag {
+        display: inline-block;
+        background: var(--accent-soft);
+        color: var(--accent);
+        padding: 0.1rem 0.5rem;
+        font-weight: 700;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+      .commit-actions a {
+        color: var(--muted);
+        font-size: 0.78rem;
+        text-decoration: none;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+      .commit-actions a:hover { color: var(--accent); }
+
+      .empty {
+        text-align: center;
+        padding: 3rem 1rem;
+        color: var(--muted);
+      }
+      .spinner {
+        display: inline-block;
+        width: 20px; height: 20px;
+        border: 2px solid var(--border);
+        border-top-color: var(--accent);
+        border-radius: 50%;
+        animation: spin 0.7s linear infinite;
+      }
+      @keyframes spin { to { transform: rotate(360deg); } }
+
+      footer.bottom {
+        margin-top: 4rem;
+        padding: 2rem 0;
+        border-top: 1px solid var(--border);
+        color: var(--muted);
+        font-size: 0.82rem;
+        text-align: center;
+      }
+      footer.bottom a { color: var(--accent); text-decoration: none; }
+      footer.bottom a:hover { text-decoration: underline; }
+    </style>
+  </head>
+  <body>
+    <header class="top">
+      <div class="container topbar">
+        <div class="brand">
+          <img src="/logo.png" alt="Boxclub Gifhorn" />
+          <div class="brand-text">
+            <div class="brand-name">Boxclub CMS</div>
+            <div class="brand-sub">Audit-Log</div>
+          </div>
+        </div>
+        <nav class="nav-links">
+          <a href="/" target="_blank" rel="noopener">Live-Site ↗</a>
+          <a href="/admin/" class="primary">Zum Editor</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <div id="auth-gate" class="auth-gate" hidden>
+        <h2>Nicht eingeloggt</h2>
+        <p style="color: var(--muted)">Bitte erst im CMS einloggen, dann zurückkommen.</p>
+        <a href="/admin/" class="btn">Zum Admin-Login</a>
+      </div>
+
+      <div id="forbidden-gate" class="auth-gate" hidden>
+        <h2>Kein Zugriff auf Audit-Log</h2>
+        <p style="color: var(--muted)">
+          Du bist eingeloggt als <strong id="forbidden-user"></strong>, aber dieser Account
+          ist nicht für die Audit-Log-Ansicht freigeschaltet.<br/><br/>
+          Den CMS-Editor kannst du normal nutzen.
+        </p>
+        <a href="/admin/" class="btn">Zurück zum Editor</a>
+      </div>
+
+      <div id="content" hidden>
+        <h1>Wer war wann da. Was wurde geändert.</h1>
+        <p class="sub">Letzte Änderungen am Inhalt + alle Personen mit Schreibrechten.</p>
+
+        <h2>Personen mit Schreibrechten</h2>
+        <div id="collaborators" class="collaborators-grid">
+          <div class="empty"><span class="spinner"></span> &nbsp; Lade Liste …</div>
+        </div>
+
+        <h2>Letzte Änderungen</h2>
+        <div class="toolbar">
+          <span style="color: var(--muted); font-size: 0.85rem; margin-right: 0.5rem;">Filter:</span>
+          <button class="filter-btn active" data-filter="*">Alle</button>
+        </div>
+        <div id="commits" class="commits-list">
+          <div class="empty"><span class="spinner"></span> &nbsp; Lade Änderungs-Historie …</div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="bottom" id="footer-info" hidden>
+      <p>
+        Diese Seite zeigt Daten direkt aus GitHub.
+        Vollständige Commit-Detail:
+        <a id="repo-link" href={`https://github.com/${REPO}/commits/main`} target="_blank" rel="noopener">
+          github.com/{REPO}/commits ↗
+        </a>
+      </p>
+    </footer>
+
+    <script define:vars={{ REPO, CONTENT_PATH }}>
+      (async function () {
+        // -------- 1. Decap-Token aus LocalStorage lesen --------
+        function readDecapToken() {
+          // Decap CMS speichert den User unter "decap-cms-user" (oder "netlify-cms-user" in alten Versionen)
+          for (const key of ['decap-cms-user', 'netlify-cms-user']) {
+            try {
+              const raw = localStorage.getItem(key);
+              if (!raw) continue;
+              const parsed = JSON.parse(raw);
+              if (parsed && parsed.token) return parsed;
+            } catch (_) {}
+          }
+          return null;
+        }
+
+        const user = readDecapToken();
+        const $auth = document.getElementById('auth-gate');
+        const $content = document.getElementById('content');
+        const $footer = document.getElementById('footer-info');
+        const $forbidden = document.getElementById('forbidden-gate');
+
+        if (!user || !user.token) {
+          $auth.hidden = false;
+          return;
+        }
+
+        // -------- 1b. Whitelist-Check --------
+        let allowlist = [];
+        try {
+          const res = await fetch('/admin/allowlist.json', { cache: 'no-store' });
+          if (res.ok) {
+            const data = await res.json();
+            allowlist = Array.isArray(data.audit_log_users) ? data.audit_log_users : [];
+          }
+        } catch (_) {}
+
+        if (allowlist.length && !allowlist.includes(user.login)) {
+          document.getElementById('forbidden-user').textContent = user.login || '(unbekannt)';
+          $forbidden.hidden = false;
+          return;
+        }
+
+        $content.hidden = false;
+        $footer.hidden = false;
+
+        // -------- 2. GitHub-API-Helfer --------
+        async function gh(path, opts = {}) {
+          const res = await fetch(`https://api.github.com${path}`, {
+            ...opts,
+            headers: {
+              Accept: 'application/vnd.github+json',
+              'X-GitHub-Api-Version': '2022-11-28',
+              Authorization: `Bearer ${user.token}`,
+              ...(opts.headers || {}),
+            },
+          });
+          if (!res.ok) throw new Error(`GitHub ${res.status}: ${await res.text()}`);
+          return res.json();
+        }
+
+        function timeAgo(iso) {
+          const diff = Date.now() - new Date(iso).getTime();
+          const m = Math.floor(diff / 60000);
+          if (m < 1) return 'gerade eben';
+          if (m < 60) return `vor ${m} Min`;
+          const h = Math.floor(m / 60);
+          if (h < 24) return `vor ${h} Std`;
+          const d = Math.floor(h / 24);
+          if (d < 7) return `vor ${d} Tag${d > 1 ? 'en' : ''}`;
+          return new Date(iso).toLocaleDateString('de-DE', {
+            day: '2-digit', month: 'short', year: 'numeric',
+          });
+        }
+
+        function fmtFullDate(iso) {
+          return new Date(iso).toLocaleString('de-DE', {
+            day: '2-digit', month: '2-digit', year: 'numeric',
+            hour: '2-digit', minute: '2-digit',
+          });
+        }
+
+        function classifyMessage(msg) {
+          const m = msg.toLowerCase();
+          if (m.startsWith('create')) return 'Neu';
+          if (m.startsWith('update')) return 'Geändert';
+          if (m.startsWith('delete')) return 'Gelöscht';
+          if (m.startsWith('upload')) return 'Upload';
+          if (m.startsWith('fix') || m.startsWith('feat') || m.startsWith('chore') || m.startsWith('test')) return 'Code';
+          return 'Edit';
+        }
+
+        // -------- 3. Collaborators laden --------
+        try {
+          const collabs = await gh(`/repos/${REPO}/collaborators?affiliation=all&per_page=50`);
+          const $cb = document.getElementById('collaborators');
+          if (!collabs.length) {
+            $cb.innerHTML = '<div class="empty">Keine Collaboratoren gefunden.</div>';
+          } else {
+            $cb.innerHTML = collabs.map(c => `
+              <div class="collab-card">
+                <img src="${c.avatar_url}&s=80" alt="${c.login}" />
+                <div>
+                  <div class="collab-name">${c.login}</div>
+                  <div class="collab-role">${c.role_name || c.permissions?.admin ? 'Admin' : c.permissions?.maintain ? 'Maintain' : c.permissions?.push ? 'Schreibrechte' : 'Lesen'}</div>
+                </div>
+              </div>
+            `).join('');
+          }
+        } catch (e) {
+          document.getElementById('collaborators').innerHTML =
+            `<div class="empty">Konnte Collaboratoren nicht laden: ${e.message}</div>`;
+        }
+
+        // -------- 4. Commits laden (gefiltert auf Content) --------
+        let allCommits = [];
+        const $commits = document.getElementById('commits');
+        const $toolbar = document.querySelector('.toolbar');
+
+        try {
+          const commits = await gh(`/repos/${REPO}/commits?path=${encodeURIComponent(CONTENT_PATH)}&per_page=50`);
+          allCommits = commits;
+
+          // Filter-Buttons pro Autor
+          const authors = [...new Set(commits.map(c => c.author?.login || c.commit.author.name).filter(Boolean))];
+          for (const author of authors) {
+            const btn = document.createElement('button');
+            btn.className = 'filter-btn';
+            btn.dataset.filter = author;
+            btn.textContent = author;
+            $toolbar.appendChild(btn);
+          }
+
+          renderCommits('*');
+        } catch (e) {
+          $commits.innerHTML = `<div class="empty">Konnte Commits nicht laden: ${e.message}</div>`;
+        }
+
+        function renderCommits(filter) {
+          const filtered = filter === '*'
+            ? allCommits
+            : allCommits.filter(c => (c.author?.login || c.commit.author.name) === filter);
+
+          if (!filtered.length) {
+            $commits.innerHTML = '<div class="empty">Keine Änderungen für diesen Filter.</div>';
+            return;
+          }
+
+          $commits.innerHTML = filtered.map(c => {
+            const login = c.author?.login || c.commit.author.name;
+            const avatar = c.author?.avatar_url || `https://github.com/identicons/${encodeURIComponent(login)}.png`;
+            const msg = (c.commit.message || '').split('\n')[0];
+            const tag = classifyMessage(msg);
+            const when = c.commit.author.date;
+            const sha = c.sha.slice(0, 7);
+            return `
+              <article class="commit-row">
+                <div class="avatar"><img src="${avatar}&s=80" alt="${login}" /></div>
+                <div class="commit-body">
+                  <p class="commit-message">${escapeHtml(msg)}</p>
+                  <div class="commit-meta">
+                    <span class="tag">${tag}</span>
+                    <strong>${escapeHtml(login)}</strong>
+                    <time datetime="${when}" title="${fmtFullDate(when)}">${timeAgo(when)}</time>
+                    <code style="opacity:0.6">${sha}</code>
+                  </div>
+                </div>
+                <div class="commit-actions">
+                  <a href="${c.html_url}" target="_blank" rel="noopener">Diff ↗</a>
+                </div>
+              </article>
+            `;
+          }).join('');
+        }
+
+        $toolbar.addEventListener('click', (e) => {
+          const btn = e.target.closest('.filter-btn');
+          if (!btn) return;
+          $toolbar.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          renderCommits(btn.dataset.filter);
+        });
+
+        function escapeHtml(s) {
+          return String(s).replace(/[&<>"']/g, c => ({
+            '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+          }[c]));
+        }
+      })();
+    </script>
+  </body>
+</html>

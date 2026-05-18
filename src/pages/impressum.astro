@@ -1,0 +1,30 @@
+---
+import Layout from '../layouts/Layout.astro';
+import LegalPage from '../components/LegalPage.astro';
+import { getEntry } from 'astro:content';
+
+const entry = await getEntry('seite', 'impressum');
+const { Content } = await entry!.render();
+const { title, intro, stand } = entry!.data;
+
+const siteUrl = 'https://boxclub-gifhorn.de';
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${siteUrl}/` },
+    { '@type': 'ListItem', position: 2, name: 'Impressum', item: `${siteUrl}/impressum` },
+  ],
+};
+---
+
+<Layout
+  title={`${title} | Boxclub Gifhorn e.V.`}
+  description="Impressum und rechtliche Angaben des Boxclub Gifhorn e.V."
+  noindex={true}
+  jsonLd={breadcrumb}
+>
+  <LegalPage title={title} intro={intro} stand={stand} breadcrumb="Impressum">
+    <Content />
+  </LegalPage>
+</Layout>

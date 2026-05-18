@@ -1,0 +1,160 @@
+---
+import { getEntry } from 'astro:content';
+
+const site = (await getEntry('startseite', 'index'))?.data;
+const f = site?.faq ?? {
+  kicker: 'FAQ',
+  headline_part1: 'Häufig gestellte',
+  headline_part2_orange: 'Fragen',
+  subtitle: '',
+  items: [],
+};
+const faqs = f.items;
+
+// FAQPage JSON-LD — nur wenn mindestens 2 echte Fragen vorhanden sind
+// (Google straft leere/falsche FAQ-Schemas ab).
+const faqJsonLd =
+  faqs && faqs.length >= 2
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faqs.map((item) => ({
+          '@type': 'Question',
+          name: item.frage,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: item.antwort,
+          },
+        })),
+      }
+    : null;
+---
+
+{faqJsonLd && (
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(faqJsonLd)} />
+)}
+
+<section id="faq" class="section-padding bg-stone-50 dark:bg-primary relative overflow-hidden">
+  <!-- Background accent -->
+  <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-stone-300 dark:via-gray-800 to-transparent"></div>
+
+  <div class="container-custom relative z-10">
+    <div class="grid lg:grid-cols-2 gap-16 items-start">
+      <!-- Left: Header -->
+      <div class="lg:sticky lg:top-32 reveal">
+        <div class="inline-flex items-center gap-3 mb-6">
+          <div class="w-12 h-px bg-secondary"></div>
+          <span class="text-secondary font-bold text-sm uppercase tracking-[0.3em]">{f.kicker}</span>
+        </div>
+        <h2 class="heading-lg text-stone-900 dark:text-white mb-6">
+          {f.headline_part1} <span class="text-secondary">{f.headline_part2_orange}</span>
+        </h2>
+        <p class="text-stone-600 dark:text-gray-400 text-lg mb-8">
+          {f.subtitle}
+        </p>
+        <div class="flex items-center gap-4">
+          <a href="/kontakt" class="btn-primary text-sm">
+            Noch Fragen? Kontakt
+          </a>
+        </div>
+
+        <!-- Decorative image -->
+        <div class="hidden lg:block mt-12 relative">
+          <img
+            src="https://images.unsplash.com/photo-1591173627030-6fc3077b8d23?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NjMzNzR8MHwxfHNlYXJjaHwyfHxib3hpbmclMjBwdW5jaGluZyUyMGJhZyUyMGhlYXZ5JTIwYmFnJTIwd29ya291dHxlbnwwfDB8fHwxNzc4NjgyNDQ4fDA&ixlib=rb-4.1.0&q=80&w=1080"
+            alt="Boxhandschuhe hängen bereit"
+            class="w-full h-48 object-cover opacity-40"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-stone-50 dark:from-primary to-transparent"></div>
+        </div>
+      </div>
+
+      <!-- Right: Accordion -->
+      <div class="space-y-4" id="faq-accordion">
+        {faqs.map((faq, index) => (
+          <div
+            class="faq-item bg-white dark:bg-transparent border border-stone-200 dark:border-gray-800 hover:border-stone-300 dark:hover:border-gray-700 shadow-sm dark:shadow-none transition-colors duration-300 reveal"
+            style={`transition-delay: ${index * 100}ms`}
+          >
+            <button
+              class="faq-trigger w-full flex items-center justify-between p-6 text-left group"
+              aria-expanded="false"
+              aria-controls={`faq-content-${index}`}
+            >
+              <div class="flex items-center gap-4">
+                <span class="text-secondary font-black text-sm min-w-[2rem]">0{index + 1}</span>
+                <span class="text-stone-900 dark:text-white font-bold text-lg group-hover:text-secondary transition-colors duration-300">
+                  {faq.frage}
+                </span>
+              </div>
+              <div class="faq-icon w-10 h-10 border border-stone-300 dark:border-gray-700 flex items-center justify-center flex-shrink-0 ml-4 transition-all duration-300 group-hover:border-secondary">
+                <svg class="w-4 h-4 text-stone-500 dark:text-gray-400 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
+            </button>
+            <div
+              id={`faq-content-${index}`}
+              class="faq-content overflow-hidden max-h-0 transition-all duration-500 ease-out"
+            >
+              <div class="px-6 pb-6 pl-[4.5rem]">
+                <p class="text-stone-600 dark:text-gray-400 leading-relaxed">
+                  {faq.antwort}
+                </p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const accordion = document.getElementById('faq-accordion');
+    if (!accordion) return;
+
+    const triggers = accordion.querySelectorAll('.faq-trigger');
+
+    triggers.forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        const item = trigger.closest('.faq-item');
+        const content = item?.querySelector('.faq-content') as HTMLElement;
+        const icon = trigger.querySelector('.faq-icon svg') as HTMLElement;
+        const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+
+        // Close all other items
+        triggers.forEach((otherTrigger) => {
+          if (otherTrigger !== trigger) {
+            const otherItem = otherTrigger.closest('.faq-item');
+            const otherContent = otherItem?.querySelector('.faq-content') as HTMLElement;
+            const otherIcon = otherTrigger.querySelector('.faq-icon svg') as HTMLElement;
+            otherTrigger.setAttribute('aria-expanded', 'false');
+            if (otherContent) {
+              otherContent.style.maxHeight = '0';
+            }
+            if (otherIcon) {
+              otherIcon.style.transform = 'rotate(0deg)';
+            }
+            otherItem?.classList.remove('border-secondary/50');
+          }
+        });
+
+        // Toggle current item
+        if (isOpen) {
+          trigger.setAttribute('aria-expanded', 'false');
+          if (content) content.style.maxHeight = '0';
+          if (icon) icon.style.transform = 'rotate(0deg)';
+          item?.classList.remove('border-secondary/50');
+        } else {
+          trigger.setAttribute('aria-expanded', 'true');
+          if (content) content.style.maxHeight = content.scrollHeight + 'px';
+          if (icon) icon.style.transform = 'rotate(180deg)';
+          item?.classList.add('border-secondary/50');
+        }
+      });
+    });
+  });
+</script>

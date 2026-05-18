@@ -1,0 +1,223 @@
+---
+import '../styles/global.css';
+
+// Fonts lokal hosten (DSGVO-konform – kein Datentransfer an Google CDN)
+import '@fontsource/inter/300.css';
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/inter/700.css';
+import '@fontsource/inter/800.css';
+import '@fontsource/inter/900.css';
+import '@fontsource/oswald/400.css';
+import '@fontsource/oswald/500.css';
+import '@fontsource/oswald/600.css';
+import '@fontsource/oswald/700.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  canonical?: string;
+  ogImage?: string;
+  noindex?: boolean;
+  jsonLd?: unknown;
+  preloadHero?: string;
+}
+
+const {
+  title,
+  description = 'Nr. 1 Boxverein in Gifhorn seit über 50 Jahren. Boxen, MMA, Judo, Ringen und Frauenfitness für Kinder, Anfänger und Profis. Komm einfach zum Training vorbei — keine Anmeldung nötig.',
+  canonical,
+  ogImage,
+  noindex = false,
+  jsonLd,
+  preloadHero,
+} = Astro.props;
+
+const siteUrl = 'https://boxclub-gifhorn.de';
+const canonicalUrl = canonical || new URL(Astro.url.pathname, siteUrl).href;
+const ogImageUrl = ogImage
+  ? new URL(ogImage, siteUrl).href
+  : `${siteUrl}/og-image.jpg`;
+
+// Globale JSON-LD: Organization + SportsClub + LocalBusiness + WebSite
+const orgId = `${siteUrl}/#organization`;
+const websiteId = `${siteUrl}/#website`;
+
+const baseJsonLd: unknown[] = [
+  {
+    '@context': 'https://schema.org',
+    '@type': ['Organization', 'SportsClub', 'LocalBusiness', 'SportsActivityLocation'],
+    '@id': orgId,
+    name: 'Boxclub Gifhorn e.V.',
+    legalName: 'Boxclub Gifhorn e.V.',
+    url: siteUrl,
+    logo: `${siteUrl}/logo.png`,
+    image: `${siteUrl}/og-image.jpg`,
+    description,
+    telephone: '+4953717599679',
+    email: 'info@boxclub-gifhorn.de',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Cardenap 2-4',
+      postalCode: '38518',
+      addressLocality: 'Gifhorn',
+      addressRegion: 'Niedersachsen',
+      addressCountry: 'DE',
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: 52.488693,
+      longitude: 10.5444489,
+    },
+    areaServed: [
+      { '@type': 'City', name: 'Gifhorn' },
+      { '@type': 'City', name: 'Wolfsburg' },
+      { '@type': 'City', name: 'Braunschweig' },
+      { '@type': 'AdministrativeArea', name: 'Landkreis Gifhorn' },
+    ],
+    sameAs: [
+      'https://www.instagram.com/bcg_e.v/',
+      'https://maps.app.goo.gl/veVx4JJ3LiEtG58c7',
+    ],
+    sport: ['Boxen', 'MMA', 'Judo', 'Ringen', 'Fitness'],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': websiteId,
+    url: siteUrl,
+    name: 'Boxclub Gifhorn e.V.',
+    inLanguage: 'de-DE',
+    publisher: { '@id': orgId },
+  },
+];
+
+const extraJsonLd: unknown[] = jsonLd
+  ? Array.isArray(jsonLd)
+    ? jsonLd
+    : [jsonLd]
+  : [];
+const allJsonLd = [...baseJsonLd, ...extraJsonLd];
+---
+
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content="Boxen Gifhorn, Boxclub Gifhorn, Kampfsport Gifhorn, MMA Gifhorn, Judo Gifhorn, Fitness Gifhorn, Selbstverteidigung Gifhorn, Boxtraining Kinder, Boxverein Wolfsburg Braunschweig" />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta
+      name="robots"
+      content={noindex
+        ? 'noindex, follow'
+        : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'}
+    />
+
+    <!-- hreflang -->
+    <link rel="alternate" hreflang="de-DE" href={canonicalUrl} />
+    <link rel="alternate" hreflang="x-default" href={canonicalUrl} />
+
+    <!-- Geo -->
+    <meta name="geo.region" content="DE-NI" />
+    <meta name="geo.placename" content="Gifhorn" />
+    <meta name="geo.position" content="52.488693;10.5444489" />
+    <meta name="ICBM" content="52.488693, 10.5444489" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content="Boxclub Gifhorn e.V." />
+    <meta property="og:locale" content="de_DE" />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Boxclub Gifhorn e.V. — Boxen, MMA, Judo und Frauenfitness in Gifhorn" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <!-- Favicon + Webmanifest -->
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="apple-touch-icon" href="/logo.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#0B0B0F" />
+
+    <!-- Performance: Preconnect für externe Bilder + optionaler Hero-Preload -->
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+    <link rel="dns-prefetch" href="https://images.unsplash.com" />
+    {preloadHero && <link rel="preload" as="image" href={preloadHero} fetchpriority="high" />}
+
+    <!-- Fonts werden lokal über @fontsource gebündelt (DSGVO-konform) -->
+
+    <!-- Strukturierte Daten (Schema.org JSON-LD) -->
+    {allJsonLd.map((schema) => (
+      <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
+    ))}
+
+    <!-- No-Flash Theme Init: läuft vor Body-Render, vermeidet weißes Flackern -->
+    <script is:inline>
+      (function () {
+        try {
+          const stored = localStorage.getItem('theme');
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          const theme = stored || (prefersDark ? 'dark' : 'light');
+          if (theme === 'dark') {
+            document.documentElement.classList.add('dark');
+          }
+        } catch (_) {
+          // Privacy/Storage blockiert -> System-Preference
+          if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+          }
+        }
+      })();
+    </script>
+  </head>
+  <body class="bg-stone-50 text-stone-900 dark:bg-primary dark:text-white min-h-screen flex flex-col antialiased transition-colors duration-300">
+    <!-- Skip Link -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-6 focus:py-3 focus:bg-secondary focus:text-white focus:font-bold focus:rounded"
+    >
+      Zum Hauptinhalt springen
+    </a>
+
+    <slot />
+
+    <!-- Scroll Reveal Script -->
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+              }
+            });
+          },
+          {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px',
+          }
+        );
+
+        reveals.forEach((el) => observer.observe(el));
+      });
+    </script>
+
+  </body>
+</html>

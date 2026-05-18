@@ -1,0 +1,371 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { getEntry } from 'astro:content';
+import QRCode from 'qrcode';
+
+const entry = await getEntry('anmeldung', 'aktuell');
+const data = entry?.data ?? {
+  titel: 'Mitglied werden',
+  intro: '',
+  online_url: '',
+  online_anbieter: '',
+  formular_pdf: '',
+  formular_stand: '',
+  rueckgabe_email: '',
+  rueckgabe_adresse: '',
+  hinweis: '',
+  schritte: [],
+};
+
+const global = (await getEntry('global', 'site'))?.data;
+const telefon = global?.telefon || '05371 7599679';
+const telefonLink = global?.telefon_link || '+4953717599679';
+const emailFallback = data.rueckgabe_email || global?.email || 'info@boxclub-gifhorn.de';
+const adresseFallback = data.rueckgabe_adresse || global?.adresse || 'Cardenap 2-4, 38518 Gifhorn';
+
+const hasOnline = !!data.online_url;
+const hasPdf = !!data.formular_pdf;
+
+const siteUrl = 'https://boxclub-gifhorn.de';
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${siteUrl}/` },
+    { '@type': 'ListItem', position: 2, name: 'Anmeldung', item: `${siteUrl}/anmeldung` },
+  ],
+};
+
+// QR-Code zur Build-Zeit als inline SVG generieren (kein externer Service)
+let qrSvg = '';
+if (hasOnline) {
+  qrSvg = await QRCode.toString(data.online_url!, {
+    type: 'svg',
+    errorCorrectionLevel: 'M',
+    margin: 1,
+    width: 240,
+    color: { dark: '#0B0B0F', light: '#0000' },
+  });
+}
+
+const readers = [
+  {
+    key: 'windows', label: 'Windows',
+    icon: 'M3 5.5L10 4v8H3V5.5zm0 9h7v6.5L3 19.5v-5zM11 3.7l10-1.7v10H11V3.7zM11 13h10v9l-10-1.7V13z',
+    title: 'Adobe Acrobat Reader (kostenlos)',
+    description: 'Der Standard-PDF-Reader für Windows. Unterstützt alle ausfüllbaren Formular-Felder.',
+    url: 'https://get.adobe.com/de/reader/',
+    altTitle: 'Foxit PDF Reader (Alternative)',
+    altUrl: 'https://www.foxit.com/de/pdf-reader/',
+  },
+  {
+    key: 'mac', label: 'macOS',
+    icon: 'M12 2C8 2 6 4 6 7c0 1.5.5 2.5 1 3.5C5 12 4 14 4 16c0 3 2 5 5 5h6c3 0 5-2 5-5 0-2-1-4-3-5.5.5-1 1-2 1-3.5 0-3-2-5-6-5z',
+    title: 'Vorschau (vorinstalliert)',
+    description: 'macOS bringt Vorschau (Preview) ab Werk mit. Öffnet PDFs direkt und unterstützt ausfüllbare Formulare.',
+    url: 'https://support.apple.com/de-de/guide/preview/welcome/mac',
+    altTitle: 'Adobe Acrobat Reader (Alternative)',
+    altUrl: 'https://get.adobe.com/de/reader/',
+  },
+  {
+    key: 'ios', label: 'iPhone / iPad',
+    icon: 'M17.5 12.5c0-3 2.5-4.5 2.5-4.5s-1-2-3-2c-1.5 0-3 1-4 1s-2.5-1-4-1c-2.5 0-4.5 2.5-4.5 6 0 3.5 3 8 5 8 1 0 2-.5 3-.5s2 .5 3 .5c2 0 4-3 4-5.5 0-.5-1-2-2-2z',
+    title: 'Adobe Acrobat Reader (App Store)',
+    description: 'Kostenlose App für iPhone und iPad. Felder lassen sich direkt am Touchscreen ausfüllen.',
+    url: 'https://apps.apple.com/de/app/adobe-acrobat-reader-pdf/id469337564',
+    altTitle: 'Apple Bücher / Dateien-App',
+    altUrl: 'https://support.apple.com/de-de/guide/iphone/iphdde0a05e1/ios',
+  },
+  {
+    key: 'android', label: 'Android',
+    icon: 'M6 18c0 .6.4 1 1 1h1v3c0 .6.4 1 1 1s1-.4 1-1v-3h2v3c0 .6.4 1 1 1s1-.4 1-1v-3h1c.6 0 1-.4 1-1V8H6v10z',
+    title: 'Adobe Acrobat Reader (Play Store)',
+    description: 'Kostenlose App für Android-Geräte. Felder direkt am Smartphone ausfüllen.',
+    url: 'https://play.google.com/store/apps/details?id=com.adobe.reader',
+    altTitle: 'Xodo PDF Reader (Alternative)',
+    altUrl: 'https://play.google.com/store/apps/details?id=com.xodo.pdf.reader',
+  },
+];
+---
+
+<Layout
+  title={`${data.titel} — Mitglied beim Boxclub Gifhorn werden | Boxclub Gifhorn e.V.`}
+  description="Mitglied im Boxclub Gifhorn werden: Online anmelden, QR-Code scannen oder alternativ den Mitgliedsantrag als PDF herunterladen. Probetraining unverbindlich."
+  jsonLd={breadcrumb}
+>
+  <Header />
+  <main id="main-content">
+    <!-- Page Hero -->
+    <section class="relative py-24 md:py-32 bg-stone-50 dark:bg-primary overflow-hidden">
+      <div class="absolute inset-0 opacity-[0.07] dark:opacity-5 pointer-events-none">
+        <div class="absolute inset-0 dark:hidden" style="background-image: radial-gradient(circle at 1px 1px, #0B0B0F 1px, transparent 0); background-size: 40px 40px;"></div>
+        <div class="absolute inset-0 hidden dark:block" style="background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 40px 40px;"></div>
+      </div>
+
+      <div class="container-custom relative z-10">
+        <nav class="mb-8" aria-label="Breadcrumb">
+          <ol class="flex items-center gap-2 text-sm text-stone-500 dark:text-gray-500">
+            <li><a href="/" class="hover:text-secondary transition-colors">Startseite</a></li>
+            <li><span class="text-stone-400 dark:text-gray-600">/</span></li>
+            <li class="text-secondary">Anmeldung</li>
+          </ol>
+        </nav>
+
+        <div class="inline-flex items-center gap-3 mb-6">
+          <div class="w-12 h-px bg-secondary"></div>
+          <span class="text-secondary font-bold text-sm uppercase tracking-[0.3em]">Mitgliedschaft</span>
+        </div>
+        <h1 class="heading-xl text-stone-900 dark:text-white mb-6">
+          {data.titel}
+        </h1>
+        {data.intro && (
+          <p class="text-stone-600 dark:text-gray-400 text-xl max-w-2xl whitespace-pre-line">
+            {data.intro}
+          </p>
+        )}
+      </div>
+    </section>
+
+    <!-- Schritte -->
+    {data.schritte?.length > 0 && (
+      <section class="py-16 bg-white dark:bg-gray-900">
+        <div class="container-custom">
+          <div class="grid md:grid-cols-3 gap-6">
+            {data.schritte.map((s, i) => (
+              <div class="bg-stone-50 dark:bg-primary border border-stone-200 dark:border-gray-800 p-6 reveal" style={`transition-delay: ${i * 80}ms`}>
+                <div class="flex items-baseline gap-3 mb-3">
+                  <span class="text-secondary font-display font-bold text-3xl">{String(i + 1).padStart(2, '0')}</span>
+                  <h3 class="text-stone-900 dark:text-white font-bold text-lg">{s.titel}</h3>
+                </div>
+                <p class="text-stone-600 dark:text-gray-400 text-sm leading-relaxed">{s.beschreibung}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- ===== Online-Anmeldung (Primärer Weg) ===== -->
+    {hasOnline && (
+      <section class="section-padding bg-white dark:bg-gray-900">
+        <div class="container-custom">
+          <div class="max-w-5xl mx-auto bg-stone-50 dark:bg-primary border-l-4 border-secondary p-6 md:p-10 reveal">
+            <div class="grid md:grid-cols-[1fr_240px] gap-8 md:gap-10 items-center">
+              <!-- Links: Text + Button -->
+              <div>
+                <div class="inline-flex items-center gap-2 mb-3">
+                  <span class="inline-block px-2 py-0.5 bg-secondary text-white text-[10px] font-bold uppercase tracking-wider">Empfohlen</span>
+                  <span class="text-stone-500 dark:text-gray-500 text-xs uppercase tracking-wider">Schnellster Weg</span>
+                </div>
+                <h2 class="heading-md text-stone-900 dark:text-white mb-3">
+                  Direkt <span class="text-secondary">online anmelden</span>
+                </h2>
+                <p class="text-stone-600 dark:text-gray-400 mb-6">
+                  Du wirst zu unserem Online-Formular bei <strong class="text-stone-900 dark:text-white">{data.online_anbieter || 'meinverein.de'}</strong> weitergeleitet —
+                  alle Angaben am Gerät eintippen, abschicken, fertig. Kein Drucker, kein Versand nötig.
+                </p>
+
+                <div class="flex flex-wrap gap-3">
+                  <a href={data.online_url} target="_blank" rel="noopener" class="btn-primary group">
+                    Online anmelden
+                    <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
+                  <span class="text-stone-500 dark:text-gray-500 text-xs self-center max-w-[28ch]">
+                    Externes Fenster, externer Anbieter — siehe <a href="/datenschutz" class="hover:text-secondary underline">Datenschutz</a>.
+                  </span>
+                </div>
+              </div>
+
+              <!-- Rechts: QR-Code -->
+              <div class="flex flex-col items-center md:items-end gap-2">
+                <div class="bg-white dark:bg-white p-3 border border-stone-200">
+                  <div class="w-[200px] h-[200px] flex items-center justify-center" set:html={qrSvg}></div>
+                </div>
+                <p class="text-stone-500 dark:text-gray-500 text-xs uppercase tracking-wider font-bold text-center md:text-right">
+                  Mit Handy scannen
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- ===== PDF-Alternative (sekundär) ===== -->
+    {hasPdf && (
+      <section class="py-16 bg-stone-50 dark:bg-primary">
+        <div class="container-custom">
+          <div class="max-w-5xl mx-auto reveal">
+            <div class="text-center mb-8">
+              <span class="text-stone-500 dark:text-gray-500 text-xs uppercase tracking-[0.3em] font-bold">Alternative</span>
+              <h2 class="heading-md text-stone-900 dark:text-white mt-2 mb-3">
+                Lieber als <span class="text-secondary">PDF</span>?
+              </h2>
+              <p class="text-stone-600 dark:text-gray-400 max-w-2xl mx-auto">
+                Lade die Beitrittserklärung als PDF herunter, fülle sie aus und schick sie zurück.
+              </p>
+            </div>
+
+            <!-- Download-Box -->
+            <div class="bg-white dark:bg-gray-900 border border-stone-200 dark:border-gray-800 p-6 lg:p-8 mb-8">
+              <div class="flex flex-col md:flex-row md:items-center gap-4 md:gap-6">
+                <div class="w-14 h-14 flex-shrink-0 bg-secondary/10 border border-secondary/30 text-secondary flex items-center justify-center">
+                  <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 7V3.5L18.5 9H13z"/>
+                  </svg>
+                </div>
+                <div class="flex-1">
+                  <h3 class="text-stone-900 dark:text-white font-bold text-lg mb-1">Beitrittserklärung (PDF)</h3>
+                  <p class="text-stone-600 dark:text-gray-400 text-sm">
+                    Ausfüllbar in jedem PDF-Reader.{data.formular_stand && (<span> Stand: <strong>{data.formular_stand}</strong>.</span>)}
+                  </p>
+                </div>
+                <div class="flex-shrink-0">
+                  <a href={data.formular_pdf} download class="btn-secondary text-sm whitespace-nowrap">
+                    PDF herunterladen
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Rückgabe-Info -->
+            <div class="grid sm:grid-cols-2 gap-4 mb-8">
+              <a href={`mailto:${emailFallback}?subject=Mitgliedsantrag`}
+                class="flex items-start gap-4 p-5 bg-white dark:bg-gray-900 border border-stone-200 dark:border-gray-800 hover:border-secondary/60 transition-colors group"
+              >
+                <div class="w-12 h-12 flex-shrink-0 bg-secondary/10 border border-secondary/30 group-hover:bg-secondary group-hover:border-secondary flex items-center justify-center transition-colors">
+                  <svg class="w-6 h-6 text-secondary group-hover:text-white transition-colors" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-stone-500 dark:text-gray-500 text-xs uppercase tracking-wider font-bold">Per E-Mail</p>
+                  <p class="text-stone-900 dark:text-white font-semibold">{emailFallback}</p>
+                </div>
+              </a>
+              <div class="flex items-start gap-4 p-5 bg-white dark:bg-gray-900 border border-stone-200 dark:border-gray-800">
+                <div class="w-12 h-12 flex-shrink-0 bg-accent/10 border border-accent/30 flex items-center justify-center">
+                  <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-stone-500 dark:text-gray-500 text-xs uppercase tracking-wider font-bold">Per Post / Persönlich</p>
+                  <p class="text-stone-900 dark:text-white font-semibold">{adresseFallback}</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- PDF-Reader Tabs -->
+            <details class="bg-white dark:bg-gray-900 border border-stone-200 dark:border-gray-800">
+              <summary class="px-5 py-3 cursor-pointer font-bold text-stone-900 dark:text-white text-sm hover:text-secondary">
+                Brauchst du noch einen PDF-Reader?
+              </summary>
+              <div class="p-5 border-t border-stone-200 dark:border-gray-800">
+                <p class="text-stone-600 dark:text-gray-400 text-sm mb-4">
+                  Das Formular hat ausfüllbare Felder. Wähle dein Gerät — wir verlinken einen kostenlosen Reader.
+                </p>
+                <div role="tablist" class="flex flex-wrap gap-1 mb-0 border-b-2 border-stone-200 dark:border-gray-800">
+                  {readers.map((r, i) => (
+                    <button type="button" role="tab" id={`tab-${r.key}`} data-tab={r.key}
+                      aria-selected={i === 0 ? 'true' : 'false'} aria-controls={`panel-${r.key}`}
+                      class={`reader-tab inline-flex items-center gap-2 px-3 py-2 -mb-0.5 text-xs font-bold uppercase tracking-wider border-b-2 transition-colors ${i === 0 ? 'border-secondary text-secondary' : 'border-transparent text-stone-600 dark:text-gray-400 hover:text-secondary'}`}
+                    >
+                      <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d={r.icon}/></svg>
+                      {r.label}
+                    </button>
+                  ))}
+                </div>
+                <div class="bg-stone-50 dark:bg-primary border border-stone-200 dark:border-gray-800 border-t-0 p-5">
+                  {readers.map((r, i) => (
+                    <div role="tabpanel" id={`panel-${r.key}`} data-panel={r.key}
+                      class={`reader-panel ${i === 0 ? '' : 'hidden'}`} aria-labelledby={`tab-${r.key}`}
+                    >
+                      <h4 class="text-stone-900 dark:text-white font-bold mb-1">{r.title}</h4>
+                      <p class="text-stone-600 dark:text-gray-400 text-sm mb-3">{r.description}</p>
+                      <div class="flex flex-wrap gap-2">
+                        <a href={r.url} target="_blank" rel="noopener" class="btn-primary text-xs">Reader herunterladen</a>
+                        {r.altUrl && (
+                          <a href={r.altUrl} target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2 text-xs font-bold uppercase tracking-wider text-stone-600 dark:text-gray-400 hover:text-secondary border border-stone-300 dark:border-gray-700 hover:border-secondary transition-colors">
+                            {r.altTitle}
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- Wenn weder Online noch PDF: Empty State -->
+    {!hasOnline && !hasPdf && (
+      <section class="section-padding bg-white dark:bg-gray-900">
+        <div class="container-custom">
+          <div class="max-w-2xl mx-auto text-center">
+            <h2 class="text-stone-900 dark:text-white font-bold text-2xl mb-3">Anmelde-Optionen folgen in Kürze</h2>
+            <p class="text-stone-600 dark:text-gray-400 mb-6">
+              Bis dahin: ruf einfach kurz an oder komm direkt zum Training vorbei.
+            </p>
+            <div class="flex flex-wrap justify-center gap-3">
+              <a href={`tel:${telefonLink}`} class="btn-primary text-sm">Anrufen</a>
+              <a href="/kursplan" class="btn-secondary text-sm">Trainingszeiten</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- Hinweis -->
+    {data.hinweis && (
+      <section class="pb-16 bg-white dark:bg-gray-900">
+        <div class="container-custom">
+          <aside class="max-w-3xl mx-auto p-6 bg-stone-50 dark:bg-primary border-l-4 border-accent reveal">
+            <div class="flex gap-4">
+              <svg class="w-6 h-6 text-accent flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <p class="text-stone-700 dark:text-gray-300 text-sm leading-relaxed whitespace-pre-line">{data.hinweis}</p>
+            </div>
+          </aside>
+        </div>
+      </section>
+    )}
+  </main>
+  <Footer />
+
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      const tabs = document.querySelectorAll('.reader-tab');
+      const panels = document.querySelectorAll('.reader-panel');
+      tabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+          const key = tab.getAttribute('data-tab');
+          tabs.forEach((t) => {
+            const active = t === tab;
+            t.setAttribute('aria-selected', active ? 'true' : 'false');
+            t.classList.toggle('border-secondary', active);
+            t.classList.toggle('text-secondary', active);
+            t.classList.toggle('border-transparent', !active);
+            t.classList.toggle('text-stone-600', !active);
+            t.classList.toggle('dark:text-gray-400', !active);
+          });
+          panels.forEach((p) => {
+            p.classList.toggle('hidden', p.getAttribute('data-panel') !== key);
+          });
+        });
+      });
+    });
+  </script>
+</Layout>

@@ -1,0 +1,102 @@
+---
+// Decap CMS Admin-Bereich
+// Konfiguration liegt in /admin/config.yml (statisch in public/admin/).
+---
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Boxclub Gifhorn — Admin</title>
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="cms-config-url" type="text/yaml" href="/admin/config.yml" />
+    <style>
+      .audit-fab {
+        position: fixed;
+        bottom: 1.25rem;
+        right: 1.25rem;
+        z-index: 99999;
+        background: #FF6B00;
+        color: #fff;
+        padding: 0.6rem 1rem;
+        font-family: 'Inter', system-ui, sans-serif;
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        text-decoration: none;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        display: none;
+        align-items: center;
+        gap: 0.5rem;
+        transition: background 0.2s, transform 0.2s;
+      }
+      .audit-fab:hover {
+        background: #e25e00;
+        transform: translateY(-2px);
+      }
+      .audit-fab svg { width: 16px; height: 16px; }
+    </style>
+  </head>
+  <body>
+    <!-- Decap CMS -->
+    <script src="https://unpkg.com/decap-cms@^3.6.0/dist/decap-cms.js" is:inline></script>
+
+    <!-- Auto-Logout bei Inaktivität -->
+    <script src="/admin/idle-logout.js" is:inline defer></script>
+
+    <!-- Audit-Log-Button: nur sichtbar wenn eingeloggt -->
+    <a href="/admin-log/" class="audit-fab" id="auditFab" target="_blank" rel="noopener">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+      </svg>
+      Audit-Log
+    </a>
+
+    <!-- Banner bei Auto-Logout -->
+    <div id="logoutBanner" style="display:none;position:fixed;top:1rem;left:50%;transform:translateX(-50%);z-index:99998;background:#FF6B00;color:#fff;padding:0.75rem 1.25rem;font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;font-weight:700;box-shadow:0 4px 12px rgba(0,0,0,0.2);"></div>
+
+    <script is:inline>
+      // Auto-Logout-Hinweis aus URL anzeigen
+      (function () {
+        const r = new URLSearchParams(location.search).get('reason');
+        if (!r) return;
+        const map = {
+          'idle-timeout': 'Aus Sicherheitsgründen automatisch abgemeldet (10 Min Inaktivität).',
+          'user-logout': 'Du hast dich abgemeldet.',
+          'remote-logout': 'In einem anderen Tab abgemeldet.',
+        };
+        const msg = map[r];
+        if (!msg) return;
+        const b = document.getElementById('logoutBanner');
+        b.textContent = msg;
+        b.style.display = 'block';
+        setTimeout(() => { b.style.display = 'none'; }, 6000);
+        history.replaceState({}, '', location.pathname);
+      })();
+    </script>
+
+    <script is:inline>
+      // FAB nur zeigen wenn Decap-Token vorhanden (= eingeloggt)
+      (function () {
+        function check() {
+          for (const key of ['decap-cms-user', 'netlify-cms-user']) {
+            try {
+              const raw = localStorage.getItem(key);
+              if (raw && JSON.parse(raw).token) {
+                document.getElementById('auditFab').style.display = 'inline-flex';
+                return;
+              }
+            } catch (_) {}
+          }
+          document.getElementById('auditFab').style.display = 'none';
+        }
+        check();
+        // Bei Login/Logout reagieren
+        window.addEventListener('storage', check);
+        setInterval(check, 2000);
+      })();
+    </script>
+  </body>
+</html>

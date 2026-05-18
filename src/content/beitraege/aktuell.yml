@@ -1,0 +1,72 @@
+titel: "Mitgliedsbeiträge"
+intro: >
+  Faire Beiträge, klare Konditionen — und ein Verein, der dafür sorgt, dass jede:r
+  bei uns trainieren kann. Kein Vertrag mit langer Laufzeit, kein Kleingedrucktes.
+monatsbeitraege:
+  - gruppe: "Mitglieder bis 18 Jahre"
+    preis: "15,00 €"
+    hinweis: "Kinder & Jugendliche bis einschließlich 17 Jahre."
+  - gruppe: "Mitglieder ab 18 Jahre"
+    preis: "25,00 €"
+    hinweis: "Erwachsene — alle Kurse inklusive."
+  - gruppe: "Familien (2 Erw. & 1–3 Kinder)"
+    preis: "50,00 €"
+    hinweis: "Ein Beitrag für die ganze Familie. Ideal für gemeinsames Training."
+aufnahmegebuehr:
+  label: "Aufnahmegebühr (einmalig)"
+  preis: "20,00 €"
+  hinweis: "Wird mit dem ersten Monatsbeitrag eingezogen."
+zahlung_info: >
+  Die Beiträge werden monatlich per SEPA-Lastschrift eingezogen
+  (Sparkasse Celle-Gifhorn-Wolfsburg). Das SEPA-Mandat erteilst du
+  direkt auf der Beitrittserklärung.
+cta:
+  kicker: "Jetzt Mitglied werden"
+  headline: "Bereit für den ersten Schritt?"
+  text: >
+    Melde dich online oder per Beitrittserklärung an. Wer sich erstmal ein Bild
+    machen will, kommt einfach zum Probetraining vorbei — kostenlos und unverbindlich.
+  primary_label: "Jetzt anmelden"
+  primary_href: "/anmeldung"
+  secondary_label: "Trainingszeiten ansehen"
+  secondary_href: "/kursplan"
+faq:
+  - frage: "Gilt der Beitrag nur für eine Sportart — oder darf ich überall mitmachen?"
+    antwort: >
+      Du zahlst einen einzigen Mitgliedsbeitrag und kannst alle Sportarten
+      besuchen, die wir anbieten — Boxen, Vollkontakt, Kinder-Boxen, Judo,
+      Ringen, MMA und Frauenfitness. Komm wann und so oft du willst, mische
+      ruhig auch mal zwischen den Disziplinen. Du entscheidest, was dir
+      gerade Spaß macht.
+  - frage: "Gibt es ein kostenloses Probetraining?"
+    antwort: >
+      Ja. Du kannst jederzeit unverbindlich zum Training vorbeikommen. Bring
+      bequeme Sportkleidung mit — den Rest besprechen wir vor Ort.
+  - frage: "Wie lange läuft die Mitgliedschaft?"
+    antwort: >
+      Die Mitgliedschaft läuft unbefristet und kann mit einer Frist von
+      einem Monat zum Quartalsende gekündigt werden. Details stehen in
+      unserer Satzung.
+  - frage: "Wie wird der Beitrag bezahlt?"
+    antwort: >
+      Wir ziehen den Monatsbeitrag per SEPA-Lastschrift ein. Du erteilst uns
+      einmalig ein SEPA-Mandat auf der Beitrittserklärung — danach läuft
+      alles automatisch.
+  - frage: "Was ist im Beitrag enthalten?"
+    antwort: >
+      Alle Trainingseinheiten in allen Sportarten — ohne Zusatzgebühren,
+      ohne Pakete, ohne Aufpreis pro Kurs. Einfach vorbeikommen und
+      mittrainieren.
+  - frage: "Ermäßigung für Geschwister oder Familien?"
+    antwort: >
+      Ja — der Familientarif (2 Erwachsene + 1–3 Kinder) zu 50 € im Monat
+      ist günstiger als die Einzeltarife zusammen.
+  - frage: "Was passiert bei längerer Verletzung oder Krankheit?"
+    antwort: >
+      Sprich uns einfach an. Bei längerer Sportunfähigkeit finden wir
+      individuell eine faire Lösung (Beitragspause).
+  - frage: "Brauche ich eigene Ausrüstung?"
+    antwort: >
+      Für den Einstieg reicht Sportkleidung. Box­handschuhe, Bandagen
+      und Schoner kannst du dir am Anfang ausleihen — später lohnt sich
+      eigene Ausrüstung.

@@ -1,0 +1,82 @@
+---
+import { getEntry } from 'astro:content';
+
+const site = (await getEntry('startseite', 'index'))?.data;
+const b = site?.benefits ?? {
+  kicker: 'Warum wir',
+  headline_part1: 'Was uns',
+  headline_part2_gold: 'auszeichnet',
+  subtitle: 'Mehr als ein Verein — eine Familie, die dich stärker macht.',
+  items: [],
+};
+
+const fallbackIcons = ['trophy', 'shield', 'equipment', 'people', 'coach', 'youth'];
+
+const iconMap: Record<string, string> = {
+  trophy: "M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z",
+  shield: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z",
+  equipment: "M20.57 14.86L22 13.43 20.57 12 17 15.57 8.43 7 12 3.43 10.57 2 9.14 3.43 7.71 2 5.57 4.14 4.14 2.71 2.71 4.14l1.43 1.43L2.71 7l1.43 1.43L2 10.57 3.43 12 7 8.43 15.57 17 12 20.57 13.43 22l1.43-1.43L16.29 22l2.14-2.14 1.43 1.43 1.43-1.43-1.43-1.43L22 16.29z",
+  people: "M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z",
+  coach: "M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z",
+  youth: "M13 2v8h8c0-4.42-3.58-8-8-8zm6.32 13.89C20.37 14.54 21 12.84 21 11H6.44l-.95-2H2v2h2.22s1.89 4.07 2.12 4.42C5.24 16.17 4.5 17.22 4.5 18.5 4.5 20.43 6.07 22 8 22c1.76 0 3.22-1.3 3.46-3h2.08c.24 1.7 1.7 3 3.46 3 1.93 0 3.5-1.57 3.5-3.5 0-1.04-.46-1.97-1.18-2.61zM8 20c-.83 0-1.5-.67-1.5-1.5S7.17 17 8 17s1.5.67 1.5 1.5S8.83 20 8 20zm9 0c-.83 0-1.5-.67-1.5-1.5S16.17 17 17 17s1.5.67 1.5 1.5S17.83 20 17 20z",
+};
+---
+
+<section id="vorteile" class="section-padding relative overflow-hidden">
+  <!-- Split background -->
+  <div class="absolute inset-0 bg-white dark:bg-gray-900"></div>
+  <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-secondary/5 to-transparent"></div>
+
+  <div class="container-custom relative z-10">
+    <!-- Section Header -->
+    <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-16">
+      <div class="max-w-2xl reveal">
+        <div class="inline-flex items-center gap-3 mb-6">
+          <div class="w-12 h-px bg-accent"></div>
+          <span class="text-accent font-bold text-sm uppercase tracking-[0.3em]">{b.kicker}</span>
+        </div>
+        <h2 class="heading-lg text-stone-900 dark:text-white">
+          {b.headline_part1} <span class="text-accent">{b.headline_part2_gold}</span>
+        </h2>
+      </div>
+      <div class="reveal">
+        <p class="text-stone-600 dark:text-gray-400 text-lg max-w-md">
+          {b.subtitle}
+        </p>
+      </div>
+    </div>
+
+    <!-- Benefits Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {b.items.map((benefit, index) => (
+        <div
+          class="group relative p-8 bg-stone-50 dark:bg-primary/50 border border-stone-200 dark:border-gray-800 hover:border-accent/50 transition-all duration-500 reveal"
+          style={`transition-delay: ${index * 100}ms`}
+        >
+          <!-- Number -->
+          <div class="absolute top-4 right-4 text-stone-200 dark:text-gray-800 font-black text-5xl select-none">
+            0{index + 1}
+          </div>
+
+          <!-- Icon -->
+          <div class="w-14 h-14 bg-accent/10 border border-accent/20 flex items-center justify-center mb-6 group-hover:bg-accent/20 transition-colors duration-300">
+            <svg class="w-6 h-6 text-accent" fill="currentColor" viewBox="0 0 24 24">
+              <path d={iconMap[fallbackIcons[index % fallbackIcons.length]]} />
+            </svg>
+          </div>
+
+          <!-- Content -->
+          <h3 class="text-stone-900 dark:text-white font-bold text-xl mb-3 group-hover:text-accent transition-colors duration-300">
+            {benefit.title}
+          </h3>
+          <p class="text-stone-600 dark:text-gray-400 text-sm leading-relaxed">
+            {benefit.description}
+          </p>
+
+          <!-- Bottom accent -->
+          <div class="absolute bottom-0 left-0 w-full h-0.5 bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

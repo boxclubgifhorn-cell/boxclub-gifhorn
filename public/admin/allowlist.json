@@ -1,0 +1,7 @@
+{
+  "_comment_de": "GitHub-Usernames die das Audit-Log unter /admin-log/ sehen duerfen. Editieren + commiten. Standard-CMS-Zugriff laeuft separat ueber GitHub-Repo-Collaborators.",
+  "audit_log_users": [
+    "schurick1502",
+    "boxclubgifhorn-cell"
+  ]
+}

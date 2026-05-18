@@ -1,0 +1,82 @@
+hero:
+  badge: "Seit über 50 Jahren"
+  headline_zeile1: "Ring frei."
+  headline_zeile2_rot: "Für dein Training,"
+  headline_zeile3: "deinen Charakter,"
+  headline_zeile4_gold: "deine Stärke."
+  subheadline: >
+    Boxclub Gifhorn e.V. — der Nr. 1 Verein in Gifhorn. Über 50 Jahre Erfahrung,
+    eine Historie voller Champions und eine Gemeinschaft, in der jeder seinen Platz findet.
+    Bei uns ist die Tür offen: komm einfach zum Training vorbei.
+  cta_primary_label: "Trainingszeiten ansehen"
+  cta_secondary_label: "Unsere Leistungen"
+  bild: ""
+  bild_seitlich: ""
+  stats:
+    - { wert: "50+", label_oben: "Jahre", label_unten: "Erfahrung", farbe: "orange" }
+    - { wert: "8+", label_oben: "Disziplinen", label_unten: "im Angebot", farbe: "gold" }
+    - { wert: "5+", label_oben: "Jahre", label_unten: "Mindestalter", farbe: "orange" }
+
+claim:
+  kicker: "Hier werden Sieger wie am Fließband gemacht"
+  headline: "Der Nr. 1 Verein in Gifhorn!"
+  text: >
+    Regelmäßiges Boxen fördert Beweglichkeit, Schnellkraft, Kondition,
+    Kraftausdauer und natürlich die Fettverbrennung.
+
+benefits:
+  kicker: "Warum wir"
+  headline_part1: "Was uns"
+  headline_part2_gold: "auszeichnet"
+  subtitle: "Mehr als ein Verein — eine Familie, die dich stärker macht."
+  items:
+    - title: "Tradition & Expertise"
+      description: "Über 50 Jahre Vereinsgeschichte und eine Historie voller Champions. Unser Trainerteam weiß, wie man Talente bis zur Weltspitze führt."
+    - title: "Werte & Disziplin"
+      description: "Wir trainieren nicht nur den Körper, sondern den Charakter. Respekt, Fairplay und Zusammenhalt stehen in jeder Einheit an erster Stelle."
+    - title: "Bestes Equipment"
+      description: "Vom klassischen Sandsack-Areal bis zum professionellen Wettkampfring — unser Equipment ist auf dem neuesten Stand für dein optimales Training."
+    - title: "Inklusivität & Vielfalt"
+      description: "Egal ob 5 oder 70 Jahre, ob Anfänger oder Profi: In unserer Gemeinschaft findet jeder seinen Platz und sein individuelles Ziel."
+    - title: "Professionelles Trainerteam"
+      description: "Lizenzierte Coaches mit Wettkampf-Erfahrung. Fundiertes Fachwissen und moderne Trainingsmethoden — für jedes Niveau."
+    - title: "Gezielte Nachwuchsförderung"
+      description: "Wir investieren in die Zukunft. Spezielle Programme für Kinder und Jugendliche fördern Motorik, Selbstbewusstsein und Teamgeist."
+
+faq:
+  kicker: "FAQ"
+  headline_part1: "Häufig gestellte"
+  headline_part2_orange: "Fragen"
+  subtitle: "Du hast Fragen? Hier findest du Antworten auf die häufigsten Fragen rund um unser Training und den Verein."
+  items:
+    - frage: "Muss ich mich vorher anmelden?"
+      antwort: "Nein. Schau in den Kursplan, welcher Kurs zu dir passt, komm einfach in Sportzeug vorbei und mach mit. Bei Fragen kannst du uns gerne vorher anrufen."
+    - frage: "Für welche Altersgruppen ist das Training geeignet?"
+      antwort: "Von Kindern ab 5 Jahren bis zu Erwachsenen jeden Alters. Wir haben eigene Programme für Kids, Jugendliche, Anfänger, Fortgeschrittene und Wettkämpfer."
+    - frage: "Was kostet die Mitgliedschaft?"
+      antwort: "Aktuelle Beiträge erfährst du vor Ort beim Training oder telefonisch. Als gemeinnütziger Verein halten wir die Beiträge bewusst niedrig."
+    - frage: "Brauche ich eigene Ausrüstung?"
+      antwort: "Für den Anfang reicht Sportzeug. Boxhandschuhe und Bandagen kannst du dir bei uns ausleihen, später empfehlen wir eigene Ausrüstung."
+    - frage: "Bietet ihr auch Selbstverteidigung an?"
+      antwort: "Ja — durch unsere Programme in Boxen, MMA, Judo und Ringen lernst du praxistaugliche Selbstverteidigung als natürlichen Teil des Trainings."
+
+cta:
+  kicker: "Jetzt starten"
+  headline_part1: "Komm einfach"
+  headline_part2_orange: "vorbei."
+  headline_part3: "Trainier mit uns."
+  headline_part4_gold: "Werde stärker."
+  subtext: "Keine Anmeldung nötig — schau in den Kursplan, bring Sportzeug mit und mach mit. Bei uns ist die Tür offen."
+  primary_label: "Trainingszeiten ansehen"
+  trust_items:
+    - "Keine Anmeldung nötig"
+    - "Keine Vorkenntnisse nötig"
+    - "Alle Altersgruppen"
+
+contact_section:
+  kicker: "Kontakt & Anfahrt"
+  headline_part1: "Komm einfach"
+  headline_part2_orange: "vorbei."
+  intro: "Keine Anmeldung nötig. Schau zu den Trainingszeiten vorbei, bring Sportzeug mit und mach mit. So einfach geht das."
+  form_titel: "Direkt vorbeikommen"
+  form_subtitel: "Du brauchst keinen Termin und keine Anmeldung. Komm zu einem Training, das zu dir passt — wir freuen uns."

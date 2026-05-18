@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /admin-log/
+Disallow: /uploads/
+Disallow: /api/
+
+Sitemap: https://boxclub-gifhorn.de/sitemap-index.xml

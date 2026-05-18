@@ -1,0 +1,89 @@
+---
+import { getEntry } from 'astro:content';
+
+const site = (await getEntry('startseite', 'index'))?.data;
+const c = site?.cta ?? {
+  kicker: 'Jetzt starten',
+  headline_part1: 'Dein erster',
+  headline_part2_orange: 'Kampf',
+  headline_part3: 'beginnt mit dem',
+  headline_part4_gold: 'ersten Schritt.',
+  subtext: '',
+  primary_label: 'Trainingszeiten ansehen',
+  trust_items: [],
+};
+
+const global = (await getEntry('global', 'site'))?.data;
+const telefonLink = global?.telefon_link || '+4953717599679';
+const telefon = global?.telefon || '05371 7599679';
+---
+
+<section class="relative py-24 md:py-32 overflow-hidden">
+  <!-- Background Image -->
+  <img
+    src="https://images.unsplash.com/photo-1564097147829-44f8c74a8549?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NjMzNzR8MHwxfHNlYXJjaHwxfHxib3hpbmclMjBjaGFtcGlvbiUyMHZpY3RvcnklMjBjZWxlYnJhdGlvbiUyMHJpbmd8ZW58MHwwfHx8MTc3ODY4MjQ1Mnww&ixlib=rb-4.1.0&q=80&w=1080"
+    alt="Boxkampf im Ring"
+    class="absolute inset-0 w-full h-full object-cover"
+    loading="lazy"
+  />
+  <!-- Overlay -->
+  <div class="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/85 to-secondary/70"></div>
+
+  <!-- Decorative lines -->
+  <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-secondary to-transparent"></div>
+  <div class="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-accent to-transparent"></div>
+
+  <div class="container-custom relative z-10">
+    <div class="max-w-4xl mx-auto text-center reveal">
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-3 mb-8">
+        <div class="w-8 h-px bg-accent"></div>
+        <span class="text-accent font-bold text-sm uppercase tracking-[0.3em]">{c.kicker}</span>
+        <div class="w-8 h-px bg-accent"></div>
+      </div>
+
+      <!-- Headline -->
+      <h2 class="heading-xl text-white mb-6">
+        {c.headline_part1} <span class="text-secondary">{c.headline_part2_orange}</span><br />
+        {c.headline_part3} <span class="text-accent">{c.headline_part4_gold}</span>
+      </h2>
+
+      <!-- Subtext -->
+      <p class="text-gray-300 text-xl mb-10 max-w-2xl mx-auto">
+        {c.subtext}
+      </p>
+
+      <!-- CTAs -->
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="/anmeldung" class="btn-primary group animate-pulse-glow">
+          Hier anmelden
+          <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </a>
+        <a href="/kursplan" class="btn-secondary group">
+          {c.primary_label}
+        </a>
+        <a href={`tel:${telefonLink}`} class="btn-outline-white group">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+          </svg>
+          {telefon}
+        </a>
+      </div>
+
+      {c.trust_items && c.trust_items.length > 0 && (
+        <div class="mt-12 flex flex-wrap justify-center gap-8 text-sm text-gray-400">
+          {c.trust_items.map((item) => (
+            <span class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-secondary" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              {item}
+            </span>
+          ))}
+        </div>
+      )}
+    </div>
+  </div>
+</section>

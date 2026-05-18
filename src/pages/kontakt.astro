@@ -1,0 +1,96 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Contact from '../components/Contact.astro';
+import StandortKarte from '../components/StandortKarte.astro';
+import Footer from '../components/Footer.astro';
+
+const siteUrl = 'https://boxclub-gifhorn.de';
+const orgId = `${siteUrl}/#organization`;
+const websiteId = `${siteUrl}/#website`;
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${siteUrl}/` },
+      { '@type': 'ListItem', position: 2, name: 'Kontakt', item: `${siteUrl}/kontakt` },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    '@id': `${siteUrl}/kontakt#contactpage`,
+    name: 'Kontakt – Boxclub Gifhorn e.V.',
+    description: 'Kontakt und Anfahrt zum Boxclub Gifhorn e.V. in Gifhorn — Cardenap 2-4, Telefon 05371 7599679.',
+    url: `${siteUrl}/kontakt`,
+    inLanguage: 'de-DE',
+    isPartOf: { '@id': websiteId },
+    about: { '@id': orgId },
+  },
+];
+---
+
+<Layout
+  title="Kontakt & Anfahrt zum Boxclub Gifhorn — Cardenap 2-4, 38518 Gifhorn"
+  description="So findest du den Boxclub Gifhorn e.V.: Cardenap 2-4, 38518 Gifhorn. Telefon 05371 7599679 oder E-Mail info@boxclub-gifhorn.de. Komm einfach zum Training vorbei."
+  jsonLd={jsonLd}
+>
+  <Header />
+  <main id="main-content">
+    <!-- Page Hero -->
+    <section class="relative py-24 md:py-32 bg-stone-50 dark:bg-primary overflow-hidden">
+      <div class="absolute inset-0 opacity-10">
+        <img
+          src="https://images.unsplash.com/photo-1522844931788-513a2ed46b4b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NjMzNzR8MHwxfHNlYXJjaHwzfHxib3hpbmclMjBwdW5jaGluZyUyMGJhZyUyMGhlYXZ5JTIwYmFnJTIwd29ya291dHxlbnwwfDB8fHwxNzc4NjgyNDQ4fDA&ixlib=rb-4.1.0&q=80&w=1080"
+          alt=""
+          class="w-full h-full object-cover"
+          aria-hidden="true"
+        />
+      </div>
+      <div class="container-custom relative z-10">
+        <nav class="mb-8" aria-label="Breadcrumb">
+          <ol class="flex items-center gap-2 text-sm text-stone-500 dark:text-gray-500">
+            <li><a href="/" class="hover:text-secondary transition-colors">Startseite</a></li>
+            <li><span class="text-stone-400 dark:text-gray-600">/</span></li>
+            <li class="text-secondary">Kontakt</li>
+          </ol>
+        </nav>
+
+        <div class="inline-flex items-center gap-3 mb-6">
+          <div class="w-12 h-px bg-secondary"></div>
+          <span class="text-secondary font-bold text-sm uppercase tracking-[0.3em]">Kontakt & Anfahrt</span>
+        </div>
+        <h1 class="heading-xl text-stone-900 dark:text-white mb-6">
+          Kontakt zum <span class="text-secondary">Boxclub Gifhorn</span><br />
+          <span class="text-accent">Komm vorbei. Mach mit.</span>
+        </h1>
+        <p class="text-stone-600 dark:text-gray-400 text-xl max-w-2xl">
+          Beim Boxclub Gifhorn ist kein Termin nötig. Schau dir den Kursplan an,
+          komm zur passenden Trainingszeit vorbei — und leg los.
+        </p>
+      </div>
+    </section>
+
+    <!-- Kontakt + Karte (Hauptbereich, mit kleiner Karte) -->
+    <Contact />
+
+    <!-- Dedizierte große Karte mit Routen-Buttons -->
+    <section class="section-padding bg-stone-50 dark:bg-primary">
+      <div class="container-custom">
+        <div class="max-w-4xl mx-auto reveal">
+          <div class="inline-flex items-center gap-3 mb-4">
+            <div class="w-12 h-px bg-secondary"></div>
+            <span class="text-secondary font-bold text-sm uppercase tracking-[0.3em]">Anfahrt</span>
+          </div>
+          <h2 class="heading-lg text-stone-900 dark:text-white mb-8">
+            So <span class="text-secondary">findest du uns</span>
+          </h2>
+          <StandortKarte height="480px" />
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

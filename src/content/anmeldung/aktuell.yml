@@ -1,0 +1,20 @@
+titel: "Mitglied werden"
+intro: >
+  Du willst dauerhaft bei uns trainieren? Schön! Du kannst direkt online anmelden —
+  unten findest du den Link und einen QR-Code zum Scannen mit dem Handy.
+online_url: "https://web.meinverein.de/profile/32210"
+online_anbieter: "meinverein.de"
+formular_pdf: "/uploads/anmeldung/Boxclub_Gifhorn_Beitrittserklaerung.pdf"
+formular_stand: "Mai 2026"
+rueckgabe_email: "info@boxclub-gifhorn.de"
+rueckgabe_adresse: "Cardenap 2-4, 38518 Gifhorn"
+hinweis: >
+  Eltern minderjähriger Sportler:innen melden ihr Kind an und unterschreiben.
+  Bei Fragen rufst du uns einfach an: 05371 7599679.
+schritte:
+  - titel: "Link öffnen oder QR scannen"
+    beschreibung: "Klicke auf den 'Online anmelden'-Button — oder scanne den QR-Code mit der Kamera deines Handys."
+  - titel: "Daten eintragen"
+    beschreibung: "Fülle das Online-Formular direkt am Gerät aus. Es führt dich durch alle nötigen Angaben."
+  - titel: "Absenden — fertig"
+    beschreibung: "Du erhältst eine Bestätigung. Wir melden uns innerhalb weniger Tage und du bist startklar fürs Training."

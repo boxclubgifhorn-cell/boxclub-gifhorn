@@ -1,0 +1,32 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Seite nicht gefunden (404) | Boxclub Gifhorn e.V."
+  description="Die gesuchte Seite existiert nicht. Zurück zur Startseite des Boxclub Gifhorn e.V. oder direkt zum Kursplan."
+  noindex={true}
+>
+  <Header />
+  <main id="main-content" class="flex-1 flex items-center justify-center py-24 bg-stone-50 dark:bg-primary">
+    <div class="container-custom text-center max-w-2xl reveal">
+      <p class="text-secondary font-display font-black text-7xl md:text-9xl leading-none">404</p>
+      <h1 class="heading-xl text-stone-900 dark:text-white mt-6 mb-4">
+        Diese Seite gibt es <span class="text-secondary">nicht.</span>
+      </h1>
+      <p class="text-stone-600 dark:text-gray-400 text-lg mb-10">
+        Die gesuchte Seite wurde verschoben, umbenannt oder existiert nicht mehr.
+        Hier sind ein paar gute Anlaufstellen:
+      </p>
+      <div class="flex flex-wrap justify-center gap-3">
+        <a href="/" class="btn-primary text-sm">Zur Startseite</a>
+        <a href="/kursplan" class="btn-secondary text-sm">Trainingszeiten</a>
+        <a href="/leistungen" class="btn-secondary text-sm">Unsere Kurse</a>
+        <a href="/kontakt" class="btn-secondary text-sm">Kontakt</a>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Layout>

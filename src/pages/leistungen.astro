@@ -1,0 +1,208 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import CTA from '../components/CTA.astro';
+import Footer from '../components/Footer.astro';
+
+const siteUrl = 'https://boxclub-gifhorn.de';
+const orgId = `${siteUrl}/#organization`;
+
+const services = [
+  {
+    title: "Kinder & Anfänger Training",
+    tagline: "Dein Start im Ring",
+    description: "Sauberer Einstieg in den Boxsport. Wir kombinieren Technik-Grundschule mit Fitness — klare Bewegungen, sichere Abläufe, kein Druck. Unsere erfahrenen Trainer führen dich Schritt für Schritt an den Sport heran. Egal ob du noch nie Boxhandschuhe getragen hast oder erste Erfahrungen mitbringst — hier lernst du die Basics richtig.",
+    image: "https://images.unsplash.com/photo-1620123303506-5a0854820fcd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NjMzNzR8MHwxfHNlYXJjaHwxfHxraWRzJTIwYm94aW5nJTIwdHJhaW5pbmclMjBjaGlsZHJlbiUyMG1hcnRpYWwlMjBhcnRzfGVufDB8MHx8fDE3Nzg2ODI0NDd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+    imageAlt: "Kinder-Boxtraining mit Trainer",
+    features: ["Grundtechniken", "Fitness-Aufbau", "Sichere Abläufe", "Kein Druck"],
+  },
+  {
+    title: "Boxen Kindertraining (5–8 Jahre)",
+    tagline: "Spielerische Frühförderung",
+    description: "Motorik, Koordination und Selbstbewusstsein. Boxen als Spiel, das gleichzeitig Disziplin und Teamgeist fördert. In altersgerechten Übungen lernen die Kleinsten spielerisch erste Bewegungsabläufe, verbessern ihre Reaktionsfähigkeit und entwickeln ein gesundes Körpergefühl.",
+    image: "https://images.unsplash.com/photo-1699464676088-c6349d19b013?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NjMzNzR8MHwxfHNlYXJjaHwzfHxraWRzJTIwYm94aW5nJTIwdHJhaW5pbmclMjBjaGlsZHJlbiUyMG1hcnRpYWwlMjBhcnRzfGVufDB8MHx8fDE3Nzg2ODI0NDd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+    imageAlt: "Kinder beim Kampfsport-Training in der Halle",
+    features: ["Ab 5 Jahren", "Motorik-Förderung", "Spielerisches Lernen", "Teamgeist"],
+  },
+  {
+    title: "Judo für Kinder (6–12 Jahre)",
+    tagline: "Technik und Respekt",
+    description: "Der friedfertige Weg für Kinder: Fallschule, Wurftechniken und der respektvolle Umgang miteinander stehen im Mittelpunkt. Judo lehrt nicht nur Kampftechniken, sondern auch Werte wie Höflichkeit, Mut und Hilfsbereitschaft — Fähigkeiten, die weit über die Matte hinaus wirken.",
+    image: "https://images.unsplash.com/photo-1616447285364-f1461103ee36?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NjMzNzR8MHwxfHNlYXJjaHwxfHxqdWRvJTIwdHJhaW5pbmclMjBraWRzJTIwZG9qbyUyMG1hcnRpYWwlMjBhcnRzfGVufDB8MHx8fDE3Nzg2ODI0NTB8MA&ixlib=rb-4.1.0&q=80&w=1080",
+    imageAlt: "Judo-Training für Kinder im Dojo",
+    features: ["Fallschule", "Wurftechniken", "Respekt & Werte", "6–12 Jahre"],
+  },
+  {
+    title: "Boxen für Fortgeschrittene & Profis",
+    tagline: "Technik & Taktik",
+    description: "Verfeinere Schlagkombinationen, Beinarbeit und Defensive. Intensives Training für Sportler mit Erfahrung und klaren Ambitionen. Hier geht es um Präzision, Timing und taktisches Verständnis. Unsere Trainer arbeiten individuell an deinen Stärken und Schwächen.",
+    image: "https://images.unsplash.com/photo-1741732311455-0d56a45732a5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NjMzNzR8MHwxfHNlYXJjaHwxfHxib3hpbmclMjBwdW5jaGluZyUyMGJhZyUyMGhlYXZ5JTIwYmFnJTIwd29ya291dHxlbnwwfDB8fHwxNzc4NjgyNDQ4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+    imageAlt: "Boxer trainiert am Sandsack",
+    features: ["Schlagkombinationen", "Beinarbeit", "Defensive", "Individuelles Coaching"],
+  },
+  {
+    title: "Profis & Stützpunkttraining",
+    tagline: "Elite-Boxen in Gifhorn",
+    description: "Hochleistungstraining für Wettkämpfer. Fokus auf maximale Performance, Kampfstrategie und professionelle Wettkampfvorbereitung. Unser Stützpunkttraining richtet sich an ambitionierte Boxer, die auf regionaler und nationaler Ebene antreten wollen.",
+    image: "https://images.unsplash.com/photo-1564097147829-44f8c74a8549?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NjMzNzR8MHwxfHNlYXJjaHwxfHxib3hpbmclMjBjaGFtcGlvbiUyMHZpY3RvcnklMjBjZWxlYnJhdGlvbiUyMHJpbmd8ZW58MHwwfHx8MTc3ODY4MjQ1Mnww&ixlib=rb-4.1.0&q=80&w=1080",
+    imageAlt: "Boxkampf im Ring vor Publikum",
+    features: ["Wettkampfvorbereitung", "Kampfstrategie", "Maximale Performance", "Profi-Coaching"],
+  },
+  {
+    title: "MMA — Mixed Martial Arts (ab 16 Jahren)",
+    tagline: "Die volle Bandbreite",
+    description: "Stand- und Bodenkampf vereint. Hocheffektive Techniken aus Boxen, Kickboxen und Grappling — diszipliniert vermittelt. MMA ist die Königsdisziplin des Kampfsports und erfordert Vielseitigkeit, Ausdauer und mentale Stärke.",
+    image: "https://images.unsplash.com/photo-1615117972428-28de67cda58e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NjMzNzR8MHwxfHNlYXJjaHwxfHxNTUElMjBtaXhlZCUyMG1hcnRpYWwlMjBhcnRzJTIwZ3JhcHBsaW5nJTIwZmlnaHR8ZW58MHwwfHx8MTc3ODY4MjQ0OXww&ixlib=rb-4.1.0&q=80&w=1080",
+    imageAlt: "MMA-Kämpfer mit Boxhandschuhen",
+    features: ["Standkampf", "Bodenkampf", "Grappling", "Ab 16 Jahren"],
+  },
+  {
+    title: "Ringen Training",
+    tagline: "Kraft & Bodenkontrolle",
+    description: "Funktionelle Kraft und Explosivität. Klassischer Zweikampf mit Hebeltechniken, Stabilität und vollem Körpereinsatz. Ringen ist eine der ältesten Kampfsportarten und trainiert den gesamten Körper wie kaum eine andere Disziplin.",
+    image: "https://images.unsplash.com/photo-1770772807938-f2321dd9e96c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NjMzNzR8MHwxfHNlYXJjaHwxfHx3cmVzdGxpbmclMjB0cmFpbmluZyUyMGF0aGxldGVzJTIwZ3JhcHBsaW5nfGVufDB8MHx8fDE3Nzg2ODI0NTF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+    imageAlt: "Zwei Ringer beim Grappling auf der Matte",
+    features: ["Hebeltechniken", "Explosivität", "Ganzkörpertraining", "Stabilität"],
+  },
+  {
+    title: "Frauenfitness (ab 14 Jahren)",
+    tagline: "Power & Empowerment",
+    description: "Full-Body-Workout speziell für Frauen. Mehr Fitness, mehr Selbstbewusstsein — in einer motivierenden, ehrlichen Atmosphäre. Unser Frauenfitness-Programm kombiniert Elemente aus dem Boxsport mit funktionellem Training für maximale Ergebnisse.",
+    image: "https://images.unsplash.com/photo-1597079997518-cd1fa15d42e0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NjMzNzR8MHwxfHNlYXJjaHwxfHx3b21lbiUyMGZpdG5lc3MlMjBib3hpbmclMjB3b3Jrb3V0JTIwZW1wb3dlcm1lbnR8ZW58MHwwfHx8MTc3ODY4MjQ1MXww&ixlib=rb-4.1.0&q=80&w=1080",
+    imageAlt: "Frau beim Boxtraining - Fitness und Empowerment",
+    features: ["Full-Body-Workout", "Selbstbewusstsein", "Ab 14 Jahren", "Motivierende Atmosphäre"],
+  },
+];
+
+// JSON-LD: pro Service ein Service-Schema + BreadcrumbList
+const serviceSchemas = services.map((s) => ({
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  serviceType: s.title,
+  name: `${s.title} in Gifhorn`,
+  description: s.description,
+  provider: { '@id': orgId },
+  areaServed: [
+    { '@type': 'City', name: 'Gifhorn' },
+    { '@type': 'City', name: 'Wolfsburg' },
+    { '@type': 'City', name: 'Braunschweig' },
+  ],
+  url: `${siteUrl}/leistungen`,
+}));
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${siteUrl}/` },
+    { '@type': 'ListItem', position: 2, name: 'Leistungen', item: `${siteUrl}/leistungen` },
+  ],
+};
+
+const jsonLd = [breadcrumbSchema, ...serviceSchemas];
+---
+
+<Layout
+  title="Leistungen: Boxen, MMA, Judo & Frauenfitness in Gifhorn | Boxclub Gifhorn e.V."
+  description="Alle Trainingsangebote des Boxclub Gifhorn: Boxen für Kinder und Erwachsene, MMA, Judo, Ringen, Frauenfitness und Profi-Stützpunkttraining in Gifhorn. Komm zum Probetraining."
+  jsonLd={jsonLd}
+>
+  <Header />
+  <main id="main-content">
+    <!-- Page Hero -->
+    <section class="relative py-24 md:py-32 bg-stone-50 dark:bg-primary overflow-hidden">
+      <div class="absolute inset-0 opacity-10">
+        <img
+          src="https://images.unsplash.com/photo-1620123449946-30d6efd4b8ba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NjMzNzR8MHwxfHNlYXJjaHwxfHxib3hpbmclMjBneW0lMjB0cmFpbmluZyUyMHJpbmclMjBkYXJrJTIwYXRtb3NwaGVyZXxlbnwwfDB8fHwxNzc4NjgyNDQ3fDA&ixlib=rb-4.1.0&q=80&w=1080"
+          alt=""
+          class="w-full h-full object-cover"
+          aria-hidden="true"
+        />
+      </div>
+      <div class="container-custom relative z-10">
+        <!-- Breadcrumb -->
+        <nav class="mb-8" aria-label="Breadcrumb">
+          <ol class="flex items-center gap-2 text-sm text-stone-500 dark:text-gray-500">
+            <li><a href="/" class="hover:text-secondary transition-colors">Startseite</a></li>
+            <li><span class="text-stone-400 dark:text-gray-600">/</span></li>
+            <li class="text-secondary">Leistungen</li>
+          </ol>
+        </nav>
+
+        <div class="inline-flex items-center gap-3 mb-6">
+          <div class="w-12 h-px bg-secondary"></div>
+          <span class="text-secondary font-bold text-sm uppercase tracking-[0.3em]">Unsere Leistungen</span>
+        </div>
+        <h1 class="heading-xl text-stone-900 dark:text-white mb-6">
+          Kampfsport in <span class="text-secondary">Gifhorn</span> — finde dein Training
+        </h1>
+        <p class="text-stone-600 dark:text-gray-400 text-xl max-w-2xl">
+          Von Kinderboxen bis Profi-Wettkampf — der Boxclub Gifhorn e.V. bietet acht
+          Disziplinen für jedes Alter und Level: Boxen, MMA, Judo, Ringen und Frauenfitness
+          in Gifhorn, Wolfsburg und Braunschweig.
+        </p>
+      </div>
+    </section>
+
+    <!-- Services Detail -->
+    <section class="section-padding bg-stone-50 dark:bg-primary">
+      <div class="container-custom">
+        <div class="space-y-20">
+          {services.map((service, index) => (
+            <article class={`grid lg:grid-cols-2 gap-12 items-center reveal ${index % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}>
+              <!-- Image -->
+              <div class={`relative overflow-hidden group ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
+                <img
+                  src={service.image}
+                  alt={service.imageAlt}
+                  class="w-full h-[400px] object-cover transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent"></div>
+                <div class="absolute top-4 left-4">
+                  <span class="px-4 py-2 bg-secondary text-stone-100 text-xs font-bold uppercase tracking-wider">
+                    {service.tagline}
+                  </span>
+                </div>
+              </div>
+
+              <!-- Content -->
+              <div class={index % 2 === 1 ? 'lg:col-start-1' : ''}>
+                <h2 class="heading-md text-stone-900 dark:text-white mb-4">
+                  {service.title}
+                </h2>
+                <p class="text-stone-600 dark:text-gray-400 text-lg leading-relaxed mb-8">
+                  {service.description}
+                </p>
+
+                <!-- Features -->
+                <div class="grid grid-cols-2 gap-3 mb-8">
+                  {service.features.map((feature: string) => (
+                    <div class="flex items-center gap-2">
+                      <svg class="w-4 h-4 text-secondary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                      </svg>
+                      <span class="text-stone-700 dark:text-gray-300 text-sm">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div class="flex flex-wrap gap-3">
+                  <a href="/kursplan" class="btn-primary text-sm">
+                    Trainingszeiten ansehen
+                  </a>
+                  <a href="/kontakt" class="btn-secondary text-sm">
+                    Probetraining anfragen
+                  </a>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <CTA />
+  </main>
+  <Footer />
+</Layout>

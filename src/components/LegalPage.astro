@@ -1,0 +1,52 @@
+---
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+
+export interface Props {
+  title: string;
+  intro?: string;
+  stand?: string;
+  breadcrumb: string;
+}
+
+const { title, intro, stand, breadcrumb } = Astro.props;
+---
+
+<Header />
+<main id="main-content">
+  <!-- Page Hero -->
+  <section class="py-24 md:py-32 bg-stone-100 dark:bg-primary">
+    <div class="container-custom">
+      <nav class="mb-8" aria-label="Breadcrumb">
+        <ol class="flex items-center gap-2 text-sm text-stone-500 dark:text-gray-500">
+          <li><a href="/" class="hover:text-secondary transition-colors">Startseite</a></li>
+          <li><span class="text-stone-400 dark:text-gray-600">/</span></li>
+          <li class="text-secondary">{breadcrumb}</li>
+        </ol>
+      </nav>
+      <h1 class="heading-lg text-stone-900 dark:text-white mb-4">{title}</h1>
+      {intro && (
+        <p class="text-stone-600 dark:text-gray-400 text-lg max-w-2xl">{intro}</p>
+      )}
+      {stand && (
+        <p class="mt-6 inline-flex items-center gap-2 text-stone-500 dark:text-gray-500 text-sm">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          Stand: {stand}
+        </p>
+      )}
+      <div class="red-line mt-6"></div>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <section class="section-padding bg-white dark:bg-gray-900">
+    <div class="container-custom">
+      <article class="legal-prose max-w-3xl">
+        <slot />
+      </article>
+    </div>
+  </section>
+</main>
+<Footer />

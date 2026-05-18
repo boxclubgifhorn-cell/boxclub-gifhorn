@@ -1,0 +1,100 @@
+---
+// Standort-Karte – DSGVO-freundlich via OpenStreetMap-Iframe (kein Tracking, kein API-Key)
+// Plus: Routen-Buttons für Google Maps, Apple Maps, OSM
+import { getEntry } from 'astro:content';
+
+const global = (await getEntry('global', 'site'))?.data;
+const adresse = global?.adresse || 'Cardenap 2-4, 38518 Gifhorn';
+const adresseHinweis = global?.adresse_hinweis || '';
+
+// Cardenap 2-4, 38518 Gifhorn (Geokodiert via Nominatim)
+const LAT = 52.4887095;
+const LON = 10.5445565;
+const ZOOM = 16;
+
+// bbox für Iframe (~700m Radius)
+const BBOX_DELTA = 0.005;
+const bbox = [
+  LON - BBOX_DELTA, LAT - BBOX_DELTA,
+  LON + BBOX_DELTA, LAT + BBOX_DELTA,
+].join(',');
+
+const adresseEncoded = encodeURIComponent(adresse);
+
+interface Props {
+  /** Höhe der Karte */
+  height?: string;
+  /** Compact-Mode: ohne Header und Buttons */
+  compact?: boolean;
+  /** Eigene CSS-Klassen für äußeren Wrapper */
+  class?: string;
+}
+
+const { height = '380px', compact = false, class: extraClass = '' } = Astro.props;
+---
+
+<div class={`standort-karte ${extraClass}`}>
+  {!compact && (
+    <div class="mb-4">
+      <h3 class="text-stone-900 dark:text-white font-bold text-lg mb-1">So findest du uns</h3>
+      <p class="text-stone-600 dark:text-gray-400 text-sm">
+        <strong class="text-stone-900 dark:text-white">{adresse}</strong>
+        {adresseHinweis && <span class="block text-xs mt-1">{adresseHinweis}</span>}
+      </p>
+    </div>
+  )}
+
+  <div class="relative overflow-hidden border border-stone-200 dark:border-gray-700 shadow-sm dark:shadow-none" style={`height: ${height};`}>
+    <iframe
+      title={`Karte mit Standort ${adresse}`}
+      width="100%"
+      height="100%"
+      frameborder="0"
+      scrolling="no"
+      marginheight="0"
+      marginwidth="0"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      style="border:0;"
+      src={`https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${LAT},${LON}`}
+    ></iframe>
+    <a
+      href={`https://www.openstreetmap.org/?mlat=${LAT}&mlon=${LON}#map=${ZOOM}/${LAT}/${LON}`}
+      target="_blank"
+      rel="noopener"
+      class="absolute bottom-2 right-2 bg-white/95 dark:bg-gray-900/95 text-stone-700 dark:text-gray-300 text-[10px] px-2 py-1 font-semibold uppercase tracking-wider hover:text-secondary transition-colors"
+      aria-label="Größere Karte auf OpenStreetMap"
+    >
+      Größere Karte ↗
+    </a>
+  </div>
+
+  {!compact && (
+    <div class="flex flex-wrap gap-2 mt-4">
+      <a
+        href={`https://www.google.com/maps/dir/?api=1&destination=${adresseEncoded}`}
+        target="_blank" rel="noopener"
+        class="inline-flex items-center gap-2 px-4 py-2 bg-secondary hover:bg-secondary-600 text-white text-xs font-bold uppercase tracking-wider transition-colors"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+        </svg>
+        Route in Google Maps
+      </a>
+      <a
+        href={`https://maps.apple.com/?daddr=${adresseEncoded}`}
+        target="_blank" rel="noopener"
+        class="inline-flex items-center gap-2 px-4 py-2 border border-stone-300 dark:border-gray-700 text-stone-700 dark:text-gray-300 hover:border-secondary hover:text-secondary text-xs font-bold uppercase tracking-wider transition-colors"
+      >
+        Apple Maps
+      </a>
+      <a
+        href={`https://www.openstreetmap.org/?mlat=${LAT}&mlon=${LON}#map=${ZOOM}/${LAT}/${LON}`}
+        target="_blank" rel="noopener"
+        class="inline-flex items-center gap-2 px-4 py-2 border border-stone-300 dark:border-gray-700 text-stone-700 dark:text-gray-300 hover:border-secondary hover:text-secondary text-xs font-bold uppercase tracking-wider transition-colors"
+      >
+        OpenStreetMap
+      </a>
+    </div>
+  )}
+</div>

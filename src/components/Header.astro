@@ -1,0 +1,212 @@
+---
+import { getEntry } from 'astro:content';
+
+const navItems = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Kursplan', href: '/kursplan' },
+  { label: 'Mitgliedsbeiträge', href: '/mitgliedsbeitraege' },
+  { label: 'Kontakt', href: '/kontakt' },
+];
+
+const global = (await getEntry('global', 'site'))?.data;
+const firma = global?.firma_name || 'Boxclub Gifhorn e.V.';
+const brandKurz = firma.split(' ')[0] || 'Boxclub';
+const brandSubtitel = global?.brand_subtitel || 'Gifhorn e.V.';
+const telefon = global?.telefon || '05371 7599679';
+const telefonLink = global?.telefon_link || '+4953717599679';
+const email = global?.email || 'info@boxclub-gifhorn.de';
+---
+
+<header id="main-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+  <div class="container-custom">
+    <nav class="flex items-center justify-between h-20" aria-label="Hauptnavigation">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-3 group flex-shrink-0" aria-label="Boxclub Gifhorn - Startseite">
+        <img
+          src="/logo.png"
+          alt="Boxclub Gifhorn e.V. — Löwen-Logo"
+          width="48"
+          height="48"
+          class="w-11 h-11 md:w-12 md:h-12 rounded-full ring-1 ring-stone-200 dark:ring-white/10 transform group-hover:scale-110 transition-transform duration-300"
+          loading="eager"
+        />
+        <div class="flex flex-col">
+          <span class="text-stone-900 dark:text-white font-black text-base xl:text-lg uppercase tracking-wider leading-none">{brandKurz}</span>
+          <span class="hidden xl:block text-accent text-xs font-bold uppercase tracking-[0.3em] leading-none mt-0.5">{brandSubtitel}</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden lg:flex items-center gap-5 xl:gap-7">
+        {navItems.map((item) => (
+          <a
+            href={item.href}
+            class="text-stone-700 dark:text-gray-300 hover:text-stone-900 dark:hover:text-white font-semibold text-sm uppercase tracking-wider transition-colors duration-300 relative group"
+          >
+            {item.label}
+            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary transition-all duration-300 group-hover:w-full"></span>
+          </a>
+        ))}
+
+        <!-- Dark Mode Toggle -->
+        <button
+          id="theme-toggle"
+          class="p-2 text-stone-600 dark:text-gray-400 hover:text-stone-900 dark:hover:text-white transition-colors duration-300"
+          aria-label="Farbmodus umschalten"
+        >
+          <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+          <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        </button>
+
+        <!-- CTA Button -->
+        <a
+          href="/anmeldung"
+          class="px-6 py-3 bg-secondary hover:bg-secondary-600 text-white font-bold text-sm uppercase tracking-wider transition-all duration-300 hover:shadow-[0_0_25px_rgba(255,107,0,0.4)]"
+        >
+          Hier anmelden
+        </a>
+      </div>
+
+      <!-- Mobile Controls -->
+      <div class="lg:hidden flex items-center gap-2">
+        <button
+          id="theme-toggle-mobile"
+          class="p-2 text-stone-700 dark:text-gray-300 hover:text-stone-900 dark:hover:text-white transition-colors duration-300"
+          aria-label="Farbmodus umschalten"
+        >
+          <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+          <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        </button>
+        <button
+          id="mobile-menu-btn"
+          class="p-2 text-stone-900 dark:text-white"
+          aria-label="Menü öffnen"
+          aria-expanded="false"
+        >
+          <div class="w-7 h-5 relative flex flex-col justify-between">
+            <span class="hamburger-line w-full h-0.5 bg-stone-900 dark:bg-white transition-all duration-300 origin-left"></span>
+            <span class="hamburger-line w-full h-0.5 bg-stone-900 dark:bg-white transition-all duration-300"></span>
+            <span class="hamburger-line w-3/4 h-0.5 bg-secondary transition-all duration-300 origin-left"></span>
+          </div>
+        </button>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div
+    id="mobile-menu"
+    class="lg:hidden fixed inset-0 top-20 bg-white/98 dark:bg-primary/98 backdrop-blur-xl transform translate-x-full transition-transform duration-500 ease-out z-40"
+  >
+    <div class="flex flex-col items-center justify-center h-full gap-8">
+      {navItems.map((item, i) => (
+        <a
+          href={item.href}
+          class="text-stone-900 dark:text-white text-3xl font-black uppercase tracking-wider hover:text-secondary transition-colors duration-300"
+          style={`animation-delay: ${i * 100}ms`}
+        >
+          {item.label}
+        </a>
+      ))}
+      <div class="mt-4 flex flex-col items-center gap-3">
+        <a href="/anmeldung" class="btn-primary">Hier anmelden</a>
+        <a href="/kursplan" class="btn-secondary text-sm">Trainingszeiten</a>
+      </div>
+      <div class="mt-8 flex flex-col items-center gap-3 text-stone-600 dark:text-gray-400 text-sm">
+        <a href={`tel:${telefonLink}`} class="hover:text-secondary transition-colors">{telefon}</a>
+        <a href={`mailto:${email}`} class="hover:text-secondary transition-colors">{email}</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Spacer for fixed header -->
+<div class="h-20"></div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const header = document.getElementById('main-header');
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+
+    // Sticky header background (light + dark sensitive)
+    const scrolledClasses = [
+      'bg-white/95', 'dark:bg-primary/95',
+      'backdrop-blur-xl',
+      'shadow-lg', 'dark:shadow-2xl', 'shadow-black/5', 'dark:shadow-black/20',
+      'border-b', 'border-stone-200/60', 'dark:border-white/5',
+    ];
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.scrollY;
+      if (header) {
+        if (currentScroll > 50) {
+          header.classList.add(...scrolledClasses);
+        } else {
+          header.classList.remove(...scrolledClasses);
+        }
+      }
+    });
+
+    // Mobile menu toggle
+    let isMenuOpen = false;
+    mobileMenuBtn?.addEventListener('click', () => {
+      isMenuOpen = !isMenuOpen;
+      if (mobileMenu) {
+        mobileMenu.style.transform = isMenuOpen ? 'translateX(0)' : 'translateX(100%)';
+      }
+      mobileMenuBtn.setAttribute('aria-expanded', String(isMenuOpen));
+      document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+
+      // Animate hamburger
+      const lines = mobileMenuBtn.querySelectorAll('.hamburger-line');
+      if (isMenuOpen) {
+        lines[0].style.transform = 'rotate(45deg) translateY(2px)';
+        lines[1].style.opacity = '0';
+        lines[2].style.transform = 'rotate(-45deg) translateY(-2px)';
+        lines[2].style.width = '100%';
+      } else {
+        lines[0].style.transform = '';
+        lines[1].style.opacity = '1';
+        lines[2].style.transform = '';
+        lines[2].style.width = '75%';
+      }
+    });
+
+    // Close mobile menu on link click
+    mobileMenu?.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        isMenuOpen = false;
+        if (mobileMenu) {
+          mobileMenu.style.transform = 'translateX(100%)';
+        }
+        document.body.style.overflow = '';
+        mobileMenuBtn?.setAttribute('aria-expanded', 'false');
+        const lines = mobileMenuBtn?.querySelectorAll('.hamburger-line');
+        if (lines) {
+          lines[0].style.transform = '';
+          lines[1].style.opacity = '1';
+          lines[2].style.transform = '';
+          lines[2].style.width = '75%';
+        }
+      });
+    });
+
+    // Theme toggle (Desktop + Mobile)
+    const toggleTheme = () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      try { localStorage.setItem('theme', isDark ? 'dark' : 'light'); } catch (_) {}
+    };
+    themeToggle?.addEventListener('click', toggleTheme);
+    themeToggleMobile?.addEventListener('click', toggleTheme);
+  });
+</script>

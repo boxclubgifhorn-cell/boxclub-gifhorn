@@ -1,0 +1,43 @@
+titel: "Trainingsplan"
+beschreibung: "Hier findest du unseren aktuellen Wochenplan mit allen Kursen, Zeiten und Zielgruppen."
+bild: ""
+bild_alt: ""
+pdf: ""
+stand: "März 2026"
+hinweis: "Bei Feiertagen und in den Schulferien kann es zu Abweichungen kommen. Bitte beachte aktuelle Aushänge im Verein oder ruf vorher kurz an: 05371 7599679."
+eintraege:
+  # ---- Montag ----
+  - { tag: "Montag", zeit: "16:45–18:15", kurs: "Judo", zielgruppe: "ab 6–12 Jahre", farbe: "blau" }
+  - { tag: "Montag", zeit: "17:00–18:30", kurs: "Boxen Kindertraining", zielgruppe: "ab 8–12 Jahre", farbe: "orange" }
+  - { tag: "Montag", zeit: "18:30–19:45", kurs: "Frauentraining / Kraft-Ausdauer", zielgruppe: "", farbe: "blau" }
+  - { tag: "Montag", zeit: "18:30–20:00", kurs: "Fortgeschrittene & Profis", zielgruppe: "", farbe: "neutral" }
+
+  # ---- Dienstag ----
+  - { tag: "Dienstag", zeit: "16:00–17:00", kurs: "Boxen Kindertraining", zielgruppe: "ab 5–8 Jahre", farbe: "rot" }
+  - { tag: "Dienstag", zeit: "16:30–18:00", kurs: "Ringen", zielgruppe: "ab 8 Jahre", farbe: "neutral" }
+  - { tag: "Dienstag", zeit: "17:00–18:30", kurs: "Boxen Kindertraining & Anfänger", zielgruppe: "ab 12 Jahre", farbe: "orange" }
+  - { tag: "Dienstag", zeit: "18:00–20:00", kurs: "MMA Anfänger / Fortgeschrittene", zielgruppe: "ab 16 Jahre", farbe: "orange" }
+  - { tag: "Dienstag", zeit: "18:30–20:00", kurs: "Fortgeschrittene & Profis", zielgruppe: "", farbe: "neutral" }
+
+  # ---- Mittwoch ----
+  - { tag: "Mittwoch", zeit: "17:00–19:00", kurs: "Ringen", zielgruppe: "ab 8 Jahre", farbe: "neutral" }
+  - { tag: "Mittwoch", zeit: "18:00–20:00", kurs: "MMA Anfänger / Fortgeschrittene", zielgruppe: "ab 16 Jahre", farbe: "orange" }
+  - { tag: "Mittwoch", zeit: "19:00–20:15", kurs: "Frauentraining / Fitness Boxen", zielgruppe: "ab 14 Jahre", farbe: "blau" }
+
+  # ---- Donnerstag ----
+  - { tag: "Donnerstag", zeit: "16:00–17:00", kurs: "Boxen Kindertraining", zielgruppe: "ab 5–8 Jahre", farbe: "rot" }
+  - { tag: "Donnerstag", zeit: "17:00–18:30", kurs: "Boxen Kindertraining & Anfänger", zielgruppe: "ab 12 Jahre", farbe: "orange" }
+  - { tag: "Donnerstag", zeit: "18:00–20:00", kurs: "MMA Anfänger / Fortgeschrittene", zielgruppe: "ab 16 Jahre", farbe: "orange" }
+  - { tag: "Donnerstag", zeit: "18:30–20:00", kurs: "Fortgeschrittene & Profis", zielgruppe: "", farbe: "neutral" }
+
+  # ---- Freitag ----
+  - { tag: "Freitag", zeit: "15:00–16:30", kurs: "Judo", zielgruppe: "ab 6–12 Jahre", farbe: "blau" }
+  - { tag: "Freitag", zeit: "15:30–17:00", kurs: "Boxen Kindertraining", zielgruppe: "ab 8–12 Jahre", farbe: "orange" }
+  - { tag: "Freitag", zeit: "18:00–19:30", kurs: "Fortgeschrittene & Profis", zielgruppe: "", farbe: "neutral" }
+
+  # ---- Samstag ----
+  - { tag: "Samstag", zeit: "14:00–15:30", kurs: "FitDance", zielgruppe: "", farbe: "gold", hinweis: "Neu im Programm" }
+  - { tag: "Samstag", zeit: "16:00–18:00", kurs: "Ringen", zielgruppe: "ab 8 Jahre", farbe: "neutral" }
+
+  # ---- Sonntag ----
+  - { tag: "Sonntag", zeit: "13:00–15:00", kurs: "Ringen", zielgruppe: "ab 8 Jahre", farbe: "neutral" }
