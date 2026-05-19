@@ -27,6 +27,7 @@ const adresseFallback = data.rueckgabe_adresse || global?.adresse || 'Cardenap 2
 
 const hasOnline = !!data.online_url;
 const hasPdf = !!data.formular_pdf;
+const hasVideo = !!data.video_url;
 
 const siteUrl = 'https://boxclub-gifhorn.de';
 const breadcrumb = {
@@ -234,6 +235,43 @@ const readers = [
                 </div>
               </div>
             </div>
+
+            <!-- Erklärvideo -->
+            {hasVideo && (
+              <div class="bg-white dark:bg-gray-900 border border-stone-200 dark:border-gray-800 p-6 lg:p-8 mb-8">
+                <div class="flex items-start gap-4 mb-5">
+                  <div class="w-14 h-14 flex-shrink-0 bg-secondary/10 border border-secondary/30 text-secondary flex items-center justify-center">
+                    <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="text-stone-900 dark:text-white font-bold text-lg mb-1">
+                      {data.video_titel || 'Erklärvideo zum Ausfüllen'}
+                    </h3>
+                    {data.video_beschreibung && (
+                      <p class="text-stone-600 dark:text-gray-400 text-sm">
+                        {data.video_beschreibung}
+                      </p>
+                    )}
+                  </div>
+                </div>
+                <div class="aspect-video bg-black overflow-hidden">
+                  <video
+                    src={data.video_url}
+                    controls
+                    preload="metadata"
+                    playsinline
+                    class="w-full h-full"
+                  >
+                    Dein Browser kann dieses Video nicht abspielen.
+                    <a href={data.video_url} download class="text-secondary underline">
+                      Video herunterladen
+                    </a>
+                  </video>
+                </div>
+              </div>
+            )}
 
             <!-- Rückgabe-Info -->
             <div class="grid sm:grid-cols-2 gap-4 mb-8">

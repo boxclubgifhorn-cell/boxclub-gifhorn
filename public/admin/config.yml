@@ -231,6 +231,9 @@ collections:
           - { name: "online_anbieter", label: "Anbieter-Name (zur Anzeige)", widget: "string", required: false, hint: "z.B. 'meinverein.de' — wird im Hinweis auf der Anmeldeseite angezeigt." }
           - { name: "formular_pdf", label: "Mitgliedsantrag (PDF, alternativ)", widget: "file", required: false, hint: "OPTIONAL: PDF als Alternative zum Online-Formular. Wenn beides angegeben ist, wird Online primär gezeigt." }
           - { name: "formular_stand", label: "Stand des PDF-Formulars", widget: "string", required: false, hint: "z.B. 'Januar 2026'" }
+          - { name: "video_url", label: "Erklärvideo (MP4)", widget: "file", required: false, hint: "OPTIONAL: Kurzes Video, das das Ausfüllen der Beitrittserklärung erklärt. Wird unterhalb des PDF-Downloads angezeigt." }
+          - { name: "video_titel", label: "Video-Titel", widget: "string", required: false, default: "Kurze Anleitung zum Ausfüllen" }
+          - { name: "video_beschreibung", label: "Video-Beschreibung", widget: "text", required: false, hint: "Kurzer Hinweistext über dem Video." }
           - { name: "rueckgabe_email", label: "Rückgabe-E-Mail", widget: "string", required: false, hint: "Standard: info@boxclub-gifhorn.de" }
           - { name: "rueckgabe_adresse", label: "Rückgabe-Adresse", widget: "string", required: false, hint: "Standard: Cardenap 2-4, 38518 Gifhorn" }
           - { name: "hinweis", label: "Hinweis-Box (unten)", widget: "text", required: false, hint: "z.B. Hinweis auf Eltern-Unterschrift bei Minderjährigen." }
