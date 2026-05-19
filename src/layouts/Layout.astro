@@ -14,6 +14,9 @@ import '@fontsource/oswald/500.css';
 import '@fontsource/oswald/600.css';
 import '@fontsource/oswald/700.css';
 
+// Vercel Speed Insights
+import SpeedInsights from '@vercel/speed-insights/astro';
+
 interface Props {
   title: string;
   description?: string;
@@ -195,6 +198,9 @@ const allJsonLd = [...baseJsonLd, ...extraJsonLd];
     </a>
 
     <slot />
+
+    <!-- Vercel Speed Insights -->
+    <SpeedInsights />
 
     <!-- Scroll Reveal Script -->
     <script>
