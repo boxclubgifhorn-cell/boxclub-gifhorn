@@ -16,6 +16,8 @@ import '@fontsource/oswald/700.css';
 
 // Vercel Web Analytics
 import Analytics from '@vercel/analytics/astro';
+// Vercel Speed Insights
+import SpeedInsights from '@vercel/speed-insights/astro';
 
 interface Props {
   title: string;
@@ -109,6 +111,7 @@ const allJsonLd = [...baseJsonLd, ...extraJsonLd];
   <head>
     <meta charset="UTF-8" />
     <Analytics />
+    <SpeedInsights />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
 
