@@ -1,9 +1,16 @@
 ---
 import { getCollection } from 'astro:content';
 
-// Hole alle veröffentlichten News, sortiert nach Datum (neueste zuerst)
+// Hole alle veröffentlichten News, sortiert nach Datum (neueste zuerst).
+// Filter:
+//   - veroeffentlicht !== false  (Default true)
+//   - gueltig_bis nicht gesetzt ODER gueltig_bis >= heute (00:00 lokal)
+const now = new Date();
+now.setHours(0, 0, 0, 0);
+
 const allNews = (await getCollection('news'))
   .filter((n) => n.data.veroeffentlicht !== false)
+  .filter((n) => !n.data.gueltig_bis || new Date(n.data.gueltig_bis) >= now)
   .sort((a, b) => +new Date(b.data.datum) - +new Date(a.data.datum));
 
 const latest = allNews[0];

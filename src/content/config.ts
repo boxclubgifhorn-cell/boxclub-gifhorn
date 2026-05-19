@@ -200,6 +200,7 @@ const news = defineCollection({
     autor: z.string().optional(),
     kategorie: z.string().optional(),
     veroeffentlicht: z.boolean().default(true),
+    gueltig_bis: z.date().optional(),
   }),
 });
 

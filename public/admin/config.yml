@@ -330,6 +330,7 @@ collections:
     fields:
       - { name: "titel", label: "Titel", widget: "string" }
       - { name: "datum", label: "Datum", widget: "datetime", date_format: "DD.MM.YYYY", time_format: false, picker_utc: false }
+      - { name: "gueltig_bis", label: "Sichtbar bis (optional)", widget: "datetime", date_format: "DD.MM.YYYY", time_format: false, picker_utc: false, required: false, default: "", hint: "Wenn gesetzt: Beitrag verschwindet ab diesem Tag automatisch von der Startseite. Leer lassen → bleibt sichtbar." }
       - { name: "kategorie", label: "Kategorie", widget: "string", required: false, hint: "z.B. 'Wettkampf', 'Verein', 'Termine'" }
       - { name: "autor", label: "Autor", widget: "string", required: false }
       - { name: "teaser", label: "Teaser (kurzer Vorschautext)", widget: "text", required: false, hint: "1-2 Sätze für die News-Übersicht." }
