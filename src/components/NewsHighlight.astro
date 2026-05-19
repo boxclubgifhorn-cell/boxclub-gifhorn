@@ -1,0 +1,128 @@
+---
+import { getCollection } from 'astro:content';
+
+// Hole alle veröffentlichten News, sortiert nach Datum (neueste zuerst)
+const allNews = (await getCollection('news'))
+  .filter((n) => n.data.veroeffentlicht !== false)
+  .sort((a, b) => +new Date(b.data.datum) - +new Date(a.data.datum));
+
+const latest = allNews[0];
+const hasMore = allNews.length > 1;
+
+// Wenn keine News: komplett ausblenden (kein <section> rendern)
+if (!latest) {
+  // nothing — fragment unten ist conditionally gerendert
+}
+
+// Datum hübsch formatieren
+const datumFormatted = latest
+  ? new Date(latest.data.datum).toLocaleDateString('de-DE', {
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric',
+    })
+  : '';
+
+// "NEU"-Flag wenn jünger als 14 Tage
+const isFresh = latest
+  ? +new Date() - +new Date(latest.data.datum) < 14 * 24 * 60 * 60 * 1000
+  : false;
+
+const slug = latest?.slug;
+const detailUrl = slug ? `/news/${slug}` : '/news';
+---
+
+{latest && (
+  <section id="news-highlight" class="relative overflow-hidden">
+    <!-- Hintergrund: tiefer Gradient (secondary → primary), klar abgesetzt -->
+    <div class="absolute inset-0 bg-gradient-to-br from-secondary via-secondary-600 to-primary"></div>
+
+    <!-- Dezentes Raster-Pattern -->
+    <div class="absolute inset-0 opacity-10 pointer-events-none">
+      <div class="absolute inset-0" style="background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 32px 32px;"></div>
+    </div>
+
+    <!-- Pulsierender Akzent-Streifen oben -->
+    <div class="absolute top-0 left-0 right-0 h-1 bg-accent animate-pulse"></div>
+
+    <div class="container-custom relative z-10 py-12 md:py-16">
+      <div class="grid lg:grid-cols-[1fr_1.2fr] gap-8 lg:gap-12 items-center">
+        <!-- Links: Text -->
+        <div>
+          <!-- Badge-Reihe -->
+          <div class="flex flex-wrap items-center gap-3 mb-5">
+            <span class="inline-flex items-center gap-2 px-3 py-1.5 bg-white text-secondary text-xs font-black uppercase tracking-[0.2em]">
+              <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-secondary"></span>
+              </span>
+              Aktuelles
+            </span>
+            {isFresh && (
+              <span class="inline-block px-3 py-1.5 bg-accent text-primary text-xs font-black uppercase tracking-[0.2em]">
+                Neu
+              </span>
+            )}
+            {latest.data.kategorie && (
+              <span class="text-white/80 text-xs font-bold uppercase tracking-[0.2em]">
+                {latest.data.kategorie}
+              </span>
+            )}
+            <span class="text-white/70 text-xs font-semibold ml-auto md:ml-0">
+              {datumFormatted}
+            </span>
+          </div>
+
+          <h2 class="font-display font-black text-white text-3xl md:text-4xl lg:text-5xl leading-tight mb-5">
+            {latest.data.titel}
+          </h2>
+
+          {latest.data.teaser && (
+            <p class="text-white/90 text-lg md:text-xl leading-relaxed mb-7 max-w-xl">
+              {latest.data.teaser}
+            </p>
+          )}
+
+          <div class="flex flex-wrap gap-3">
+            <a
+              href={detailUrl}
+              class="inline-flex items-center gap-2 px-6 py-3 bg-white text-primary font-bold text-sm uppercase tracking-wider hover:bg-accent hover:text-primary transition-colors group"
+            >
+              Weiterlesen
+              <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+            {hasMore && (
+              <a
+                href="/news"
+                class="inline-flex items-center gap-2 px-6 py-3 text-white text-sm font-bold uppercase tracking-wider border border-white/40 hover:border-white hover:bg-white/10 transition-colors"
+              >
+                Alle News
+              </a>
+            )}
+          </div>
+        </div>
+
+        <!-- Rechts: Bild (wenn vorhanden) -->
+        {latest.data.bild && (
+          <a href={detailUrl} class="block group relative">
+            <div class="aspect-[4/3] lg:aspect-[5/4] overflow-hidden bg-primary/40 ring-1 ring-white/10">
+              <img
+                src={latest.data.bild}
+                alt={latest.data.bild_alt || latest.data.titel}
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                loading="eager"
+                decoding="async"
+              />
+            </div>
+            <!-- Eckiger Akzent oben-links -->
+            <div class="absolute -top-2 -left-2 w-12 h-12 border-t-4 border-l-4 border-accent pointer-events-none"></div>
+            <!-- Eckiger Akzent unten-rechts -->
+            <div class="absolute -bottom-2 -right-2 w-12 h-12 border-b-4 border-r-4 border-white/60 pointer-events-none"></div>
+          </a>
+        )}
+      </div>
+    </div>
+  </section>
+)}
