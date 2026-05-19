@@ -56,7 +56,23 @@
         border: 1px solid rgba(255, 255, 255, 0.12);
         box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
         backdrop-filter: blur(8px);
+        cursor: pointer;
+        transition: background 0.2s, border-color 0.2s;
       }
+      .who-badge:hover {
+        background: rgba(255, 107, 0, 0.92);
+        border-color: rgba(255, 255, 255, 0.3);
+      }
+      .who-badge:hover .who-label { color: rgba(255, 255, 255, 0.85); }
+      .who-badge:hover .who-login { color: rgba(255, 255, 255, 0.85); }
+      .who-badge .who-logout-icon {
+        width: 14px;
+        height: 14px;
+        margin-left: 0.35rem;
+        opacity: 0.55;
+        flex-shrink: 0;
+      }
+      .who-badge:hover .who-logout-icon { opacity: 1; }
       .who-badge img {
         width: 22px;
         height: 22px;
@@ -88,13 +104,21 @@
     <!-- Auto-Logout bei Inaktivität -->
     <script src="/admin/idle-logout.js" is:inline defer></script>
 
-    <!-- Eingeloggt-als-Badge: zeigt GitHub-Avatar + Name + Login -->
-    <div id="whoBadge" class="who-badge" title="Aktuell eingeloggter GitHub-Account">
+    <!-- Eingeloggt-als-Badge: zeigt GitHub-Avatar + Name + Login. Klick = Abmelden -->
+    <button
+      type="button"
+      id="whoBadge"
+      class="who-badge"
+      title="Klicken zum Abmelden / Account wechseln"
+    >
       <img id="whoAvatar" alt="" src="" />
       <span class="who-label">Eingeloggt</span>
       <span id="whoName" class="who-name"></span>
       <span id="whoLogin" class="who-login"></span>
-    </div>
+      <svg class="who-logout-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+      </svg>
+    </button>
 
     <!-- Audit-Log-Button: nur sichtbar wenn eingeloggt -->
     <a href="/admin-log/" class="audit-fab" id="auditFab" target="_blank" rel="noopener">
@@ -174,6 +198,25 @@
         render();
         window.addEventListener('storage', render);
         setInterval(render, 2000);
+
+        // Klick aufs Badge = Logout + Reload
+        badge.addEventListener('click', () => {
+          if (!confirm('Wirklich abmelden? Du wirst danach automatisch zur Login-Seite geleitet.')) return;
+          try {
+            // Decap-User-Keys
+            localStorage.removeItem('decap-cms-user');
+            localStorage.removeItem('netlify-cms-user');
+            // Decap-interne State-Keys (falls vorhanden)
+            for (let i = localStorage.length - 1; i >= 0; i--) {
+              const k = localStorage.key(i) || '';
+              if (k.startsWith('decap-cms.') || k.startsWith('netlify-cms.')) {
+                localStorage.removeItem(k);
+              }
+            }
+          } catch (_) {}
+          // Reload mit Hinweis-Banner
+          location.href = '/admin/?reason=user-logout';
+        });
       })();
     </script>
   </body>
