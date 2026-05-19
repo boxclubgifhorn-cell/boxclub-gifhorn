@@ -37,6 +37,48 @@
         transform: translateY(-2px);
       }
       .audit-fab svg { width: 16px; height: 16px; }
+
+      /* Eingeloggt-als-Badge oben rechts */
+      .who-badge {
+        position: fixed;
+        top: 0.75rem;
+        right: 0.75rem;
+        z-index: 99999;
+        display: none;
+        align-items: center;
+        gap: 0.55rem;
+        background: rgba(11, 11, 15, 0.92);
+        color: #fff;
+        padding: 0.35rem 0.65rem 0.35rem 0.4rem;
+        font-family: 'Inter', system-ui, sans-serif;
+        font-size: 0.78rem;
+        font-weight: 600;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+        backdrop-filter: blur(8px);
+      }
+      .who-badge img {
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: #2a2a32;
+        flex-shrink: 0;
+      }
+      .who-badge .who-label {
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: rgba(255, 255, 255, 0.55);
+        font-size: 0.62rem;
+        font-weight: 700;
+        margin-right: 0.15rem;
+      }
+      .who-badge .who-name {
+        color: #fff;
+      }
+      .who-badge .who-login {
+        color: rgba(255, 255, 255, 0.55);
+        font-weight: 500;
+      }
     </style>
   </head>
   <body>
@@ -45,6 +87,14 @@
 
     <!-- Auto-Logout bei Inaktivität -->
     <script src="/admin/idle-logout.js" is:inline defer></script>
+
+    <!-- Eingeloggt-als-Badge: zeigt GitHub-Avatar + Name + Login -->
+    <div id="whoBadge" class="who-badge" title="Aktuell eingeloggter GitHub-Account">
+      <img id="whoAvatar" alt="" src="" />
+      <span class="who-label">Eingeloggt</span>
+      <span id="whoName" class="who-name"></span>
+      <span id="whoLogin" class="who-login"></span>
+    </div>
 
     <!-- Audit-Log-Button: nur sichtbar wenn eingeloggt -->
     <a href="/admin-log/" class="audit-fab" id="auditFab" target="_blank" rel="noopener">
@@ -78,24 +128,52 @@
     </script>
 
     <script is:inline>
-      // FAB nur zeigen wenn Decap-Token vorhanden (= eingeloggt)
+      // FAB + Eingeloggt-Badge nur zeigen wenn Decap-Token vorhanden (= eingeloggt)
       (function () {
-        function check() {
+        const fab = document.getElementById('auditFab');
+        const badge = document.getElementById('whoBadge');
+        const avatar = document.getElementById('whoAvatar');
+        const nameEl = document.getElementById('whoName');
+        const loginEl = document.getElementById('whoLogin');
+
+        function readUser() {
           for (const key of ['decap-cms-user', 'netlify-cms-user']) {
             try {
               const raw = localStorage.getItem(key);
-              if (raw && JSON.parse(raw).token) {
-                document.getElementById('auditFab').style.display = 'inline-flex';
-                return;
+              if (raw) {
+                const u = JSON.parse(raw);
+                if (u && u.token) return u;
               }
             } catch (_) {}
           }
-          document.getElementById('auditFab').style.display = 'none';
+          return null;
         }
-        check();
-        // Bei Login/Logout reagieren
-        window.addEventListener('storage', check);
-        setInterval(check, 2000);
+
+        function render() {
+          const u = readUser();
+          if (u) {
+            fab.style.display = 'inline-flex';
+            // Decap speichert je nach Backend unterschiedlich: name, login, avatar_url
+            const name = u.name || u.login || 'Editor';
+            const login = u.login && u.login !== name ? '@' + u.login : '';
+            nameEl.textContent = name;
+            loginEl.textContent = login;
+            if (u.avatar_url) {
+              avatar.src = u.avatar_url;
+              avatar.style.display = '';
+            } else {
+              avatar.style.display = 'none';
+            }
+            badge.style.display = 'inline-flex';
+          } else {
+            fab.style.display = 'none';
+            badge.style.display = 'none';
+          }
+        }
+
+        render();
+        window.addEventListener('storage', render);
+        setInterval(render, 2000);
       })();
     </script>
   </body>
