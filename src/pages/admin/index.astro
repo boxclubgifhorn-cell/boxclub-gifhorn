@@ -39,11 +39,12 @@
       }
       .audit-fab svg { width: 16px; height: 16px; }
 
-      /* Eingeloggt-als-Badge oben rechts */
+      /* Eingeloggt-als-Badge unten links (überdeckt nicht Decap's eigene
+         Toolbar oben rechts, wo Vorschau/Visit-Site/Logout sitzen) */
       .who-badge {
         position: fixed;
-        top: 0.75rem;
-        right: 0.75rem;
+        bottom: 1.25rem;
+        left: 1.25rem;
         z-index: 99999;
         display: none;
         align-items: center;
@@ -179,10 +180,17 @@
           if (u) {
             fab.style.display = 'inline-flex';
             // Decap speichert je nach Backend unterschiedlich: name, login, avatar_url
-            const name = u.name || u.login || 'Editor';
-            const login = u.login && u.login !== name ? '@' + u.login : '';
-            nameEl.textContent = name;
-            loginEl.textContent = login;
+            // u.name kann null/leer/"Unknown" sein wenn GitHub-Profil keinen
+            // Anzeigenamen hat → in dem Fall nur @login zeigen.
+            const rawName = (u.name || '').trim();
+            const isNoName = !rawName || rawName.toLowerCase() === 'unknown';
+            const display = isNoName ? (u.login ? '@' + u.login : 'Editor') : rawName;
+            // Login-Suffix nur wenn wir oben den Klarnamen zeigen UND login != name
+            const loginSuffix = isNoName || !u.login || u.login === rawName
+              ? ''
+              : '@' + u.login;
+            nameEl.textContent = display;
+            loginEl.textContent = loginSuffix;
             if (u.avatar_url) {
               avatar.src = u.avatar_url;
               avatar.style.display = '';

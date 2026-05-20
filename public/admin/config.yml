@@ -37,8 +37,14 @@ publish_mode: editorial_workflow
 media_folder: "public/uploads"
 public_folder: "/uploads"
 
-# Site-Display-Name in der Admin-UI
-site_url: https://boxclub-gifhorn.de
+# Site-Display-Name in der Admin-UI — wird für "Visit Site" + Preview-Links genutzt.
+# Solange boxclub-gifhorn.de noch auf den alten All-Inkl-Webspace zeigt (DNS nicht
+# umgestellt), MUSS hier die Vercel-URL stehen — sonst landen Vorschau-Klicks auf
+# der veralteten Site. Nach DNS-Switch zurück auf https://boxclub-gifhorn.de
+# umstellen.
+site_url: https://om-boxclub-gifhorn.vercel.app
+display_url: https://om-boxclub-gifhorn.vercel.app
+show_preview_links: true
 logo_url: /logo.png
 
 collections:
@@ -321,6 +327,7 @@ collections:
     format: "frontmatter"
     create: true
     delete: true
+    preview_path: "news/{{slug}}"
     slug: "{{year}}-{{month}}-{{day}}-{{fields.titel | lowercase}}"
     media_folder: "/public/uploads/news"
     public_folder: "/uploads/news"
