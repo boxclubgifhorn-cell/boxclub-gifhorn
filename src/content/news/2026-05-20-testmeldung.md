@@ -5,7 +5,7 @@ gueltig_bis: 22.05.2026
 kategorie: Testeintrag
 autor: Admin
 teaser: Nur ein Test
-bild: /uploads/news/cropped-cropped-logo-600x.png
+bild: ""
 bild_alt: Boxclub Logo
 veroeffentlicht: true
 ---
