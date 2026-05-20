@@ -26,6 +26,13 @@ backend:
   # OAuth-Proxy: eigene Vercel-Function im selben Projekt
   base_url: https://om-boxclub-gifhorn.vercel.app
   auth_endpoint: api/auth
+  # Vercel postet einen Commit-Status mit context "Vercel" (ohne Wort
+  # "deploy"), den Decap sonst ignoriert. Mit preview_context erkennt
+  # Decap den Status -> "Open Preview"-Button erscheint nach erfolgreichem
+  # Vercel-Preview-Build. Hinweis: target_url zeigt aufs Vercel-Dashboard
+  # (Deployment-Details), von dort kann der Editor auf den echten Preview
+  # springen.
+  preview_context: Vercel
 
 # Lokale Entwicklung (Decap erkennt localhost automatisch)
 local_backend: true
