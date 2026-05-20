@@ -7,6 +7,16 @@ import Footer from '../components/Footer.astro';
 const siteUrl = 'https://boxclub-gifhorn.de';
 const orgId = `${siteUrl}/#organization`;
 
+// Slug-Helper für Anchor-IDs (deutsche Umlaute → ascii) — muss exakt
+// derselben Logik im Header.astro folgen, damit Dropdown-Links treffen.
+function slug(s: string): string {
+  return s
+    .toLowerCase()
+    .replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+}
+
 const services = [
   {
     title: "Kinder & Anfänger Training",
@@ -149,7 +159,7 @@ const jsonLd = [breadcrumbSchema, ...serviceSchemas];
       <div class="container-custom">
         <div class="space-y-20">
           {services.map((service, index) => (
-            <article class={`grid lg:grid-cols-2 gap-12 items-center reveal ${index % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}>
+            <article id={slug(service.title)} class={`grid lg:grid-cols-2 gap-12 items-center reveal scroll-mt-24 ${index % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}>
               <!-- Image -->
               <div class={`relative overflow-hidden group ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
                 <img
