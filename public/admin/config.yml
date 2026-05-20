@@ -32,6 +32,9 @@ backend:
   # Decap rendert daraus den Direkt-Link in der "Check for Preview"-Box.
   preview_context: deploy/preview
 
+# UI-Sprache der Decap-Oberfläche (Buttons, Statusmeldungen, Dialoge)
+locale: de
+
 # Lokale Entwicklung (Decap erkennt localhost automatisch)
 local_backend: true
 
