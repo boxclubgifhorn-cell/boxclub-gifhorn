@@ -1,7 +1,7 @@
 ---
 titel: Testmeldung
-datum: 20.05.2026
-gueltig_bis: 22.05.2026
+datum: 2026-05-20
+gueltig_bis: 2026-05-22
 kategorie: Testeintrag
 autor: Admin
 teaser: Nur ein Test
