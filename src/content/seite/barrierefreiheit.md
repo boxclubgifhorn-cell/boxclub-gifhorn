@@ -1,52 +1,84 @@
 ---
 title: "Erklärung zur Barrierefreiheit"
 intro: "Wir bemühen uns, unsere Website für alle Nutzer:innen zugänglich zu machen."
-stand: "Mai 2026"
+stand: "22. Mai 2026"
 ---
 
-Der Boxclub Gifhorn e.V. ist bemüht, seine Website im Einklang mit den geltenden Vorschriften zur Barrierefreiheit zugänglich zu machen.
+Der Boxclub Gifhorn e.V. setzt sich dafür ein, dass diese Website von möglichst
+allen Menschen genutzt werden kann — unabhängig von körperlichen Einschränkungen,
+Technik oder Vorwissen.
+
+Diese Erklärung ist **freiwillig**. Als eingetragener Verein ohne Online-Verkauf
+sind wir nicht förmlich zur Barrierefreiheit verpflichtet — wir veröffentlichen
+sie trotzdem, um unsere Maßnahmen transparent zu dokumentieren.
 
 ## Stand der Vereinbarkeit mit den Anforderungen
 
-Diese Website ist **teilweise konform** mit den Web Content Accessibility Guidelines (WCAG) 2.1 in der Konformitätsstufe AA.
+Wir orientieren uns an den **Web Content Accessibility Guidelines (WCAG) 2.1
+in der Konformitätsstufe AA**. Eine **formale Konformitätsprüfung** durch eine
+externe Stelle steht noch aus.
 
-Die Vereinbarkeit wird derzeit laufend überprüft und verbessert. Folgende Maßnahmen sind bereits umgesetzt:
+Folgende Maßnahmen sind bereits umgesetzt und im Code überprüfbar:
 
-- Semantisches HTML mit klarer Überschriftenhierarchie
-- Alt-Texte für inhaltsrelevante Bilder
-- Sichtbare Fokus-Indikatoren
-- Ausreichende Farbkontraste in Hell- und Dunkelmodus
-- Tastaturnavigation für alle interaktiven Elemente
-- Responsive Darstellung auf allen Bildschirmgrößen
+- **Skip-Link** zum Hauptinhalt am Seitenanfang (per `Tab` erreichbar)
+- **Semantisches HTML** mit klarer Überschriftenhierarchie (H1 → H2 → H3)
+- **Alt-Texte** für alle inhaltsrelevanten Bilder; rein dekorative Bilder
+  mit `alt=""`
+- **Sichtbare Fokus-Indikatoren** auf allen interaktiven Elementen
+- **Ausreichende Farbkontraste** in Hell- und Dunkelmodus
+- **Tastaturnavigation** für Menü, Dropdown, Buttons und Formulare
+- **Responsive Darstellung** auf allen Bildschirmgrößen
+- **Lokal eingebundene Schriften** (kein externer Webfont-Service)
+- **Keine Animationen mit Krampfanfall-Risiko**, keine automatischen
+  Audio-/Video-Wiedergaben
 
-## Nicht barrierefreie Inhalte
+## Nicht (vollständig) barrierefreie Inhalte
 
 Folgende Bereiche sind aktuell **nicht vollständig zugänglich**:
 
-- **Trainingsplan als Bild** (falls zusätzlich zum Tabellen-Plan ein gescannter
-  Aushang hochgeladen wird) — die strukturierte Tabelle auf der Seite ist
-  jedoch vollständig screenreader-tauglich.
-- **Eingebettete OpenStreetMap-Karte** — Karteninhalt selbst ist von Dritten
-  und nicht vollständig zugänglich; alternative Adress-Angabe und Routen-Links
-  zu Google/Apple Maps sind als Alternative verfügbar.
+- **Erklärvideo auf [/anmeldung](/anmeldung)** — das eingebettete MP4 zum
+  Ausfüllen der Beitrittserklärung hat aktuell **keine eingeblendeten
+  Untertitel**. Die wichtigsten Informationen stehen im Text neben dem Video
+  und in der Beitrittserklärung selbst. Eine Untertitel-Spur planen wir
+  nachzureichen.
+- **PDF-Downloads** (Beitrittserklärung, Vereinssatzung) sind aktuell als
+  optisches PDF eingestellt und nicht garantiert vollständig
+  **screenreader-tauglich** (nicht „getaggt"). Bei Bedarf stellen wir die
+  Inhalte gerne in einem alternativen Format zur Verfügung — bitte per
+  E-Mail melden.
+- **Eingebettete OpenStreetMap-Karte** auf der Kontaktseite — der
+  Kartenausschnitt ist von Dritten und nicht vollständig zugänglich. Als
+  Alternative findest du die Adresse in Textform sowie Routen-Links.
+- **Galerie-Bilder** — die Bildunterschriften sind teils sehr kurz, ein
+  ausführlicher Bildtext fehlt.
+
+Wir arbeiten daran, diese Punkte schrittweise zu verbessern.
 
 ## Erstellung dieser Erklärung
 
 Diese Erklärung wurde im **Mai 2026** erstmals erstellt. Sie beruht auf einer
-**Selbstbewertung** durch den Vereinsvorstand.
+**Selbstbewertung** durch den Vereinsvorstand und durch eine Code-Analyse der
+Website-Komponenten. Eine externe WCAG-Prüfung ist nicht erfolgt.
 
 ## Feedback und Kontakt
 
-Sind Ihnen Mängel bei der barrierefreien Gestaltung dieser Website aufgefallen? Möchten Sie Informationen zu nicht barrierefrei dargestellten Inhalten erhalten? Dann melden Sie sich gerne bei uns:
+Sind dir Mängel bei der barrierefreien Gestaltung dieser Website aufgefallen?
+Möchtest du Informationen zu nicht barrierefrei dargestellten Inhalten erhalten
+oder einen Inhalt in einem anderen Format erfragen? Melde dich gerne bei uns:
 
 **Boxclub Gifhorn e.V.**
 Cardenap 2-4
 38518 Gifhorn
-Telefon: 05371 7599679
-E-Mail: info@boxclub-gifhorn.de
+**Telefon:** 05371 7599679
+**E-Mail:** info@boxclub-gifhorn.de
+
+Wir antworten in der Regel innerhalb weniger Tage.
 
 ## Schlichtungsverfahren
 
-Wenn auch nach Ihrem Feedback an die oben genannte Kontaktstelle keine zufriedenstellende Lösung gefunden wurde, können Sie sich an die zuständige Schlichtungsstelle wenden.
+Als eingetragener Verein unterliegen wir **keiner formalen Schlichtungsstelle
+nach § 16 BGG** — dieses Verfahren ist Sonderregelung für öffentliche Stellen
+des Bundes bzw. der Länder.
 
-_[Bitte im Admin ergänzen: Adresse der zuständigen Schlichtungsstelle in Niedersachsen — Niedersächsische Schlichtungsstelle nach dem Behindertengleichstellungsgesetz]_
+Wenn du mit unserer Reaktion auf eine Feedback-Meldung nicht zufrieden bist,
+sprich uns bitte direkt nochmal an — wir nehmen Hinweise ernst.
