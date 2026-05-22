@@ -188,7 +188,7 @@ Damit die Site frisch bleibt — als grobe Hausnummer:
 
 ## Bei Fragen
 
-Web-Verantwortlicher: **Alexander Greb** — grebalexander@gmail.com
+Web-Verantwortlicher: **Alexander Greb** — alexander.greb@onemillion-digital.de
 
 Diese Checkliste lebt im Repo unter `CHECKLIST.md` und kann jederzeit
 über das CMS oder direkt in GitHub bearbeitet werden.
