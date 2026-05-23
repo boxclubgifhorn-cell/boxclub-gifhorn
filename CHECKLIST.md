@@ -13,14 +13,14 @@ Stand: 22. Mai 2026
 § 5 TMG verlangt diese Angaben **zwingend** für eingetragene Vereine. Solange
 sie fehlen, riskiert der Verein eine Abmahnung.
 
-- [ ] **Vereinsregister-Gericht** ermitteln (z. B. „Amtsgericht Hildesheim"
+- [Anton] **Vereinsregister-Gericht** ermitteln (z. B. „Amtsgericht Hildesheim"
       oder „Amtsgericht Braunschweig") — steht im Vereinsregister-Auszug
-- [ ] **Vereinsregister-Nummer** ermitteln (Format: `VR XXXXX`)
-- [ ] **Vorstandsname** prüfen — aktuell steht „Andreas Strom" im
+- [Anton] **Vereinsregister-Nummer** ermitteln (Format: `VR XXXXX`)
+- [Anton] **Vorstandsname** prüfen — aktuell steht „Andreas Strom" im
       Impressum. Falls Vorsitz gewechselt: neuen Namen melden
-- [ ] **Weitere vertretungsberechtigte Vorstände** ergänzen (falls
+- [Anton] **Weitere vertretungsberechtigte Vorstände** ergänzen (falls
       Satzung vertretungsberechtigt sagt: 1. + 2. Vorsitzender + Kassenwart o. ä.)
-- [ ] **USt-ID klären** — hat der Verein eine USt-ID (i. d. R. nur bei
+- [Anton] **USt-ID klären** — hat der Verein eine USt-ID (i. d. R. nur bei
       wirtschaftlichem Geschäftsbetrieb)? Falls nein, kann der Absatz
       auf einen kurzen Satz reduziert werden
 
@@ -34,14 +34,14 @@ sie fehlen, riskiert der Verein eine Abmahnung.
 Aktuell zeigt `boxclub-gifhorn.de` noch auf den alten All-Inkl-Webspace. Damit
 die neue Website unter eurer eigentlichen Adresse live geht:
 
-- [ ] **All-Inkl KAS-Zugangsdaten** zusammensuchen (oder eigenen Login dafür
+- [Alex] **All-Inkl KAS-Zugangsdaten** zusammensuchen (oder eigenen Login dafür
       anlegen, falls bisher externer Dienstleister)
-- [ ] **DNS-Records** bei All-Inkl umstellen (Anleitung: 4 Records, Details
+- [Alex] **DNS-Records** bei All-Inkl umstellen (Anleitung: 4 Records, Details
       im Web-Verantwortlichen-Handover)
-- [ ] **MX-Records (E-Mail)** explizit **NICHT anfassen** — sonst kommen
+- [Alex] **MX-Records (E-Mail)** explizit **NICHT anfassen** — sonst kommen
       E-Mails an `info@boxclub-gifhorn.de` nicht mehr an
-- [ ] **24 h Wartezeit** nach DNS-Switch einplanen (Cache-Propagation)
-- [ ] **Alten Webspace bei All-Inkl** weiter laufen lassen (mind. 2 Wochen
+- [Alex] **24 h Wartezeit** nach DNS-Switch einplanen (Cache-Propagation)
+- [Alex] **Alten Webspace bei All-Inkl** weiter laufen lassen (mind. 2 Wochen
       als Sicherheitsnetz, dann kündbar — Mail-Postfächer behalten oder
       migrieren)
 
@@ -49,16 +49,16 @@ die neue Website unter eurer eigentlichen Adresse live geht:
 
 ## 📄 3. Vereinsdokumente
 
-- [ ] **Satzung** — ist die hochgeladene PDF
+- [X] **Satzung** — ist die hochgeladene PDF
       (`/uploads/downloads/satzung-boxclub-gifhorn.pdf`) die aktuell
       gültige Fassung?
-- [ ] **Datum der letzten Mitgliederversammlungs-Beschluss** notieren
+- [Anton] **Datum der letzten Mitgliederversammlungs-Beschluss** notieren
       → ins CMS unter „Downloads → Vereinssatzung → Stand" eintragen
-- [ ] **Beitrittserklärung** — Beträge (15 € U18, 25 € Erw., 50 € Familie,
+- [X] **Beitrittserklärung** — Beträge (15 € U18, 25 € Erw., 50 € Familie,
       20 € Aufnahmegebühr) noch aktuell? Bankverbindung korrekt?
-- [ ] Optional: **Beitragsordnung als separates Dokument** anlegen, falls
+- [-] Optional: **Beitragsordnung als separates Dokument** anlegen, falls
       gewünscht (aktuell stehen Beiträge nur in der Beitrittserklärung)
-- [ ] Optional: **Datenschutzhinweis für Mitglieder** als Download
+- [-] Optional: **Datenschutzhinweis für Mitglieder** als Download
       bereitstellen (falls Mitglieder eine schriftliche DSGVO-Information
       erhalten sollen)
 
@@ -67,33 +67,33 @@ die neue Website unter eurer eigentlichen Adresse live geht:
 ## 👥 4. Inhalt prüfen / aktualisieren
 
 ### Stammdaten
-- [ ] **Adresse** „Cardenap 2-4, 38518 Gifhorn" korrekt?
-- [ ] **Telefon** `05371 7599679` korrekt + wird betreut?
-- [ ] **E-Mail** `info@boxclub-gifhorn.de` korrekt + wird gelesen?
-- [ ] **WhatsApp-Nummer** `+49 5371 7599679` aktiviert + wird wirklich
+- [x] **Adresse** „Cardenap 2-4, 38518 Gifhorn" korrekt?
+- [x] **Telefon** `05371 7599679` korrekt + wird betreut?
+- [x] **E-Mail** `info@boxclub-gifhorn.de` korrekt + wird gelesen?
+- [Anton] **WhatsApp-Nummer** `+49 5371 7599679` aktiviert + wird wirklich
       auf WhatsApp empfangen?
-- [ ] **Instagram** `@bcg_e.v` ist der offizielle Vereins-Account?
-- [ ] **Eingangs-Hinweis** „Eingang Konrad-Adenauer-Straße gegenüber
+- [x] **Instagram** `@bcg_e.v` ist der offizielle Vereins-Account?
+- [x] **Eingangs-Hinweis** „Eingang Konrad-Adenauer-Straße gegenüber
       Amtsgericht" stimmt?
 
 ### Trainer
-- [ ] **Aktuelle Trainerliste** zusammenstellen (Name, Disziplin, kurze Bio)
-- [ ] **Foto-Einverständnis** von jedem Trainer schriftlich einholen
+- [Anton] **Aktuelle Trainerliste** zusammenstellen (Name, Disziplin, kurze Bio)
+- [Anton] **Foto-Einverständnis** von jedem Trainer schriftlich einholen
       (DSGVO Art. 6 + KUG für Bildveröffentlichung)
-- [ ] **Trainerfotos** in einheitlichem Format (idealerweise Hochformat,
+- [Anton] **Trainerfotos** in einheitlichem Format (idealerweise Hochformat,
       mind. 600×800 px) bereitstellen
-- [ ] Im CMS unter „Trainer" einpflegen
+- [Anton/Alex] Im CMS unter „Trainer" einpflegen
 
 ### Kursplan
-- [ ] **Aktuelle Trainingszeiten** prüfen + ins CMS unter „Kursplan"
+- [x] **Aktuelle Trainingszeiten** prüfen + ins CMS unter „Kursplan"
       einpflegen
-- [ ] **Feiertage/Ferien**-Berücksichtigung — die Seite zeigt automatisch
+- [x] **Feiertage/Ferien**-Berücksichtigung — die Seite zeigt automatisch
       Niedersachsen-Ferien, kein Pflegeaufwand
 
 ### Online-Anmeldung
-- [ ] **meinverein.de-Link** `https://web.meinverein.de/profile/32210`
+- [x] **meinverein.de-Link** `https://web.meinverein.de/profile/32210`
       noch aktiv und korrekt?
-- [ ] **QR-Code-Plakate** im Vereinsheim aufhängen (URL führt zu /anmeldung
+- [x] **QR-Code-Plakate** im Vereinsheim aufhängen (URL führt zu /anmeldung
       bzw. direkt zum meinverein-Formular)
 
 ---
@@ -103,43 +103,43 @@ die neue Website unter eurer eigentlichen Adresse live geht:
 Aktuell sind viele Hero- und Service-Bilder von **Unsplash/Pexels** (Stock).
 Mit eigenen Fotos wirkt die Seite deutlich authentischer:
 
-- [ ] **Hero-Foto** vom eigenen Verein (Training im Ring, gute Lichtstimmung)
-- [ ] **Service-Karten-Fotos** pro Disziplin (Boxen, MMA, Judo, Ringen,
+- [Anton] **Hero-Foto** vom eigenen Verein (Training im Ring, gute Lichtstimmung)
+- [Anton] **Service-Karten-Fotos** pro Disziplin (Boxen, MMA, Judo, Ringen,
       Frauenfitness, Kinder) — jeweils 1-2 echte Trainingsmomente
-- [ ] **Galerie-Bilder** zusammenstellen (Wettkampf-Highlights,
+- [Anton] **Galerie-Bilder** zusammenstellen (Wettkampf-Highlights,
       Vereinsfeier, Trainer-Lehrgänge)
-- [ ] **Foto-Freigaben** dokumentieren — wer ist abgebildet, gibt es
+- [Anton] **Foto-Freigaben** dokumentieren — wer ist abgebildet, gibt es
       schriftliches OK? (KUG + DSGVO)
-- [ ] Bilder im CMS hochladen unter den jeweiligen Sektionen
+- [Anton/Alex] Bilder im CMS hochladen unter den jeweiligen Sektionen
 
 ---
 
 ## 🔒 6. Datenschutz & Compliance
 
-- [ ] **Datenschutzbeauftragter** — wirklich nicht benötigt? Nur Pflicht
+- [-] **Datenschutzbeauftragter** — wirklich nicht benötigt? Nur Pflicht
       bei ≥ 20 Personen mit regelmäßiger Datenverarbeitung. Bei einem
       Verein i. d. R. nicht erforderlich, aber kurz prüfen
-- [ ] **Verarbeitungsverzeichnis nach Art. 30 DSGVO** existiert intern?
+- [Anton] **Verarbeitungsverzeichnis nach Art. 30 DSGVO** existiert intern?
       (eine einfache Tabelle reicht: was wird wofür gespeichert)
-- [ ] **AVV mit meinverein.de** abgeschlossen? (sollte beim Vertragsabschluss
+- [X] **AVV mit meinverein.de** abgeschlossen? (sollte beim Vertragsabschluss
       automatisch passiert sein, prüfen)
-- [ ] **Foto-/Video-Einverständnis** für Galerie + Wettkampfbilder ist
+- [Anton] **Foto-/Video-Einverständnis** für Galerie + Wettkampfbilder ist
       Routine im Verein? (siehe Trainerbilder)
 
 ---
 
 ## 👨‍💻 7. CMS-Pflege organisieren
 
-- [ ] **Pflege-Verantwortliche/r** im Verein bestimmen (wer schreibt News,
+- [x] **Pflege-Verantwortliche/r** im Verein bestimmen (wer schreibt News,
       tauscht Fotos aus, pflegt Trainingszeiten)
-- [ ] **GitHub-Account** für diese Person anlegen (falls noch nicht
+- [x] **GitHub-Account** für diese Person anlegen (falls noch nicht
       vorhanden) — der Pflegeaufwand ist minimal, das Konto kann
       auch weiterhin „nur für die Website" genutzt werden
-- [ ] Account zur **Decap-Allowlist** hinzufügen (Repo →
+- [x] Account zur **Decap-Allowlist** hinzufügen (Repo →
       `public/admin/allowlist.json`) — sonst kein Login möglich
-- [ ] **Kurzeinweisung Decap** durch den Web-Verantwortlichen (15 min
+- [Alex] **Kurzeinweisung Decap** durch den Web-Verantwortlichen (15 min
       reichen für News + Trainer + Galerie)
-- [ ] **2-Faktor-Authentifizierung** für den GitHub-Account aktivieren
+- [x] **2-Faktor-Authentifizierung** für den GitHub-Account aktivieren
       (Pflicht für jeden mit Repo-Schreibrechten)
 
 ---
@@ -149,24 +149,24 @@ Mit eigenen Fotos wirkt die Seite deutlich authentischer:
 Diese Punkte erledigt der Web-Verantwortliche kurz vor dem Go-Live, nur
 zur Info hier:
 
-- [ ] DNS-Switch verifiziert (`nslookup boxclub-gifhorn.de` zeigt Vercel-IP)
-- [ ] HTTPS-Zertifikat von Vercel aktiv (Schloss-Symbol)
-- [ ] `site_url` in der Decap-Config zurück auf `https://boxclub-gifhorn.de`
-- [ ] Alle internen Links + Anchor-Sprünge funktionieren
-- [ ] Sitemap + robots.txt aktuell
-- [ ] Open Graph Bilder rendern korrekt (Test in Slack/WhatsApp)
-- [ ] Lighthouse-Audit ≥ 90 in allen Kategorien
+- [Alex] DNS-Switch verifiziert (`nslookup boxclub-gifhorn.de` zeigt Vercel-IP)
+- [Alex] HTTPS-Zertifikat von Vercel aktiv (Schloss-Symbol)
+- [Alex] `site_url` in der Decap-Config zurück auf `https://boxclub-gifhorn.de`
+- [Alex] Alle internen Links + Anchor-Sprünge funktionieren
+- [Alex] Sitemap + robots.txt aktuell
+- [Alex] Open Graph Bilder rendern korrekt (Test in Slack/WhatsApp)
+- [Alex] Lighthouse-Audit ≥ 90 in allen Kategorien
 
 ---
 
 ## 📢 9. Go-Live-Kommunikation
 
-- [ ] **Mitglieder informieren** — kurze Info per E-Mail/WhatsApp:
+- [Anton] **Mitglieder informieren** — kurze Info per E-Mail/WhatsApp:
       neue Website online, alte Links funktionieren weiter
-- [ ] **Google Business Profile** aktualisieren (Adresse + Telefon +
+- [X] **Google Business Profile** aktualisieren (Adresse + Telefon +
       neue Website-URL eintragen, falls noch alte URL drin)
-- [ ] **Instagram-Bio** updaten (Website-Link)
-- [ ] **Flyer/Drucksachen** mit alter URL aufbrauchen oder neu drucken
+- [X] **Instagram-Bio** updaten (Website-Link)
+- [X] **Flyer/Drucksachen** mit alter URL aufbrauchen oder neu drucken
       (URL bleibt ja `boxclub-gifhorn.de` — Aufgabe entfällt meistens)
 
 ---
