@@ -13,19 +13,17 @@ Stand: 22. Mai 2026
 § 5 TMG verlangt diese Angaben **zwingend** für eingetragene Vereine. Solange
 sie fehlen, riskiert der Verein eine Abmahnung.
 
-- [Anton] **Vereinsregister-Gericht** ermitteln (z. B. „Amtsgericht Hildesheim"
-      oder „Amtsgericht Braunschweig") — steht im Vereinsregister-Auszug
-- [Anton] **Vereinsregister-Nummer** ermitteln (Format: `VR XXXXX`)
-- [Anton] **Vorstandsname** prüfen — aktuell steht „Andreas Strom" im
-      Impressum. Falls Vorsitz gewechselt: neuen Namen melden
-- [Anton] **Weitere vertretungsberechtigte Vorstände** ergänzen (falls
-      Satzung vertretungsberechtigt sagt: 1. + 2. Vorsitzender + Kassenwart o. ä.)
-- [Anton] **USt-ID klären** — hat der Verein eine USt-ID (i. d. R. nur bei
-      wirtschaftlichem Geschäftsbetrieb)? Falls nein, kann der Absatz
-      auf einen kurzen Satz reduziert werden
+- [x] **Vereinsregister-Gericht** ermitteln → **Amtsgericht Hildesheim**
+- [x] **Vereinsregister-Nummer** ermitteln → **VR 100147**
+- [x] **Vorstandsname** prüfen — **Andreas Strom (1. Vorsitzender)** bestätigt
+- [x] **Weitere vertretungsberechtigte Vorstände** ergänzt:
+      **Ralf Böning (2. Vorsitzender)** und **Anton Grefenstein (Schatzmeister)**.
+      Vertretungsregel laut Vereinsregister: jeweils zwei Vorstandsmitglieder,
+      darunter 1. oder 2. Vorsitzender, gemeinsam vertretungsberechtigt
+- [x] **USt-ID klären** → **keine** (gemeinnütziger Verein ohne
+      wirtschaftlichen Geschäftsbetrieb)
 
-→ Daten an den Web-Verantwortlichen schicken, der trägt sie im CMS unter
-   **„Rechtliche Seiten → Impressum"** ein.
+→ Alle Daten am 25.05.2026 ins Impressum eingepflegt (Commit folgt).
 
 ---
 
@@ -52,8 +50,10 @@ die neue Website unter eurer eigentlichen Adresse live geht:
 - [X] **Satzung** — ist die hochgeladene PDF
       (`/uploads/downloads/satzung-boxclub-gifhorn.pdf`) die aktuell
       gültige Fassung?
-- [Anton] **Datum der letzten Mitgliederversammlungs-Beschluss** notieren
-      → ins CMS unter „Downloads → Vereinssatzung → Stand" eintragen
+- [x] **Datum der letzten Mitgliederversammlungs-Beschluss** notieren →
+      laut Vereinsregister-Auszug: **Beschluss vom 13.08.2016** (Satzung
+      ursprünglich vom 15.01.1967, zuletzt geändert am 27.06.2003).
+      Im Download-Eintrag „Vereinssatzung" als Stand eingepflegt.
 - [X] **Beitrittserklärung** — Beträge (15 € U18, 25 € Erw., 50 € Familie,
       20 € Aufnahmegebühr) noch aktuell? Bankverbindung korrekt?
 - [-] Optional: **Beitragsordnung als separates Dokument** anlegen, falls
