@@ -197,65 +197,66 @@ const email = global?.email || 'info@boxclub-gifhorn.de';
     </nav>
   </div>
 
-  <!-- Mobile Menu -->
-  <div
-    id="mobile-menu"
-    class="lg:hidden fixed inset-0 top-20 bg-white/98 dark:bg-primary/98 backdrop-blur-xl transform translate-x-full transition-transform duration-500 ease-out z-40 overflow-y-auto"
-  >
-    <div class="flex flex-col items-center justify-start min-h-full py-12 gap-6">
-      <!-- Hauptnavigation -->
-      {mainNav.map((item) => (
-        <a
-          href={item.href}
-          class="text-stone-900 dark:text-white text-2xl font-black uppercase tracking-wider hover:text-secondary transition-colors duration-300"
-        >
-          {item.label}
-        </a>
-      ))}
+</header>
 
-      <!-- Leistungen-Sublist (kompakt) -->
-      <div class="text-center max-w-xs">
-        <p class="text-xs uppercase tracking-[0.3em] text-stone-500 dark:text-gray-500 font-bold mb-3">Disziplinen</p>
-        <ul class="flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 text-sm">
-          {leistungen.map((l) => (
-            <li>
-              <a href={`/leistungen#${l.anchor}`} class="text-stone-700 dark:text-gray-400 hover:text-secondary transition-colors">
-                {l.title}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
+<!-- Mobile Menu (außerhalb des Headers, damit backdrop-filter keinen neuen Containing Block erzeugt) -->
+<div
+  id="mobile-menu"
+  class="lg:hidden fixed inset-0 top-20 bg-white/98 dark:bg-primary/98 backdrop-blur-xl transform translate-x-full transition-transform duration-500 ease-out z-40 overflow-y-auto"
+>
+  <div class="flex flex-col items-center justify-start min-h-full py-12 gap-6">
+    <!-- Hauptnavigation -->
+    {mainNav.map((item) => (
+      <a
+        href={item.href}
+        class="text-stone-900 dark:text-white text-2xl font-black uppercase tracking-wider hover:text-secondary transition-colors duration-300"
+      >
+        {item.label}
+      </a>
+    ))}
 
-      <!-- Trennlinie -->
-      <div class="w-16 h-px bg-stone-300 dark:bg-gray-700 my-2"></div>
+    <!-- Leistungen-Sublist (kompakt) -->
+    <div class="text-center max-w-xs">
+      <p class="text-xs uppercase tracking-[0.3em] text-stone-500 dark:text-gray-500 font-bold mb-3">Disziplinen</p>
+      <ul class="flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 text-sm">
+        {leistungen.map((l) => (
+          <li>
+            <a href={`/leistungen#${l.anchor}`} class="text-stone-700 dark:text-gray-400 hover:text-secondary transition-colors">
+              {l.title}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
 
-      <!-- Extra-Navigation -->
-      <div class="text-center">
-        <p class="text-xs uppercase tracking-[0.3em] text-stone-500 dark:text-gray-500 font-bold mb-3">Weitere Bereiche</p>
-        <ul class="flex flex-col gap-3">
-          {extraNav.map((item) => (
-            <li>
-              <a href={item.href} class="text-stone-700 dark:text-gray-300 hover:text-secondary transition-colors text-lg font-bold uppercase tracking-wider">
-                {item.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
+    <!-- Trennlinie -->
+    <div class="w-16 h-px bg-stone-300 dark:bg-gray-700 my-2"></div>
 
-      <!-- Buttons + Kontakt -->
-      <div class="mt-4 flex flex-col items-center gap-3">
-        <a href="/anmeldung" class="btn-primary">Hier anmelden</a>
-        <a href="/kursplan" class="btn-secondary text-sm">Trainingszeiten</a>
-      </div>
-      <div class="mt-4 flex flex-col items-center gap-2 text-stone-600 dark:text-gray-400 text-sm">
-        <a href={`tel:${telefonLink}`} class="hover:text-secondary transition-colors">{telefon}</a>
-        <a href={`mailto:${email}`} class="hover:text-secondary transition-colors">{email}</a>
-      </div>
+    <!-- Extra-Navigation -->
+    <div class="text-center">
+      <p class="text-xs uppercase tracking-[0.3em] text-stone-500 dark:text-gray-500 font-bold mb-3">Weitere Bereiche</p>
+      <ul class="flex flex-col gap-3">
+        {extraNav.map((item) => (
+          <li>
+            <a href={item.href} class="text-stone-700 dark:text-gray-300 hover:text-secondary transition-colors text-lg font-bold uppercase tracking-wider">
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- Buttons + Kontakt -->
+    <div class="mt-4 flex flex-col items-center gap-3">
+      <a href="/anmeldung" class="btn-primary">Hier anmelden</a>
+      <a href="/kursplan" class="btn-secondary text-sm">Trainingszeiten</a>
+    </div>
+    <div class="mt-4 flex flex-col items-center gap-2 text-stone-600 dark:text-gray-400 text-sm">
+      <a href={`tel:${telefonLink}`} class="hover:text-secondary transition-colors">{telefon}</a>
+      <a href={`mailto:${email}`} class="hover:text-secondary transition-colors">{email}</a>
     </div>
   </div>
-</header>
+</div>
 
 <!-- Spacer for fixed header -->
 <div class="h-20"></div>
