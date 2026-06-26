@@ -5,13 +5,7 @@ import Footer from '../../components/Footer.astro';
 import CTA from '../../components/CTA.astro';
 import { getCollection } from 'astro:content';
 
-// Abgelaufene News ausblenden (gueltig_bis < heute). Wenn gueltig_bis nicht
-// gesetzt ist, bleibt der Beitrag dauerhaft sichtbar.
-const _now = new Date();
-_now.setHours(0, 0, 0, 0);
-
 const allNews = (await getCollection('news', ({ data }) => data.veroeffentlicht !== false))
-  .filter((n) => !n.data.gueltig_bis || new Date(n.data.gueltig_bis) >= _now)
   .sort((a, b) => b.data.datum.valueOf() - a.data.datum.valueOf());
 
 function formatDate(d: Date): string {

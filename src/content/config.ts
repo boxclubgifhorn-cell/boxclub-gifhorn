@@ -200,7 +200,6 @@ const news = defineCollection({
     autor: z.string().optional(),
     kategorie: z.string().optional(),
     veroeffentlicht: z.boolean().default(true),
-    gueltig_bis: z.date().optional(),
   }),
 });
 
@@ -266,9 +265,6 @@ const anmeldung = defineCollection({
     online_anbieter: z.string().optional(),
     formular_pdf: z.string().optional(),
     formular_stand: z.string().optional(),
-    video_url: z.string().optional(),
-    video_titel: z.string().optional(),
-    video_beschreibung: z.string().optional(),
     rueckgabe_email: z.string().optional(),
     rueckgabe_adresse: z.string().optional(),
     hinweis: z.string().optional(),

@@ -1,7 +1,7 @@
 ---
 title: "Datenschutzerklärung"
 intro: "Informationen zur Verarbeitung personenbezogener Daten gemäß Art. 13 DSGVO"
-stand: "22. Mai 2026"
+stand: "Mai 2026"
 ---
 
 ## 1. Verantwortlicher
@@ -57,8 +57,8 @@ Eine Zusammenführung mit anderen Datenquellen erfolgt **nicht**.
 Diese Webseite wird gehostet bei:
 
 **Vercel Inc.**
-650 California Street, 31st Floor
-San Francisco, CA 94108
+340 S Lemon Ave #4133
+Walnut, CA 91789
 USA
 
 Vercel verarbeitet die unter Abschnitt 4 genannten Server-Log-Daten in
@@ -117,11 +117,10 @@ Es findet **kein Datentransfer deiner IP-Adresse** an diesen Dienst statt.
 
 - Projekt-Info: <https://openholidaysapi.org/>
 
-## 9. Cookies und localStorage
+## 9. localStorage statt Cookies
 
-Für **reguläre Webseiten-Besucher** setzen wir **keine Cookies** und betreiben
-**kein Tracking**. Für rein technische Zwecke nutzen wir den **localStorage**
-des Browsers:
+Diese Webseite **setzt keine Cookies**. Für rein technische Zwecke nutzen wir
+den **localStorage** des Browsers:
 
 | Schlüssel | Zweck | Speicherdauer |
 |---|---|---|
@@ -129,13 +128,6 @@ des Browsers:
 
 Diese Information wird **ausschließlich in deinem Browser** gespeichert und
 **nicht** an unseren Server übertragen.
-
-**Technisches Cookie nur beim Editor-Login (`/admin/`):** Wenn ein
-Vorstandsmitglied sich am Content-Management einloggt, setzt unsere
-OAuth-Funktion ein streng technisch notwendiges, 10 Minuten gültiges
-HttpOnly-Cookie (`decap_oauth_state`) zur Absicherung gegen
-Cross-Site-Request-Forgery (CSRF). Dieses Cookie wird **nicht** beim normalen
-Besuch der Webseite gesetzt.
 
 **Rechtsgrundlage:** Art. 6 Abs. 1 lit. f DSGVO + § 25 Abs. 2 Nr. 2 TTDSG
 (unbedingt erforderlich für die vom Nutzer ausdrücklich gewünschte Funktion).
@@ -205,41 +197,6 @@ die enthaltenen Daten.
 
 **Rechtsgrundlage:** Art. 6 Abs. 1 lit. b DSGVO. Die Aufbewahrungsfristen
 ergeben sich aus den gesetzlichen Vorgaben (insb. Steuer- und Vereinsrecht).
-
-## 12b. Verlinkung zu sozialen Medien und Messenger (Meta-Konzern)
-
-Auf unserer Webseite findest du Verlinkungen zu folgenden Drittanbieter-Diensten:
-
-### WhatsApp (Direkt-Kontakt)
-
-Im Footer und in der Kontakt-Sektion bieten wir einen WhatsApp-Direktkontakt-Link
-(`https://wa.me/4953717599679`) an. Wenn du diesen Link **anklickst**, wird dein
-Browser zu **WhatsApp/Meta** weitergeleitet. Erst dadurch erhält Meta Ireland Ltd.
-deine IP-Adresse, den Referrer (unsere Seite) und ggf. weitere Browser-Daten.
-
-**Wichtig:** Solange du den Link **nicht aktiv anklickst**, findet kein
-Datentransfer an Meta statt. Die Logik ist ein einfacher HTML-Link, keine
-nachgeladene Skripte oder Tracking-Pixel.
-
-**Anbieter:** Meta Platforms Ireland Ltd., 4 Grand Canal Square, Grand Canal
-Harbour, Dublin 2, Irland.
-
-- WhatsApp-Datenschutz: <https://www.whatsapp.com/legal/privacy-policy-eea>
-
-### Instagram (Vereins-Account)
-
-Im Footer und im Kontakt-Block verlinken wir auf unseren Instagram-Account
-(`instagram.com/bcg_e.v/`). Auch hier gilt: Klick erforderlich, erst dann
-Datentransfer an Meta.
-
-- Instagram-Datenschutz: <https://privacycenter.instagram.com/policy/>
-
-**Rechtsgrundlage** für beide: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes
-Interesse an einfacher Kontaktaufnahme und Außendarstellung des Vereins).
-
-**Drittlandtransfer:** Meta verarbeitet Daten auch in den USA. Grundlage
-sind die EU-Standardvertragsklauseln (SCC) sowie das EU-U.S. Data Privacy
-Framework, in das Meta zertifiziert ist.
 
 ## 13. Deine Rechte (Art. 15–21 DSGVO)
 

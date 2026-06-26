@@ -1,13 +1,12 @@
 ---
 title: "Impressum"
 intro: "Angaben gemäß § 5 TMG und § 18 Abs. 2 MStV"
-stand: "25. Mai 2026"
+stand: "Mai 2026"
 ---
 
 ## Diensteanbieter (§ 5 TMG)
 
-**Box-Club-Gifhorn e.V.**
-_(in der Außendarstellung auch „Boxclub Gifhorn e.V.")_
+**Boxclub Gifhorn e.V.**
 Cardenap 2-4
 38518 Gifhorn
 Deutschland
@@ -15,28 +14,25 @@ Deutschland
 **Telefon:** [05371 7599679](tel:+4953717599679)
 **E-Mail:** [info@boxclub-gifhorn.de](mailto:info@boxclub-gifhorn.de)
 
-## Vertretungsberechtigter Vorstand (§ 26 BGB)
+## Vertretungsberechtigter Vorstand
 
-- **1. Vorsitzender:** Andreas Strom
-- **2. Vorsitzender:** Ralf Böning
-- **Schatzmeister:** Anton Grefenstein
-
-Jeweils zwei Vorstandsmitglieder, darunter der 1. oder 2. Vorsitzende,
-sind gemeinsam vertretungsberechtigt.
+1. Vorsitzender: **Andreas Strom**
 
 ## Vereinsregister
 
-- **Registergericht:** Amtsgericht Hildesheim
-- **Registernummer:** VR 100147
+_⚠ Vom Verein einzutragen über das CMS:_
+
+- **Registergericht:** _z. B. Amtsgericht Hildesheim_
+- **Registernummer:** _z. B. VR 12345_
 
 ## Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV
 
-Andreas Strom, Anschrift wie oben (Box-Club-Gifhorn e.V., Cardenap 2-4, 38518 Gifhorn).
+Andreas Strom (Anschrift wie oben — Boxclub Gifhorn e.V., Cardenap 2-4, 38518 Gifhorn).
 
 ## Umsatzsteuer-Identifikationsnummer
 
 Als gemeinnütziger Verein ohne wirtschaftlichen Geschäftsbetrieb wird keine
-USt-ID geführt.
+USt-ID geführt. _Falls eine USt-ID vorhanden ist: hier eintragen._
 
 ## Streitschlichtung — Hinweis nach § 36 VSBG
 
