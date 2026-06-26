@@ -14,7 +14,6 @@ import '@fontsource/oswald/500.css';
 import '@fontsource/oswald/600.css';
 import '@fontsource/oswald/700.css';
 
-
 interface Props {
   title: string;
   description?: string;
@@ -150,11 +149,13 @@ const allJsonLd = [...baseJsonLd, ...extraJsonLd];
     <meta name="twitter:image" content={ogImageUrl} />
 
     <!-- Favicon + Webmanifest -->
-    <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" href="/logo.png" />
     <link rel="apple-touch-icon" href="/logo.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#0B0B0F" />
+
+    <!-- LLMs.txt für KI-Suchmaschinen -->
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM-optimierte Zusammenfassung" />
 
     <!-- Performance: Preconnect für externe Bilder + optionaler Hero-Preload -->
     <link rel="preconnect" href="https://images.unsplash.com" crossorigin />

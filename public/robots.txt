@@ -4,4 +4,23 @@ Disallow: /admin-log/
 Disallow: /uploads/
 Disallow: /api/
 
+# AI Crawlers erlauben (für KI-Suchmaschinen-Sichtbarkeit)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
 Sitemap: https://boxclub-gifhorn.de/sitemap-index.xml

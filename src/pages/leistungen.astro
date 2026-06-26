@@ -7,16 +7,6 @@ import Footer from '../components/Footer.astro';
 const siteUrl = 'https://boxclub-gifhorn.de';
 const orgId = `${siteUrl}/#organization`;
 
-// Slug-Helper für Anchor-IDs (deutsche Umlaute → ascii) — muss exakt
-// derselben Logik im Header.astro folgen, damit Dropdown-Links treffen.
-function slug(s: string): string {
-  return s
-    .toLowerCase()
-    .replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-|-$/g, '');
-}
-
 const services = [
   {
     title: "Kinder & Anfänger Training",
@@ -113,7 +103,7 @@ const jsonLd = [breadcrumbSchema, ...serviceSchemas];
 ---
 
 <Layout
-  title="Leistungen: Boxen, MMA, Judo & Frauenfitness in Gifhorn | Boxclub Gifhorn e.V."
+  title="Boxen, MMA, Judo & Frauenfitness in Gifhorn | Boxclub Gifhorn e.V."
   description="Alle Trainingsangebote des Boxclub Gifhorn: Boxen für Kinder und Erwachsene, MMA, Judo, Ringen, Frauenfitness und Profi-Stützpunkttraining in Gifhorn. Komm zum Probetraining."
   jsonLd={jsonLd}
 >
@@ -159,7 +149,7 @@ const jsonLd = [breadcrumbSchema, ...serviceSchemas];
       <div class="container-custom">
         <div class="space-y-20">
           {services.map((service, index) => (
-            <article id={slug(service.title)} class={`grid lg:grid-cols-2 gap-12 items-center reveal scroll-mt-24 ${index % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}>
+            <article class={`grid lg:grid-cols-2 gap-12 items-center reveal ${index % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}>
               <!-- Image -->
               <div class={`relative overflow-hidden group ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
                 <img
