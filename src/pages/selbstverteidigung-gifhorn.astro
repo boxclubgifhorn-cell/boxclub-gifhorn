@@ -1,0 +1,276 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CTA from '../components/CTA.astro';
+
+const siteUrl = 'https://boxclub-gifhorn.de';
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${siteUrl}/` },
+    { '@type': 'ListItem', position: 2, name: 'Leistungen', item: `${siteUrl}/leistungen` },
+    { '@type': 'ListItem', position: 3, name: 'Selbstverteidigung', item: `${siteUrl}/selbstverteidigung-gifhorn` },
+  ],
+};
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Bietet der Boxclub Gifhorn Selbstverteidigungskurse an?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Ja. Durch unsere Programme in Boxen, MMA, Judo und Ringen lernst du praxistaugliche Selbstverteidigung als natürlichen Teil des Trainings — keine isolierten Wochenend-Kurse, sondern echte Fähigkeiten die sich festigen.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Ab welchem Alter kann man Selbstverteidigung beim Boxclub Gifhorn lernen?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Bereits ab 5 Jahren. Kinder lernen spielerisch Koordination, Körpergefühl und Grenzen zu setzen. Ab 9 Jahren beginnt gezieltes Boxtraining, ab 16 MMA mit Bodenkampf-Techniken.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Brauche ich Vorkenntnisse für das Training?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Nein, absolut keine. Du kommst einfach zum Training vorbei, Sportzeug reicht. Handschuhe und Bandagen kannst du dir ausleihen. Die Trainer passen das Level individuell an.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Was kostet Selbstverteidigungstraining in Gifhorn?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Der Mitgliedsbeitrag beim Boxclub Gifhorn beträgt 15 € für Kinder/Jugendliche, 25 € für Erwachsene oder 50 € für Familien (2 Erw. + bis zu 3 Kinder) — alle Sportarten inklusive, keine Zusatzgebühren.',
+      },
+    },
+  ],
+};
+---
+
+<Layout
+  title="Selbstverteidigung in Gifhorn lernen | Boxclub Gifhorn e.V."
+  description="Selbstverteidigung lernen in Gifhorn: Boxen, MMA, Judo & Ringen für Kinder, Frauen und Erwachsene. Praxisnah, effektiv, ab 15 €/Monat. Probetraining jederzeit — keine Anmeldung nötig."
+  jsonLd={[breadcrumb, faqJsonLd]}
+>
+  <Header />
+  <main id="main-content">
+    <!-- Hero -->
+    <section class="relative py-24 md:py-32 bg-stone-50 dark:bg-primary overflow-hidden">
+      <div class="absolute inset-0 opacity-10">
+        <img
+          src="https://images.unsplash.com/photo-1615117972428-28de67cda58e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080"
+          alt=""
+          class="w-full h-full object-cover"
+          aria-hidden="true"
+        />
+      </div>
+      <div class="container-custom relative z-10">
+        <nav class="mb-8" aria-label="Breadcrumb">
+          <ol class="flex items-center gap-2 text-sm text-stone-500 dark:text-gray-500">
+            <li><a href="/" class="hover:text-secondary transition-colors">Startseite</a></li>
+            <li><span class="text-stone-400 dark:text-gray-600">/</span></li>
+            <li><a href="/leistungen" class="hover:text-secondary transition-colors">Leistungen</a></li>
+            <li><span class="text-stone-400 dark:text-gray-600">/</span></li>
+            <li class="text-secondary">Selbstverteidigung</li>
+          </ol>
+        </nav>
+
+        <div class="max-w-3xl">
+          <div class="inline-flex items-center gap-3 mb-6">
+            <div class="w-10 h-px bg-secondary"></div>
+            <span class="text-secondary font-bold text-xs uppercase tracking-[0.2em]">Kampfsport in Gifhorn</span>
+          </div>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-black leading-[1.1] text-stone-900 dark:text-white mb-6">
+            Selbstverteidigung<br />
+            <span class="text-secondary">lernen in Gifhorn</span>
+          </h1>
+          <p class="text-lg md:text-xl text-stone-600 dark:text-gray-300 leading-relaxed max-w-2xl">
+            Beim Boxclub Gifhorn lernst du Selbstverteidigung nicht in einem Wochenend-Kurs — sondern als echte
+            Fähigkeit, die sich durch regelmäßiges Training festigt. Boxen, MMA, Judo und Ringen machen dich
+            sicher und selbstbewusst.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Warum Kampfsport = beste Selbstverteidigung -->
+    <section class="py-20 bg-white dark:bg-primary/80">
+      <div class="container-custom">
+        <div class="max-w-3xl mx-auto">
+          <h2 class="text-3xl md:text-4xl font-black text-stone-900 dark:text-white mb-8">
+            Warum Kampfsport die <span class="text-accent">beste Selbstverteidigung</span> ist
+          </h2>
+          <p class="text-stone-600 dark:text-gray-300 text-lg leading-relaxed mb-8">
+            Isolierte Selbstverteidigungskurse vermitteln Techniken in wenigen Stunden — aber unter Stress vergisst man sie sofort.
+            Echte Selbstverteidigung entsteht durch regelmäßiges Training: Reflexe, Distanzgefühl, Ruhe unter Druck und die körperliche
+            Fitness, sich im Ernstfall zu behaupten.
+          </p>
+
+          <div class="grid md:grid-cols-2 gap-6 mb-12">
+            <div class="bg-stone-50 dark:bg-gray-900 rounded-lg p-6 border border-stone-200 dark:border-gray-800">
+              <div class="text-secondary font-black text-lg mb-2">Boxen</div>
+              <p class="text-stone-600 dark:text-gray-400 text-sm">
+                Schnelle Reflexe, präzise Schläge, Ausweichbewegungen und mentale Stärke. Die Grundlage jeder Standkampf-Verteidigung.
+              </p>
+            </div>
+            <div class="bg-stone-50 dark:bg-gray-900 rounded-lg p-6 border border-stone-200 dark:border-gray-800">
+              <div class="text-secondary font-black text-lg mb-2">MMA</div>
+              <p class="text-stone-600 dark:text-gray-400 text-sm">
+                Kombiniert Schlagen, Treten und Bodenkampf. Die vielseitigste Kampfsportart für reale Selbstverteidigungssituationen.
+              </p>
+            </div>
+            <div class="bg-stone-50 dark:bg-gray-900 rounded-lg p-6 border border-stone-200 dark:border-gray-800">
+              <div class="text-secondary font-black text-lg mb-2">Judo</div>
+              <p class="text-stone-600 dark:text-gray-400 text-sm">
+                Wurftechniken und Hebel ohne zu schlagen. Ideal um Angreifer kontrolliert zu Boden zu bringen — auch für Kinder geeignet.
+              </p>
+            </div>
+            <div class="bg-stone-50 dark:bg-gray-900 rounded-lg p-6 border border-stone-200 dark:border-gray-800">
+              <div class="text-secondary font-black text-lg mb-2">Ringen</div>
+              <p class="text-stone-600 dark:text-gray-400 text-sm">
+                Körperkontrolle, Takedowns und Aufsteh-Techniken. Unverzichtbar wenn der Kampf am Boden weitergeht.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Für wen -->
+    <section class="py-20 bg-stone-50 dark:bg-primary">
+      <div class="container-custom">
+        <div class="max-w-3xl mx-auto">
+          <h2 class="text-3xl md:text-4xl font-black text-stone-900 dark:text-white mb-8">
+            Für wen ist das <span class="text-secondary">Training</span> geeignet?
+          </h2>
+
+          <div class="space-y-6">
+            <div class="flex gap-4 items-start">
+              <div class="w-10 h-10 bg-secondary/10 dark:bg-secondary/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                <span class="text-secondary font-black">K</span>
+              </div>
+              <div>
+                <h3 class="font-bold text-stone-900 dark:text-white text-lg">Kinder ab 5 Jahren</h3>
+                <p class="text-stone-600 dark:text-gray-400">
+                  Spielerisches Training fördert Koordination, Selbstbewusstsein und das Setzen von Grenzen.
+                  Kinder lernen, Konflikte ohne Gewalt zu lösen — und sich im Notfall zu wehren.
+                </p>
+              </div>
+            </div>
+            <div class="flex gap-4 items-start">
+              <div class="w-10 h-10 bg-secondary/10 dark:bg-secondary/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                <span class="text-secondary font-black">F</span>
+              </div>
+              <div>
+                <h3 class="font-bold text-stone-900 dark:text-white text-lg">Frauen & Mädchen ab 14</h3>
+                <p class="text-stone-600 dark:text-gray-400">
+                  Unser Frauenfitness-Programm kombiniert Ganzkörpertraining mit Schlag- und Tritttechniken.
+                  Du wirst stärker, schneller und sicherer — in einer motivierenden Atmosphäre unter Frauen.
+                </p>
+              </div>
+            </div>
+            <div class="flex gap-4 items-start">
+              <div class="w-10 h-10 bg-secondary/10 dark:bg-secondary/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                <span class="text-secondary font-black">E</span>
+              </div>
+              <div>
+                <h3 class="font-bold text-stone-900 dark:text-white text-lg">Erwachsene jeden Alters</h3>
+                <p class="text-stone-600 dark:text-gray-400">
+                  Egal ob Anfänger oder mit Vorerfahrung: Unsere lizenzierten Trainer passen das Training an
+                  dein Level an. Du entscheidest selbst wie intensiv du einsteigst.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Vorteile / Zahlen -->
+    <section class="py-20 bg-white dark:bg-primary/80">
+      <div class="container-custom">
+        <div class="max-w-3xl mx-auto">
+          <h2 class="text-3xl md:text-4xl font-black text-stone-900 dark:text-white mb-10">
+            Das bringt dir <span class="text-accent">regelmäßiges Training</span>
+          </h2>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="text-center p-6">
+              <div class="text-4xl font-black text-secondary mb-2">50+</div>
+              <div class="text-stone-600 dark:text-gray-400 text-sm">Jahre Trainingserfahrung<br/>im Verein</div>
+            </div>
+            <div class="text-center p-6">
+              <div class="text-4xl font-black text-accent mb-2">8</div>
+              <div class="text-stone-600 dark:text-gray-400 text-sm">verschiedene<br/>Kampfsport-Disziplinen</div>
+            </div>
+            <div class="text-center p-6">
+              <div class="text-4xl font-black text-secondary mb-2">15 €</div>
+              <div class="text-stone-600 dark:text-gray-400 text-sm">monatlich für<br/>Kinder & Jugendliche</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-20 bg-stone-50 dark:bg-primary">
+      <div class="container-custom">
+        <div class="max-w-3xl mx-auto">
+          <h2 class="text-3xl md:text-4xl font-black text-stone-900 dark:text-white mb-10">
+            Häufige Fragen zur <span class="text-secondary">Selbstverteidigung</span>
+          </h2>
+          <div class="space-y-4">
+            <details class="group bg-white dark:bg-gray-900 rounded-lg border border-stone-200 dark:border-gray-800">
+              <summary class="flex items-center justify-between p-6 cursor-pointer font-bold text-stone-900 dark:text-white">
+                Bietet der Boxclub Gifhorn Selbstverteidigungskurse an?
+                <svg class="w-5 h-5 text-secondary transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+              </summary>
+              <div class="px-6 pb-6 text-stone-600 dark:text-gray-400">
+                Ja. Durch unsere Programme in Boxen, MMA, Judo und Ringen lernst du praxistaugliche Selbstverteidigung als natürlichen Teil des Trainings — keine isolierten Wochenend-Kurse, sondern echte Fähigkeiten die sich festigen.
+              </div>
+            </details>
+            <details class="group bg-white dark:bg-gray-900 rounded-lg border border-stone-200 dark:border-gray-800">
+              <summary class="flex items-center justify-between p-6 cursor-pointer font-bold text-stone-900 dark:text-white">
+                Ab welchem Alter kann man Selbstverteidigung lernen?
+                <svg class="w-5 h-5 text-secondary transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+              </summary>
+              <div class="px-6 pb-6 text-stone-600 dark:text-gray-400">
+                Bereits ab 5 Jahren. Kinder lernen spielerisch Koordination, Körpergefühl und Grenzen zu setzen. Ab 9 Jahren beginnt gezieltes Boxtraining, ab 16 MMA mit Bodenkampf-Techniken.
+              </div>
+            </details>
+            <details class="group bg-white dark:bg-gray-900 rounded-lg border border-stone-200 dark:border-gray-800">
+              <summary class="flex items-center justify-between p-6 cursor-pointer font-bold text-stone-900 dark:text-white">
+                Brauche ich Vorkenntnisse?
+                <svg class="w-5 h-5 text-secondary transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+              </summary>
+              <div class="px-6 pb-6 text-stone-600 dark:text-gray-400">
+                Nein, absolut keine. Du kommst einfach zum Training vorbei, Sportzeug reicht. Handschuhe und Bandagen kannst du dir ausleihen. Die Trainer passen das Level individuell an.
+              </div>
+            </details>
+            <details class="group bg-white dark:bg-gray-900 rounded-lg border border-stone-200 dark:border-gray-800">
+              <summary class="flex items-center justify-between p-6 cursor-pointer font-bold text-stone-900 dark:text-white">
+                Was kostet Selbstverteidigungstraining in Gifhorn?
+                <svg class="w-5 h-5 text-secondary transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+              </summary>
+              <div class="px-6 pb-6 text-stone-600 dark:text-gray-400">
+                Der Mitgliedsbeitrag beträgt 15 € für Kinder/Jugendliche, 25 € für Erwachsene oder 50 € für Familien (2 Erw. + bis zu 3 Kinder) — alle Sportarten inklusive, keine Zusatzgebühren.
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <CTA />
+  </main>
+  <Footer />
+</Layout>
