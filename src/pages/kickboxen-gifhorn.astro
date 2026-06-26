@@ -1,0 +1,209 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CTA from '../components/CTA.astro';
+
+const siteUrl = 'https://boxclub-gifhorn.de';
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${siteUrl}/` },
+    { '@type': 'ListItem', position: 2, name: 'Leistungen', item: `${siteUrl}/leistungen` },
+    { '@type': 'ListItem', position: 3, name: 'Kickboxen', item: `${siteUrl}/kickboxen-gifhorn` },
+  ],
+};
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Gibt es Kickboxen in Gifhorn?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Ja — beim Boxclub Gifhorn trainierst du Kickbox-Techniken (Schläge, Tritte, Knie) als Teil des MMA-Trainings. Du lernst Kickboxen nicht isoliert, sondern als kompletten Kampfsport: Stand plus Boden.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Was ist der Unterschied zwischen Kickboxen und MMA?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Kickboxen erlaubt Schläge und Tritte im Stand. MMA erweitert das um Clinch-Arbeit, Takedowns und Bodenkampf. Beim Boxclub Gifhorn lernst du beides im MMA-Training — die Kickbox-Elemente sind integriert.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Ab wann kann ich Kickboxen/MMA beim Boxclub Gifhorn trainieren?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Das MMA-Training (inkl. Kickbox-Techniken) ist ab 16 Jahren möglich. Für jüngere Sportler bieten wir Boxen ab 5 Jahren an — dort werden bereits Schlagkombinationen und Fußarbeit trainiert.',
+      },
+    },
+  ],
+};
+---
+
+<Layout
+  title="Kickboxen in Gifhorn — Training beim Boxclub Gifhorn e.V."
+  description="Kickboxen in Gifhorn: Tritte, Schläge und Knie-Techniken als Teil des MMA-Trainings beim Boxclub Gifhorn. Ab 16 Jahren, 25 €/Monat, Probetraining jederzeit."
+  jsonLd={[breadcrumb, faqJsonLd]}
+>
+  <Header />
+  <main id="main-content">
+    <!-- Hero -->
+    <section class="relative py-24 md:py-32 bg-stone-50 dark:bg-primary overflow-hidden">
+      <div class="absolute inset-0 opacity-10">
+        <img
+          src="https://images.unsplash.com/photo-1615117972428-28de67cda58e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080"
+          alt=""
+          class="w-full h-full object-cover"
+          aria-hidden="true"
+        />
+      </div>
+      <div class="container-custom relative z-10">
+        <nav class="mb-8" aria-label="Breadcrumb">
+          <ol class="flex items-center gap-2 text-sm text-stone-500 dark:text-gray-500">
+            <li><a href="/" class="hover:text-secondary transition-colors">Startseite</a></li>
+            <li><span class="text-stone-400 dark:text-gray-600">/</span></li>
+            <li><a href="/leistungen" class="hover:text-secondary transition-colors">Leistungen</a></li>
+            <li><span class="text-stone-400 dark:text-gray-600">/</span></li>
+            <li class="text-secondary">Kickboxen</li>
+          </ol>
+        </nav>
+
+        <div class="max-w-3xl">
+          <div class="inline-flex items-center gap-3 mb-6">
+            <div class="w-10 h-px bg-secondary"></div>
+            <span class="text-secondary font-bold text-xs uppercase tracking-[0.2em]">Kampfsport in Gifhorn</span>
+          </div>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-black leading-[1.1] text-stone-900 dark:text-white mb-6">
+            Kickboxen<br />
+            <span class="text-secondary">in Gifhorn</span>
+          </h1>
+          <p class="text-lg md:text-xl text-stone-600 dark:text-gray-300 leading-relaxed max-w-2xl">
+            Du suchst Kickboxen in Gifhorn? Beim Boxclub Gifhorn trainierst du Kickbox-Techniken als Teil unseres
+            MMA-Programms — Schläge, Tritte und Knie-Techniken, kombiniert mit Bodenkampf und Ringen.
+            Mehr Vielseitigkeit als reines Kickboxen, zum selben Preis.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Kickboxen vs MMA -->
+    <section class="py-20 bg-white dark:bg-primary/80">
+      <div class="container-custom">
+        <div class="max-w-3xl mx-auto">
+          <h2 class="text-3xl md:text-4xl font-black text-stone-900 dark:text-white mb-8">
+            Kickboxen + <span class="text-accent">noch mehr</span> — unser MMA-Training
+          </h2>
+          <p class="text-stone-600 dark:text-gray-300 text-lg leading-relaxed mb-8">
+            Klassisches Kickboxen trainiert Schläge und Tritte im Stand. Unser MMA-Training geht weiter:
+            Du lernst zusätzlich Takedowns, Clinch-Arbeit und Bodenkampf. Das Ergebnis? Du bist in
+            jeder Situation handlungsfähig — nicht nur wenn der Gegner auf Distanz bleibt.
+          </p>
+
+          <div class="overflow-hidden rounded-lg border border-stone-200 dark:border-gray-800">
+            <table class="w-full text-sm">
+              <thead class="bg-stone-100 dark:bg-gray-900">
+                <tr>
+                  <th class="text-left p-4 font-bold text-stone-900 dark:text-white">Technik</th>
+                  <th class="text-center p-4 font-bold text-stone-900 dark:text-white">Kickboxen</th>
+                  <th class="text-center p-4 font-bold text-secondary">Unser MMA</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-stone-200 dark:divide-gray-800">
+                <tr class="bg-white dark:bg-primary/50">
+                  <td class="p-4 text-stone-700 dark:text-gray-300">Schläge (Jab, Cross, Haken)</td>
+                  <td class="p-4 text-center text-green-600">✓</td>
+                  <td class="p-4 text-center text-green-600">✓</td>
+                </tr>
+                <tr class="bg-stone-50 dark:bg-gray-900/50">
+                  <td class="p-4 text-stone-700 dark:text-gray-300">Tritte (Low/Mid/High Kick)</td>
+                  <td class="p-4 text-center text-green-600">✓</td>
+                  <td class="p-4 text-center text-green-600">✓</td>
+                </tr>
+                <tr class="bg-white dark:bg-primary/50">
+                  <td class="p-4 text-stone-700 dark:text-gray-300">Knie-Techniken</td>
+                  <td class="p-4 text-center text-green-600">✓</td>
+                  <td class="p-4 text-center text-green-600">✓</td>
+                </tr>
+                <tr class="bg-stone-50 dark:bg-gray-900/50">
+                  <td class="p-4 text-stone-700 dark:text-gray-300">Takedowns & Würfe</td>
+                  <td class="p-4 text-center text-stone-400">—</td>
+                  <td class="p-4 text-center text-green-600">✓</td>
+                </tr>
+                <tr class="bg-white dark:bg-primary/50">
+                  <td class="p-4 text-stone-700 dark:text-gray-300">Bodenkampf & Submissions</td>
+                  <td class="p-4 text-center text-stone-400">—</td>
+                  <td class="p-4 text-center text-green-600">✓</td>
+                </tr>
+                <tr class="bg-stone-50 dark:bg-gray-900/50">
+                  <td class="p-4 text-stone-700 dark:text-gray-300">Clinch & Aufsteh-Techniken</td>
+                  <td class="p-4 text-center text-stone-400">—</td>
+                  <td class="p-4 text-center text-green-600">✓</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="mt-8 text-center">
+            <a href="/mma-gifhorn" class="btn-primary group inline-flex">
+              Mehr über unser MMA-Training
+              <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-20 bg-stone-50 dark:bg-primary">
+      <div class="container-custom">
+        <div class="max-w-3xl mx-auto">
+          <h2 class="text-3xl md:text-4xl font-black text-stone-900 dark:text-white mb-10">
+            Häufige Fragen zu <span class="text-secondary">Kickboxen in Gifhorn</span>
+          </h2>
+          <div class="space-y-4">
+            <details class="group bg-white dark:bg-gray-900 rounded-lg border border-stone-200 dark:border-gray-800">
+              <summary class="flex items-center justify-between p-6 cursor-pointer font-bold text-stone-900 dark:text-white">
+                Gibt es Kickboxen in Gifhorn?
+                <svg class="w-5 h-5 text-secondary transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+              </summary>
+              <div class="px-6 pb-6 text-stone-600 dark:text-gray-400">
+                Ja — beim Boxclub Gifhorn trainierst du Kickbox-Techniken (Schläge, Tritte, Knie) als Teil des MMA-Trainings. Du lernst Kickboxen nicht isoliert, sondern als kompletten Kampfsport: Stand plus Boden.
+              </div>
+            </details>
+            <details class="group bg-white dark:bg-gray-900 rounded-lg border border-stone-200 dark:border-gray-800">
+              <summary class="flex items-center justify-between p-6 cursor-pointer font-bold text-stone-900 dark:text-white">
+                Was ist der Unterschied zwischen Kickboxen und MMA?
+                <svg class="w-5 h-5 text-secondary transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+              </summary>
+              <div class="px-6 pb-6 text-stone-600 dark:text-gray-400">
+                Kickboxen erlaubt Schläge und Tritte im Stand. MMA erweitert das um Clinch-Arbeit, Takedowns und Bodenkampf. Beim Boxclub Gifhorn lernst du beides im MMA-Training — die Kickbox-Elemente sind integriert.
+              </div>
+            </details>
+            <details class="group bg-white dark:bg-gray-900 rounded-lg border border-stone-200 dark:border-gray-800">
+              <summary class="flex items-center justify-between p-6 cursor-pointer font-bold text-stone-900 dark:text-white">
+                Ab wann kann ich trainieren?
+                <svg class="w-5 h-5 text-secondary transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+              </summary>
+              <div class="px-6 pb-6 text-stone-600 dark:text-gray-400">
+                Das MMA-Training (inkl. Kickbox-Techniken) ist ab 16 Jahren möglich. Für jüngere Sportler bieten wir Boxen ab 5 Jahren an — dort werden bereits Schlagkombinationen und Fußarbeit trainiert.
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <CTA />
+  </main>
+  <Footer />
+</Layout>

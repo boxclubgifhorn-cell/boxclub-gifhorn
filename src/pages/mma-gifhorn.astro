@@ -1,0 +1,272 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CTA from '../components/CTA.astro';
+
+const siteUrl = 'https://boxclub-gifhorn.de';
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${siteUrl}/` },
+    { '@type': 'ListItem', position: 2, name: 'Leistungen', item: `${siteUrl}/leistungen` },
+    { '@type': 'ListItem', position: 3, name: 'MMA', item: `${siteUrl}/mma-gifhorn` },
+  ],
+};
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Was ist MMA?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'MMA (Mixed Martial Arts) ist ein Vollkontakt-Kampfsport der Techniken aus verschiedenen Disziplinen vereint: Boxen, Kickboxen, Ringen, Judo und Brazilian Jiu-Jitsu. Gekämpft wird im Stand und am Boden.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Ab welchem Alter kann man MMA beim Boxclub Gifhorn trainieren?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Das MMA-Training beim Boxclub Gifhorn ist ab 16 Jahren möglich. Für jüngere Sportler bieten wir Boxen (ab 5 Jahren) und Judo (ab 6 Jahren) als Einstieg an.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Brauche ich Vorerfahrung für MMA?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Nein. Anfänger sind willkommen und werden von unseren erfahrenen Trainern an die Techniken herangeführt. Das Training wird an dein Level angepasst.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Was kostet MMA-Training in Gifhorn?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Der Mitgliedsbeitrag beträgt 25 € pro Monat für Erwachsene. Alle Sportarten sind inklusive — du kannst MMA, Boxen, Ringen und Judo beliebig kombinieren.',
+      },
+    },
+  ],
+};
+---
+
+<Layout
+  title="MMA Training in Gifhorn — Mixed Martial Arts ab 16 | Boxclub Gifhorn e.V."
+  description="MMA in Gifhorn trainieren: Stand- und Bodenkampf, Boxen, Kickboxen & Grappling beim Boxclub Gifhorn. Ab 16 Jahren, alle Level, 25 €/Monat. Probetraining jederzeit."
+  jsonLd={[breadcrumb, faqJsonLd]}
+>
+  <Header />
+  <main id="main-content">
+    <!-- Hero -->
+    <section class="relative py-24 md:py-32 bg-stone-50 dark:bg-primary overflow-hidden">
+      <div class="absolute inset-0 opacity-10">
+        <img
+          src="https://images.unsplash.com/photo-1615117972428-28de67cda58e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080"
+          alt=""
+          class="w-full h-full object-cover"
+          aria-hidden="true"
+        />
+      </div>
+      <div class="container-custom relative z-10">
+        <nav class="mb-8" aria-label="Breadcrumb">
+          <ol class="flex items-center gap-2 text-sm text-stone-500 dark:text-gray-500">
+            <li><a href="/" class="hover:text-secondary transition-colors">Startseite</a></li>
+            <li><span class="text-stone-400 dark:text-gray-600">/</span></li>
+            <li><a href="/leistungen" class="hover:text-secondary transition-colors">Leistungen</a></li>
+            <li><span class="text-stone-400 dark:text-gray-600">/</span></li>
+            <li class="text-secondary">MMA</li>
+          </ol>
+        </nav>
+
+        <div class="max-w-3xl">
+          <div class="inline-flex items-center gap-3 mb-6">
+            <div class="w-10 h-px bg-secondary"></div>
+            <span class="text-secondary font-bold text-xs uppercase tracking-[0.2em]">Mixed Martial Arts in Gifhorn</span>
+          </div>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-black leading-[1.1] text-stone-900 dark:text-white mb-6">
+            MMA Training<br />
+            <span class="text-secondary">in Gifhorn</span>
+          </h1>
+          <p class="text-lg md:text-xl text-stone-600 dark:text-gray-300 leading-relaxed max-w-2xl">
+            Mixed Martial Arts (MMA) vereint das Beste aus Boxen, Kickboxen, Ringen und Grappling.
+            Beim Boxclub Gifhorn trainierst du Stand- und Bodenkampf — diszipliniert, effektiv und unter professioneller Anleitung.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Was ist MMA -->
+    <section class="py-20 bg-white dark:bg-primary/80">
+      <div class="container-custom">
+        <div class="max-w-3xl mx-auto">
+          <h2 class="text-3xl md:text-4xl font-black text-stone-900 dark:text-white mb-8">
+            Was ist <span class="text-accent">MMA</span>?
+          </h2>
+          <p class="text-stone-600 dark:text-gray-300 text-lg leading-relaxed mb-8">
+            MMA (Mixed Martial Arts) ist ein Vollkontakt-Kampfsport, bei dem Techniken aus verschiedenen Kampfkünsten kombiniert werden.
+            Gekämpft wird im Stand (Schläge, Tritte, Knie) und am Boden (Hebel, Würger, Positional Control). MMA gilt als eine
+            der komplettesten Kampfsportarten — weil du in jeder Distanz und Lage handlungsfähig bist.
+          </p>
+
+          <h3 class="text-xl font-bold text-stone-900 dark:text-white mb-4">Diese Disziplinen fließen ein:</h3>
+          <div class="grid md:grid-cols-2 gap-4 mb-8">
+            <div class="flex items-start gap-3 p-4 bg-stone-50 dark:bg-gray-900 rounded-lg border border-stone-200 dark:border-gray-800">
+              <span class="text-secondary font-black text-lg">▸</span>
+              <div>
+                <span class="font-bold text-stone-900 dark:text-white">Boxen & Kickboxen</span>
+                <p class="text-sm text-stone-600 dark:text-gray-400">Schlagkombinationen, Fußarbeit, Distanzkontrolle</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 p-4 bg-stone-50 dark:bg-gray-900 rounded-lg border border-stone-200 dark:border-gray-800">
+              <span class="text-secondary font-black text-lg">▸</span>
+              <div>
+                <span class="font-bold text-stone-900 dark:text-white">Ringen & Wrestling</span>
+                <p class="text-sm text-stone-600 dark:text-gray-400">Takedowns, Clinch-Arbeit, Aufsteh-Techniken</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 p-4 bg-stone-50 dark:bg-gray-900 rounded-lg border border-stone-200 dark:border-gray-800">
+              <span class="text-secondary font-black text-lg">▸</span>
+              <div>
+                <span class="font-bold text-stone-900 dark:text-white">Grappling & BJJ</span>
+                <p class="text-sm text-stone-600 dark:text-gray-400">Bodenkampf, Submissions, Positionskontrolle</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 p-4 bg-stone-50 dark:bg-gray-900 rounded-lg border border-stone-200 dark:border-gray-800">
+              <span class="text-secondary font-black text-lg">▸</span>
+              <div>
+                <span class="font-bold text-stone-900 dark:text-white">Judo</span>
+                <p class="text-sm text-stone-600 dark:text-gray-400">Wurftechniken, Hebel, Übergangs-Techniken</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Für wen -->
+    <section class="py-20 bg-stone-50 dark:bg-primary">
+      <div class="container-custom">
+        <div class="max-w-3xl mx-auto">
+          <h2 class="text-3xl md:text-4xl font-black text-stone-900 dark:text-white mb-8">
+            Für wen ist <span class="text-secondary">MMA-Training</span> geeignet?
+          </h2>
+          <div class="space-y-6">
+            <div class="flex gap-4 items-start">
+              <div class="w-10 h-10 bg-secondary/10 dark:bg-secondary/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                <span class="text-secondary font-black">A</span>
+              </div>
+              <div>
+                <h3 class="font-bold text-stone-900 dark:text-white text-lg">Anfänger ohne Vorerfahrung</h3>
+                <p class="text-stone-600 dark:text-gray-400">
+                  Du brauchst keine Kampfsport-Erfahrung. Wir holen dich da ab wo du stehst und bauen systematisch auf — Technik, Fitness und Sparring-Bereitschaft wachsen zusammen.
+                </p>
+              </div>
+            </div>
+            <div class="flex gap-4 items-start">
+              <div class="w-10 h-10 bg-secondary/10 dark:bg-secondary/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                <span class="text-secondary font-black">U</span>
+              </div>
+              <div>
+                <h3 class="font-bold text-stone-900 dark:text-white text-lg">Umsteiger aus anderen Kampfsportarten</h3>
+                <p class="text-stone-600 dark:text-gray-400">
+                  Boxer, Ringer, Judoka — wer bereits eine Grundlage hat, ergänzt sie im MMA-Training um die fehlenden Puzzleteile. Besonders der Übergang Stand→Boden profitiert.
+                </p>
+              </div>
+            </div>
+            <div class="flex gap-4 items-start">
+              <div class="w-10 h-10 bg-secondary/10 dark:bg-secondary/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                <span class="text-secondary font-black">W</span>
+              </div>
+              <div>
+                <h3 class="font-bold text-stone-900 dark:text-white text-lg">Wettkampf-Ambitionen</h3>
+                <p class="text-stone-600 dark:text-gray-400">
+                  Wer Wettkämpfe anstrebt, wird gezielt auf Amateurkämpfe vorbereitet. Der Boxclub Gifhorn hat eine lange Geschichte erfolgreicher Wettkämpfer — auch im MMA.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Zahlen -->
+    <section class="py-20 bg-white dark:bg-primary/80">
+      <div class="container-custom">
+        <div class="max-w-3xl mx-auto">
+          <div class="grid sm:grid-cols-3 gap-6 text-center">
+            <div class="p-6">
+              <div class="text-4xl font-black text-secondary mb-2">16+</div>
+              <div class="text-stone-600 dark:text-gray-400 text-sm">Mindestalter<br/>für MMA</div>
+            </div>
+            <div class="p-6">
+              <div class="text-4xl font-black text-accent mb-2">25 €</div>
+              <div class="text-stone-600 dark:text-gray-400 text-sm">pro Monat<br/>alle Sportarten inkl.</div>
+            </div>
+            <div class="p-6">
+              <div class="text-4xl font-black text-secondary mb-2">4+</div>
+              <div class="text-stone-600 dark:text-gray-400 text-sm">Disziplinen<br/>in einem Training</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-20 bg-stone-50 dark:bg-primary">
+      <div class="container-custom">
+        <div class="max-w-3xl mx-auto">
+          <h2 class="text-3xl md:text-4xl font-black text-stone-900 dark:text-white mb-10">
+            Häufige Fragen zu <span class="text-secondary">MMA in Gifhorn</span>
+          </h2>
+          <div class="space-y-4">
+            <details class="group bg-white dark:bg-gray-900 rounded-lg border border-stone-200 dark:border-gray-800">
+              <summary class="flex items-center justify-between p-6 cursor-pointer font-bold text-stone-900 dark:text-white">
+                Was ist MMA?
+                <svg class="w-5 h-5 text-secondary transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+              </summary>
+              <div class="px-6 pb-6 text-stone-600 dark:text-gray-400">
+                MMA (Mixed Martial Arts) ist ein Vollkontakt-Kampfsport der Techniken aus verschiedenen Disziplinen vereint: Boxen, Kickboxen, Ringen, Judo und Brazilian Jiu-Jitsu. Gekämpft wird im Stand und am Boden.
+              </div>
+            </details>
+            <details class="group bg-white dark:bg-gray-900 rounded-lg border border-stone-200 dark:border-gray-800">
+              <summary class="flex items-center justify-between p-6 cursor-pointer font-bold text-stone-900 dark:text-white">
+                Ab welchem Alter kann man MMA trainieren?
+                <svg class="w-5 h-5 text-secondary transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+              </summary>
+              <div class="px-6 pb-6 text-stone-600 dark:text-gray-400">
+                Das MMA-Training beim Boxclub Gifhorn ist ab 16 Jahren möglich. Für jüngere Sportler bieten wir Boxen (ab 5 Jahren) und Judo (ab 6 Jahren) als Einstieg an.
+              </div>
+            </details>
+            <details class="group bg-white dark:bg-gray-900 rounded-lg border border-stone-200 dark:border-gray-800">
+              <summary class="flex items-center justify-between p-6 cursor-pointer font-bold text-stone-900 dark:text-white">
+                Brauche ich Vorerfahrung?
+                <svg class="w-5 h-5 text-secondary transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+              </summary>
+              <div class="px-6 pb-6 text-stone-600 dark:text-gray-400">
+                Nein. Anfänger sind willkommen und werden von unseren erfahrenen Trainern an die Techniken herangeführt. Das Training wird an dein Level angepasst.
+              </div>
+            </details>
+            <details class="group bg-white dark:bg-gray-900 rounded-lg border border-stone-200 dark:border-gray-800">
+              <summary class="flex items-center justify-between p-6 cursor-pointer font-bold text-stone-900 dark:text-white">
+                Was kostet MMA-Training?
+                <svg class="w-5 h-5 text-secondary transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+              </summary>
+              <div class="px-6 pb-6 text-stone-600 dark:text-gray-400">
+                Der Mitgliedsbeitrag beträgt 25 € pro Monat für Erwachsene. Alle Sportarten sind inklusive — du kannst MMA, Boxen, Ringen und Judo beliebig kombinieren.
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <CTA />
+  </main>
+  <Footer />
+</Layout>

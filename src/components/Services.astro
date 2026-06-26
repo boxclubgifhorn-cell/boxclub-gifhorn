@@ -8,6 +8,7 @@ const services = (await getCollection('leistung'))
     description: s.data.description,
     image: s.data.bild || '',
     imageAlt: s.data.bild_alt || s.data.title,
+    link: s.data.link || '/leistungen',
     reihenfolge: s.data.reihenfolge,
   }))
   .sort((a, b) => a.reihenfolge - b.reihenfolge);
@@ -39,8 +40,9 @@ const services = (await getCollection('leistung'))
     <!-- Services Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       {services.map((service, index) => (
-        <div
-          class="group relative overflow-hidden bg-white dark:bg-gray-900 border border-stone-200 dark:border-gray-800 hover:border-secondary/50 shadow-sm dark:shadow-none hover:shadow-xl hover:shadow-secondary/10 transition-all duration-500 reveal"
+        <a
+          href={service.link}
+          class="group relative overflow-hidden bg-white dark:bg-gray-900 border border-stone-200 dark:border-gray-800 hover:border-secondary/50 shadow-sm dark:shadow-none hover:shadow-xl hover:shadow-secondary/10 transition-all duration-500 reveal block"
           style={`transition-delay: ${index * 80}ms`}
         >
           <!-- Image -->
@@ -89,7 +91,7 @@ const services = (await getCollection('leistung'))
 
           <!-- Hover border effect -->
           <div class="absolute bottom-0 left-0 w-full h-1 bg-secondary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-        </div>
+        </a>
       ))}
     </div>
 

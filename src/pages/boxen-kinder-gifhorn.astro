@@ -1,0 +1,261 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CTA from '../components/CTA.astro';
+
+const siteUrl = 'https://boxclub-gifhorn.de';
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${siteUrl}/` },
+    { '@type': 'ListItem', position: 2, name: 'Leistungen', item: `${siteUrl}/leistungen` },
+    { '@type': 'ListItem', position: 3, name: 'Boxen für Kinder', item: `${siteUrl}/boxen-kinder-gifhorn` },
+  ],
+};
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Ab welchem Alter können Kinder beim Boxclub Gifhorn trainieren?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Bereits ab 5 Jahren. Die Kleinsten trainieren spielerisch Motorik, Koordination und Körpergefühl. Ab 9 Jahren beginnt das gezielte Boxtraining mit Technik-Grundlagen.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Ist Boxen für Kinder gefährlich?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Nein. Im Kindertraining steht Technik, Fitness und Koordination im Vordergrund — kein Vollkontakt-Sparring. Die Kinder lernen kontrollierte Bewegungen unter Aufsicht erfahrener Trainer.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Was braucht mein Kind zum Probetraining?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Nur bequeme Sportkleidung und Hallenschuhe. Boxhandschuhe und Bandagen können am Anfang ausgeliehen werden. Keine Anmeldung nötig — einfach vorbeikommen.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Was kostet Kinderboxen in Gifhorn?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Der Mitgliedsbeitrag für Kinder und Jugendliche bis 18 Jahre beträgt 15 € pro Monat. Alle Sportarten sind inklusive — Boxen, Judo, Ringen und mehr.',
+      },
+    },
+  ],
+};
+---
+
+<Layout
+  title="Boxen für Kinder in Gifhorn — ab 5 Jahren | Boxclub Gifhorn e.V."
+  description="Kinderboxen in Gifhorn ab 5 Jahren: Spielerisches Training für Motorik, Koordination und Selbstbewusstsein. Lizenzierte Trainer, keine Anmeldung nötig, 15 €/Monat."
+  jsonLd={[breadcrumb, faqJsonLd]}
+>
+  <Header />
+  <main id="main-content">
+    <!-- Hero -->
+    <section class="relative py-24 md:py-32 bg-stone-50 dark:bg-primary overflow-hidden">
+      <div class="absolute inset-0 opacity-10">
+        <img
+          src="https://images.unsplash.com/photo-1699464676088-c6349d19b013?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080"
+          alt=""
+          class="w-full h-full object-cover"
+          aria-hidden="true"
+        />
+      </div>
+      <div class="container-custom relative z-10">
+        <nav class="mb-8" aria-label="Breadcrumb">
+          <ol class="flex items-center gap-2 text-sm text-stone-500 dark:text-gray-500">
+            <li><a href="/" class="hover:text-secondary transition-colors">Startseite</a></li>
+            <li><span class="text-stone-400 dark:text-gray-600">/</span></li>
+            <li><a href="/leistungen" class="hover:text-secondary transition-colors">Leistungen</a></li>
+            <li><span class="text-stone-400 dark:text-gray-600">/</span></li>
+            <li class="text-secondary">Boxen für Kinder</li>
+          </ol>
+        </nav>
+
+        <div class="max-w-3xl">
+          <div class="inline-flex items-center gap-3 mb-6">
+            <div class="w-10 h-px bg-secondary"></div>
+            <span class="text-secondary font-bold text-xs uppercase tracking-[0.2em]">Kindertraining in Gifhorn</span>
+          </div>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-black leading-[1.1] text-stone-900 dark:text-white mb-6">
+            Boxen für Kinder<br />
+            <span class="text-secondary">in Gifhorn — ab 5 Jahren</span>
+          </h1>
+          <p class="text-lg md:text-xl text-stone-600 dark:text-gray-300 leading-relaxed max-w-2xl">
+            Beim Boxclub Gifhorn lernen Kinder spielerisch Koordination, Disziplin und Selbstbewusstsein.
+            Kein Vollkontakt, kein Druck — dafür Spaß an Bewegung und echte Erfolgserlebnisse.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Altersgruppen -->
+    <section class="py-20 bg-white dark:bg-primary/80">
+      <div class="container-custom">
+        <div class="max-w-3xl mx-auto">
+          <h2 class="text-3xl md:text-4xl font-black text-stone-900 dark:text-white mb-8">
+            Zwei Programme — <span class="text-accent">perfekt nach Alter</span>
+          </h2>
+
+          <div class="grid md:grid-cols-2 gap-8">
+            <div class="bg-stone-50 dark:bg-gray-900 rounded-lg p-8 border border-stone-200 dark:border-gray-800">
+              <div class="text-accent font-black text-2xl mb-2">5–8 Jahre</div>
+              <h3 class="font-bold text-stone-900 dark:text-white text-lg mb-4">Spielerische Frühförderung</h3>
+              <ul class="space-y-2 text-stone-600 dark:text-gray-400 text-sm">
+                <li class="flex items-start gap-2"><span class="text-secondary mt-1">✓</span> Motorik & Koordination entwickeln</li>
+                <li class="flex items-start gap-2"><span class="text-secondary mt-1">✓</span> Körpergefühl und Balance</li>
+                <li class="flex items-start gap-2"><span class="text-secondary mt-1">✓</span> Spielerische Box-Grundlagen</li>
+                <li class="flex items-start gap-2"><span class="text-secondary mt-1">✓</span> Teamgeist und Disziplin</li>
+                <li class="flex items-start gap-2"><span class="text-secondary mt-1">✓</span> Spaß und Erfolgserlebnisse</li>
+              </ul>
+            </div>
+            <div class="bg-stone-50 dark:bg-gray-900 rounded-lg p-8 border border-stone-200 dark:border-gray-800">
+              <div class="text-secondary font-black text-2xl mb-2">9–14 Jahre</div>
+              <h3 class="font-bold text-stone-900 dark:text-white text-lg mb-4">Kinder & Anfänger Training</h3>
+              <ul class="space-y-2 text-stone-600 dark:text-gray-400 text-sm">
+                <li class="flex items-start gap-2"><span class="text-secondary mt-1">✓</span> Boxtechnik-Grundschule</li>
+                <li class="flex items-start gap-2"><span class="text-secondary mt-1">✓</span> Fitness und Ausdauer</li>
+                <li class="flex items-start gap-2"><span class="text-secondary mt-1">✓</span> Kontrolliertes Partnertraining</li>
+                <li class="flex items-start gap-2"><span class="text-secondary mt-1">✓</span> Selbstverteidigung</li>
+                <li class="flex items-start gap-2"><span class="text-secondary mt-1">✓</span> Wettkampf-Vorbereitung (optional)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Was Kinder lernen -->
+    <section class="py-20 bg-stone-50 dark:bg-primary">
+      <div class="container-custom">
+        <div class="max-w-3xl mx-auto">
+          <h2 class="text-3xl md:text-4xl font-black text-stone-900 dark:text-white mb-8">
+            Was dein Kind beim <span class="text-secondary">Boxtraining lernt</span>
+          </h2>
+          <div class="grid sm:grid-cols-2 gap-6">
+            <div class="flex gap-4 items-start">
+              <div class="w-10 h-10 bg-secondary/10 dark:bg-secondary/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                <span class="text-secondary font-black text-lg">1</span>
+              </div>
+              <div>
+                <h3 class="font-bold text-stone-900 dark:text-white">Selbstbewusstsein</h3>
+                <p class="text-stone-600 dark:text-gray-400 text-sm">Kinder die wissen was sie können, treten sicherer auf — in der Schule und im Alltag.</p>
+              </div>
+            </div>
+            <div class="flex gap-4 items-start">
+              <div class="w-10 h-10 bg-secondary/10 dark:bg-secondary/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                <span class="text-secondary font-black text-lg">2</span>
+              </div>
+              <div>
+                <h3 class="font-bold text-stone-900 dark:text-white">Disziplin & Respekt</h3>
+                <p class="text-stone-600 dark:text-gray-400 text-sm">Regeln einhalten, dem Partner Respekt zeigen, Grenzen akzeptieren — das lernt man nirgends besser als im Kampfsport.</p>
+              </div>
+            </div>
+            <div class="flex gap-4 items-start">
+              <div class="w-10 h-10 bg-secondary/10 dark:bg-secondary/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                <span class="text-secondary font-black text-lg">3</span>
+              </div>
+              <div>
+                <h3 class="font-bold text-stone-900 dark:text-white">Fitness & Koordination</h3>
+                <p class="text-stone-600 dark:text-gray-400 text-sm">Ganzkörpertraining das Spaß macht: Ausdauer, Schnelligkeit, Gleichgewicht und Reaktionsfähigkeit.</p>
+              </div>
+            </div>
+            <div class="flex gap-4 items-start">
+              <div class="w-10 h-10 bg-secondary/10 dark:bg-secondary/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                <span class="text-secondary font-black text-lg">4</span>
+              </div>
+              <div>
+                <h3 class="font-bold text-stone-900 dark:text-white">Selbstverteidigung</h3>
+                <p class="text-stone-600 dark:text-gray-400 text-sm">Sich im Notfall wehren können — und Konflikte ohne Gewalt lösen. Beides gehört zusammen.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trainingszeiten -->
+    <section class="py-20 bg-white dark:bg-primary/80">
+      <div class="container-custom">
+        <div class="max-w-3xl mx-auto text-center">
+          <h2 class="text-3xl md:text-4xl font-black text-stone-900 dark:text-white mb-6">
+            Trainingszeiten <span class="text-secondary">Kinderboxen</span>
+          </h2>
+          <p class="text-stone-600 dark:text-gray-300 text-lg mb-8">
+            Die aktuellen Trainingszeiten findest du in unserem Kursplan. Kinder trainieren mehrmals pro Woche — du entscheidest wie oft.
+          </p>
+          <a href="/kursplan" class="btn-primary group inline-flex">
+            Zum Kursplan
+            <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-20 bg-stone-50 dark:bg-primary">
+      <div class="container-custom">
+        <div class="max-w-3xl mx-auto">
+          <h2 class="text-3xl md:text-4xl font-black text-stone-900 dark:text-white mb-10">
+            Häufige Fragen zum <span class="text-secondary">Kinderboxen</span>
+          </h2>
+          <div class="space-y-4">
+            <details class="group bg-white dark:bg-gray-900 rounded-lg border border-stone-200 dark:border-gray-800">
+              <summary class="flex items-center justify-between p-6 cursor-pointer font-bold text-stone-900 dark:text-white">
+                Ab welchem Alter können Kinder trainieren?
+                <svg class="w-5 h-5 text-secondary transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+              </summary>
+              <div class="px-6 pb-6 text-stone-600 dark:text-gray-400">
+                Bereits ab 5 Jahren. Die Kleinsten trainieren spielerisch Motorik, Koordination und Körpergefühl. Ab 9 Jahren beginnt das gezielte Boxtraining mit Technik-Grundlagen.
+              </div>
+            </details>
+            <details class="group bg-white dark:bg-gray-900 rounded-lg border border-stone-200 dark:border-gray-800">
+              <summary class="flex items-center justify-between p-6 cursor-pointer font-bold text-stone-900 dark:text-white">
+                Ist Boxen für Kinder gefährlich?
+                <svg class="w-5 h-5 text-secondary transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+              </summary>
+              <div class="px-6 pb-6 text-stone-600 dark:text-gray-400">
+                Nein. Im Kindertraining steht Technik, Fitness und Koordination im Vordergrund — kein Vollkontakt-Sparring. Die Kinder lernen kontrollierte Bewegungen unter Aufsicht erfahrener Trainer.
+              </div>
+            </details>
+            <details class="group bg-white dark:bg-gray-900 rounded-lg border border-stone-200 dark:border-gray-800">
+              <summary class="flex items-center justify-between p-6 cursor-pointer font-bold text-stone-900 dark:text-white">
+                Was braucht mein Kind zum Probetraining?
+                <svg class="w-5 h-5 text-secondary transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+              </summary>
+              <div class="px-6 pb-6 text-stone-600 dark:text-gray-400">
+                Nur bequeme Sportkleidung und Hallenschuhe. Boxhandschuhe und Bandagen können am Anfang ausgeliehen werden. Keine Anmeldung nötig — einfach vorbeikommen.
+              </div>
+            </details>
+            <details class="group bg-white dark:bg-gray-900 rounded-lg border border-stone-200 dark:border-gray-800">
+              <summary class="flex items-center justify-between p-6 cursor-pointer font-bold text-stone-900 dark:text-white">
+                Was kostet Kinderboxen?
+                <svg class="w-5 h-5 text-secondary transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+              </summary>
+              <div class="px-6 pb-6 text-stone-600 dark:text-gray-400">
+                Der Mitgliedsbeitrag für Kinder und Jugendliche bis 18 Jahre beträgt 15 € pro Monat. Alle Sportarten sind inklusive — Boxen, Judo, Ringen und mehr.
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <CTA />
+  </main>
+  <Footer />
+</Layout>
