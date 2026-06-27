@@ -27,6 +27,9 @@ backend:
   base_url: https://om-boxclub-gifhorn.vercel.app
   auth_endpoint: api/auth
 
+# UI-Sprache der Decap-Oberfläche (Buttons, Statusmeldungen, Dialoge)
+locale: de
+
 # Lokale Entwicklung (Decap erkennt localhost automatisch)
 local_backend: true
 
@@ -327,6 +330,7 @@ collections:
     fields:
       - { name: "titel", label: "Titel", widget: "string" }
       - { name: "datum", label: "Datum", widget: "datetime", date_format: "DD.MM.YYYY", time_format: false, picker_utc: false }
+      - { name: "gueltig_bis", label: "Gültig bis (Enddatum)", widget: "datetime", date_format: "DD.MM.YYYY", time_format: false, picker_utc: false, required: false, hint: "Optional: Beitrag wird nach diesem Datum nicht mehr angezeigt." }
       - { name: "kategorie", label: "Kategorie", widget: "string", required: false, hint: "z.B. 'Wettkampf', 'Verein', 'Termine'" }
       - { name: "autor", label: "Autor", widget: "string", required: false }
       - { name: "teaser", label: "Teaser (kurzer Vorschautext)", widget: "text", required: false, hint: "1-2 Sätze für die News-Übersicht." }
