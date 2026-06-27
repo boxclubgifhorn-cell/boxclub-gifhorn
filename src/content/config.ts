@@ -194,6 +194,7 @@ const news = defineCollection({
   schema: z.object({
     titel: z.string(),
     datum: z.date(),
+    gueltig_bis: z.date().optional(),
     bild: z.string().optional(),
     bild_alt: z.string().optional(),
     teaser: z.string().optional(),

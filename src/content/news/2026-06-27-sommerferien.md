@@ -1,6 +1,7 @@
 ---
 titel: SOMMERFERIEN
-datum: 27.06.2026
+datum: 2026-06-27
+gueltig_bis: 2026-08-12
 teaser: ""
 bild: /uploads/news/169667.png
 veroeffentlicht: true
