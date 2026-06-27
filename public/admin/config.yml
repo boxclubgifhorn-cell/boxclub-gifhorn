@@ -21,7 +21,7 @@
 
 backend:
   name: github
-  repo: schurick1502/onemillion-web-factory
+  repo: boxclubgifhorn-cell/boxclub-gifhorn
   branch: main
   # OAuth-Proxy: eigene Vercel-Function im selben Projekt
   base_url: https://om-boxclub-gifhorn.vercel.app
@@ -34,7 +34,7 @@ local_backend: true
 publish_mode: editorial_workflow
 
 # Media-Uploads landen hier (öffentlich erreichbar)
-media_folder: "sites/boxclub-gifhorn/project/public/uploads"
+media_folder: "public/uploads"
 public_folder: "/uploads"
 
 # Site-Display-Name in der Admin-UI
@@ -51,7 +51,7 @@ collections:
     editor:
       preview: false
     files:
-      - file: "sites/boxclub-gifhorn/project/src/content/global/site.yml"
+      - file: "src/content/global/site.yml"
         label: "Vereinsdaten"
         name: "site"
         fields:
@@ -74,10 +74,10 @@ collections:
     editor:
       preview: false
     files:
-      - file: "sites/boxclub-gifhorn/project/src/content/startseite/index.yml"
+      - file: "src/content/startseite/index.yml"
         label: "Startseite (alle Sektionen)"
         name: "index"
-        media_folder: "/sites/boxclub-gifhorn/project/public/uploads/startseite"
+        media_folder: "/public/uploads/startseite"
         public_folder: "/uploads/startseite"
         fields:
           # ---- Hero ----
@@ -192,13 +192,13 @@ collections:
     label: "Leistungen / Kurse"
     label_singular: "Leistung"
     description: "Trainingsangebote, die als Kacheln auf Startseite und Leistungen-Seite erscheinen."
-    folder: "sites/boxclub-gifhorn/project/src/content/leistung"
+    folder: "src/content/leistung"
     extension: "yml"
     format: "yml"
     create: true
     delete: true
     slug: "{{fields.title | lowercase}}"
-    media_folder: "/sites/boxclub-gifhorn/project/public/uploads/leistung"
+    media_folder: "/public/uploads/leistung"
     public_folder: "/uploads/leistung"
     sortable_fields: ["reihenfolge", "title"]
     fields:
@@ -219,10 +219,10 @@ collections:
     editor:
       preview: false
     files:
-      - file: "sites/boxclub-gifhorn/project/src/content/anmeldung/aktuell.yml"
+      - file: "src/content/anmeldung/aktuell.yml"
         label: "Mitgliedsantrag (aktuell)"
         name: "aktuell"
-        media_folder: "/sites/boxclub-gifhorn/project/public/uploads/anmeldung"
+        media_folder: "/public/uploads/anmeldung"
         public_folder: "/uploads/anmeldung"
         fields:
           - { name: "titel", label: "Seitentitel", widget: "string", default: "Mitglied werden" }
@@ -250,7 +250,7 @@ collections:
     label_singular: "Seite"
     description: "Impressum, Datenschutz, Barrierefreiheit und Satzung-Intro — bearbeitbar als Markdown."
     files:
-      - file: "sites/boxclub-gifhorn/project/src/content/seite/impressum.md"
+      - file: "src/content/seite/impressum.md"
         label: "Impressum"
         name: "impressum"
         fields:
@@ -258,7 +258,7 @@ collections:
           - { name: "intro", label: "Einleitung (unter dem Titel)", widget: "string", required: false }
           - { name: "stand", label: "Stand-Datum", widget: "string", required: false, hint: "z.B. 'Mai 2026'" }
           - { name: "body", label: "Inhalt", widget: "markdown" }
-      - file: "sites/boxclub-gifhorn/project/src/content/seite/datenschutz.md"
+      - file: "src/content/seite/datenschutz.md"
         label: "Datenschutzerklärung"
         name: "datenschutz"
         fields:
@@ -266,7 +266,7 @@ collections:
           - { name: "intro", label: "Einleitung", widget: "string", required: false }
           - { name: "stand", label: "Stand-Datum", widget: "string", required: false }
           - { name: "body", label: "Inhalt", widget: "markdown" }
-      - file: "sites/boxclub-gifhorn/project/src/content/seite/barrierefreiheit.md"
+      - file: "src/content/seite/barrierefreiheit.md"
         label: "Erklärung zur Barrierefreiheit"
         name: "barrierefreiheit"
         fields:
@@ -274,7 +274,7 @@ collections:
           - { name: "intro", label: "Einleitung", widget: "string", required: false }
           - { name: "stand", label: "Stand-Datum", widget: "string", required: false }
           - { name: "body", label: "Inhalt", widget: "markdown" }
-      - file: "sites/boxclub-gifhorn/project/src/content/seite/satzung.md"
+      - file: "src/content/seite/satzung.md"
         label: "Satzung & Downloads – Intro"
         name: "satzung"
         fields:
@@ -289,13 +289,13 @@ collections:
     label: "Downloads"
     label_singular: "Download"
     description: "PDF-Dateien (Satzung, Beitragsordnung, Aufnahmeantrag etc.) für die Satzung-Seite."
-    folder: "sites/boxclub-gifhorn/project/src/content/download"
+    folder: "src/content/download"
     extension: "yml"
     format: "yml"
     create: true
     delete: true
     slug: "{{fields.titel | lowercase}}"
-    media_folder: "/sites/boxclub-gifhorn/project/public/uploads/downloads"
+    media_folder: "/public/uploads/downloads"
     public_folder: "/uploads/downloads"
     sortable_fields: ["reihenfolge", "titel"]
     fields:
@@ -313,13 +313,13 @@ collections:
     label: "News / Beiträge"
     label_singular: "News-Beitrag"
     description: "Aktuelle Meldungen, Wettkampfergebnisse und Vereinsmeldungen."
-    folder: "sites/boxclub-gifhorn/project/src/content/news"
+    folder: "src/content/news"
     extension: "md"
     format: "frontmatter"
     create: true
     delete: true
     slug: "{{year}}-{{month}}-{{day}}-{{fields.titel | lowercase}}"
-    media_folder: "/sites/boxclub-gifhorn/project/public/uploads/news"
+    media_folder: "/public/uploads/news"
     public_folder: "/uploads/news"
     sortable_fields: ["datum", "titel"]
     view_filters:
@@ -342,13 +342,13 @@ collections:
     label: "Galerie-Bilder"
     label_singular: "Bild"
     description: "Bilder für die Galerie-Seite. Mit Kategorie filterbar."
-    folder: "sites/boxclub-gifhorn/project/src/content/galerie"
+    folder: "src/content/galerie"
     extension: "yml"
     format: "yml"
     create: true
     delete: true
     slug: "{{fields.titel | lowercase}}"
-    media_folder: "/sites/boxclub-gifhorn/project/public/uploads/galerie"
+    media_folder: "/public/uploads/galerie"
     public_folder: "/uploads/galerie"
     sortable_fields: ["reihenfolge", "datum", "titel"]
     fields:
@@ -366,13 +366,13 @@ collections:
     label: "Sponsoren"
     label_singular: "Sponsor"
     description: "Sponsoren und Förderer, die in der Sponsoren-Seite angezeigt werden."
-    folder: "sites/boxclub-gifhorn/project/src/content/sponsor"
+    folder: "src/content/sponsor"
     extension: "yml"
     format: "yml"
     create: true
     delete: true
     slug: "{{fields.name | lowercase}}"
-    media_folder: "/sites/boxclub-gifhorn/project/public/uploads/sponsor"
+    media_folder: "/public/uploads/sponsor"
     public_folder: "/uploads/sponsor"
     sortable_fields: ["reihenfolge", "name"]
     fields:
@@ -390,13 +390,13 @@ collections:
     label: "Trainer"
     label_singular: "Trainer"
     description: "Trainer:innen-Profile, die in der Trainer-Sektion auf der Startseite erscheinen."
-    folder: "sites/boxclub-gifhorn/project/src/content/trainer"
+    folder: "src/content/trainer"
     extension: "md"
     format: "frontmatter"
     create: true
     delete: true
     slug: "{{fields.name | lowercase}}"
-    media_folder: "/sites/boxclub-gifhorn/project/public/uploads/trainer"
+    media_folder: "/public/uploads/trainer"
     public_folder: "/uploads/trainer"
     sortable_fields: ["reihenfolge", "name"]
     view_filters:
@@ -421,10 +421,10 @@ collections:
     editor:
       preview: false
     files:
-      - file: "sites/boxclub-gifhorn/project/src/content/kursplan/aktuell.yml"
+      - file: "src/content/kursplan/aktuell.yml"
         label: "Aktueller Trainingsplan"
         name: "aktuell"
-        media_folder: "/sites/boxclub-gifhorn/project/public/uploads/kursplan"
+        media_folder: "/public/uploads/kursplan"
         public_folder: "/uploads/kursplan"
         fields:
           - { name: "titel", label: "Seitentitel", widget: "string", default: "Trainingsplan", hint: "Überschrift der Kursplan-Seite." }
