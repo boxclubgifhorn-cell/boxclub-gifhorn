@@ -15,7 +15,7 @@ eintraege:
     zielgruppe: ab 6–12 Jahre
     farbe: blau
   - tag: Montag
-    zeit: 17:00–18:30
+    zeit: 16:45–18:15
     kurs: Boxen Kindertraining
     zielgruppe: ab 8–12 Jahre
     farbe: orange
@@ -35,11 +35,6 @@ eintraege:
     zielgruppe: ab 5–8 Jahre
     farbe: rot
   - tag: Dienstag
-    zeit: 16:30–18:00
-    kurs: Ringen
-    zielgruppe: ab 8 Jahre
-    farbe: neutral
-  - tag: Dienstag
     zeit: 17:00–18:30
     kurs: Boxen Kindertraining & Anfänger
     zielgruppe: ab 12 Jahre
@@ -55,7 +50,7 @@ eintraege:
     zielgruppe: ""
     farbe: neutral
   - tag: Mittwoch
-    zeit: 17:00–19:00
+    zeit: 17:00–18:30
     kurs: Ringen
     zielgruppe: ab 8 Jahre
     farbe: neutral
@@ -65,7 +60,7 @@ eintraege:
     zielgruppe: ab 16 Jahre
     farbe: orange
   - tag: Mittwoch
-    zeit: 19:00–20:15
+    zeit: 18:45–20:00
     kurs: Frauentraining / Fitness Boxen
     zielgruppe: ab 14 Jahre
     farbe: blau
@@ -100,23 +95,17 @@ eintraege:
     zielgruppe: ab 8–12 Jahre
     farbe: orange
   - tag: Freitag
-    zeit: 18:00–19:30
+    zeit: 17:00–19:00
     kurs: Fortgeschrittene & Profis
     zielgruppe: ""
     farbe: neutral
-  - tag: Samstag
-    zeit: 14:00–15:30
-    kurs: FitDance
-    zielgruppe: ""
-    farbe: gold
-    hinweis: Neu im Programm
+  - farbe: blau
+    tag: Freitag
+    zeit: 19:00
+    kurs: Fit-Dance (Ladies)
+    zielgruppe: Ab 12 Jahren
   - tag: Samstag
     zeit: 16:00–18:00
-    kurs: Ringen
-    zielgruppe: ab 8 Jahre
-    farbe: neutral
-  - tag: Sonntag
-    zeit: 13:00–15:00
     kurs: Ringen
     zielgruppe: ab 8 Jahre
     farbe: neutral
