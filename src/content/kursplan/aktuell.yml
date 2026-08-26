@@ -99,19 +99,13 @@ eintraege:
     kurs: Fortgeschrittene & Profis
     zielgruppe: ""
     farbe: neutral
-  - tag: Samstag
-    zeit: 14:00–15:30
-    kurs: FitDance
-    zielgruppe: ""
-    farbe: gold
-    hinweis: Neu im Programm
+  - farbe: blau
+    tag: Freitag
+    zeit: 19:00
+    kurs: Fit-Dance (Ladies)
+    zielgruppe: Ab 12 Jahren
   - tag: Samstag
     zeit: 16:00–18:00
-    kurs: Ringen
-    zielgruppe: ab 8 Jahre
-    farbe: neutral
-  - tag: Sonntag
-    zeit: 13:00–15:00
     kurs: Ringen
     zielgruppe: ab 8 Jahre
     farbe: neutral
