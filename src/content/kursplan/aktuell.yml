@@ -35,11 +35,6 @@ eintraege:
     zielgruppe: ab 5–8 Jahre
     farbe: rot
   - tag: Dienstag
-    zeit: 16:30–18:00
-    kurs: Ringen
-    zielgruppe: ab 8 Jahre
-    farbe: neutral
-  - tag: Dienstag
     zeit: 17:00–18:30
     kurs: Boxen Kindertraining & Anfänger
     zielgruppe: ab 12 Jahre
@@ -54,10 +49,15 @@ eintraege:
     kurs: Fortgeschrittene & Profis
     zielgruppe: ""
     farbe: neutral
+  - tag: Donnerstag
+    zeit: 16:00–17:00
+    kurs: Boxen Kindertraining
+    zielgruppe: ab 5–8 Jahre
+    farbe: rot
   - tag: Mittwoch
-    zeit: 17:00–19:00
-    kurs: Ringen
-    zielgruppe: ab 8 Jahre
+    zeit: 17:00–18:30
+    kurs: Boxen / Anfänger
+    zielgruppe: ab 12 Jahre
     farbe: neutral
   - tag: Mittwoch
     zeit: 18:00–20:00
@@ -69,11 +69,6 @@ eintraege:
     kurs: Frauentraining / Fitness Boxen
     zielgruppe: ab 14 Jahre
     farbe: blau
-  - tag: Donnerstag
-    zeit: 16:00–17:00
-    kurs: Boxen Kindertraining
-    zielgruppe: ab 5–8 Jahre
-    farbe: rot
   - tag: Donnerstag
     zeit: 17:00–18:30
     kurs: Boxen Kindertraining & Anfänger
