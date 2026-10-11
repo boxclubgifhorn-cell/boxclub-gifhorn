@@ -1,9 +1,8 @@
 ---
-title: "Impressum"
-intro: "Angaben gemäß § 5 TMG und § 18 Abs. 2 MStV"
-stand: "Mai 2026"
+title: Impressum
+intro: Angaben gemäß § 5 TMG und § 18 Abs. 2 MStV
+stand: Mai 2026
 ---
-
 ## Diensteanbieter (§ 5 TMG)
 
 **Boxclub Gifhorn e.V.**
@@ -20,19 +19,12 @@ Deutschland
 
 ## Vereinsregister
 
-_⚠ Vom Verein einzutragen über das CMS:_
-
-- **Registergericht:** _z. B. Amtsgericht Hildesheim_
-- **Registernummer:** _z. B. VR 12345_
+* **Registergericht:** *Amtsgericht Hildesheim*
+* **Registernummer:** *VR100147*
 
 ## Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV
 
 Andreas Strom (Anschrift wie oben — Boxclub Gifhorn e.V., Cardenap 2-4, 38518 Gifhorn).
-
-## Umsatzsteuer-Identifikationsnummer
-
-Als gemeinnütziger Verein ohne wirtschaftlichen Geschäftsbetrieb wird keine
-USt-ID geführt. _Falls eine USt-ID vorhanden ist: hier eintragen._
 
 ## Streitschlichtung — Hinweis nach § 36 VSBG
 
@@ -90,9 +82,9 @@ Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.
 
 ## Bildnachweise
 
-- **Logo:** Boxclub Gifhorn e.V.
-- **Trainerfotos:** mit Einwilligung der jeweiligen Person
-- **Karten:** © [OpenStreetMap-Mitwirkende](https://www.openstreetmap.org/copyright)
-- **Stock-Bilder** (Hero, Service-Kacheln, soweit verwendet):
+* **Logo:** Boxclub Gifhorn e.V.
+* **Trainerfotos:** mit Einwilligung der jeweiligen Person
+* **Karten:** © [OpenStreetMap-Mitwirkende](https://www.openstreetmap.org/copyright)
+* **Stock-Bilder** (Hero, Service-Kacheln, soweit verwendet):
   [Unsplash](https://unsplash.com) (Unsplash-Lizenz) und
   [Pexels](https://www.pexels.com) (Pexels-Lizenz)
