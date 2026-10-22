@@ -12,6 +12,8 @@ monatsbeitraege:
   - gruppe: "Familien (2 Erw. & 1–3 Kinder)"
     preis: "50,00 €"
     hinweis: "Ein Beitrag für die ganze Familie. Ideal für gemeinsames Training."
+    hervorgehoben: true
+    badge: "Familientarif"
 aufnahmegebuehr:
   label: "Aufnahmegebühr (einmalig)"
   preis: "20,00 €"

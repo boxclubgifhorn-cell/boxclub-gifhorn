@@ -246,6 +246,67 @@ collections:
               - { name: "beschreibung", label: "Beschreibung", widget: "text" }
 
   # --------------------------------------------------------------------------
+  # Mitgliedsbeiträge (Single-Entry)
+  # --------------------------------------------------------------------------
+  - name: "beitraege"
+    label: "Mitgliedsbeiträge"
+    label_singular: "Mitgliedsbeiträge"
+    description: "Beiträge, Aufnahmegebühr, Zahlungsinformationen, CTA und FAQ für /mitgliedsbeitraege."
+    editor:
+      preview: false
+    files:
+      - file: "src/content/beitraege/aktuell.yml"
+        label: "Aktueller Stand"
+        name: "aktuell"
+        fields:
+          - { name: "titel", label: "Seitentitel", widget: "string", default: "Mitgliedsbeiträge" }
+          - { name: "intro", label: "Einleitung", widget: "text", required: false, hint: "Kurzer Text unter der Überschrift." }
+          - name: "monatsbeitraege"
+            label: "Monatsbeiträge"
+            label_singular: "Beitrag"
+            widget: "list"
+            min: 1
+            summary: "{{fields.gruppe}}: {{fields.preis}}"
+            fields:
+              - { name: "gruppe", label: "Mitgliedergruppe", widget: "string", hint: "z.B. 'Mitglieder bis 18 Jahre'" }
+              - { name: "preis", label: "Monatsbeitrag", widget: "string", hint: "z.B. '15,00 €'" }
+              - { name: "hinweis", label: "Hinweis", widget: "text", required: false, hint: "Kurze Erläuterung unter dem Preis." }
+              - { name: "hervorgehoben", label: "Hervorheben", widget: "boolean", default: false, required: false, hint: "Hebt diesen Tarif als Karte mit Akzentfarbe hervor." }
+              - { name: "badge", label: "Hervorhebungs-Label", widget: "string", required: false, hint: "Nur bei hervorgehobenen Tarifen, z.B. 'Familientarif'." }
+          - name: "aufnahmegebuehr"
+            label: "Aufnahmegebühr"
+            widget: "object"
+            required: false
+            collapsed: true
+            fields:
+              - { name: "label", label: "Bezeichnung", widget: "string", default: "Aufnahmegebühr (einmalig)" }
+              - { name: "preis", label: "Betrag", widget: "string", hint: "z.B. '20,00 €'" }
+              - { name: "hinweis", label: "Hinweis", widget: "text", required: false }
+          - { name: "zahlung_info", label: "Zahlungsinformation", widget: "text", required: false, hint: "Information zum Einzug oder zur Zahlungsweise." }
+          - name: "cta"
+            label: "Anmelde-Bereich"
+            widget: "object"
+            required: false
+            collapsed: true
+            fields:
+              - { name: "kicker", label: "Kleine Überschrift", widget: "string", default: "Jetzt Mitglied werden" }
+              - { name: "headline", label: "Überschrift", widget: "string", default: "Bereit für den ersten Schritt?" }
+              - { name: "text", label: "Text", widget: "text", required: false }
+              - { name: "primary_label", label: "Haupt-Button", widget: "string", default: "Jetzt anmelden" }
+              - { name: "primary_href", label: "Haupt-Button-Link", widget: "string", default: "/anmeldung", hint: "Interne Pfade beginnen mit /, externe Links mit https://" }
+              - { name: "secondary_label", label: "Zweiter Button", widget: "string", required: false }
+              - { name: "secondary_href", label: "Zweiter Button-Link", widget: "string", required: false }
+          - name: "faq"
+            label: "Häufige Fragen"
+            label_singular: "Frage"
+            widget: "list"
+            required: false
+            summary: "{{fields.frage}}"
+            fields:
+              - { name: "frage", label: "Frage", widget: "string" }
+              - { name: "antwort", label: "Antwort", widget: "text" }
+
+  # --------------------------------------------------------------------------
   # Rechtliche / statische Seiten (Markdown-Body)
   # --------------------------------------------------------------------------
   - name: "seite"

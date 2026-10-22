@@ -22,6 +22,11 @@ const monats = data.monatsbeitraege || [];
 const aufnahme = data.aufnahmegebuehr;
 const cta = data.cta;
 const faqs = data.faq || [];
+const beitragsBeschreibung = [
+  `Mitgliedsbeiträge des Boxclub Gifhorn e.V.: ${monats.map((item) => `${item.preis} ${item.gruppe}`).join(', ')}.`,
+  aufnahme ? `${aufnahme.preis} einmalige Aufnahmegebühr.` : '',
+  data.zahlung_info ? 'SEPA-Lastschrift, keine versteckten Kosten.' : '',
+].filter(Boolean).join(' ');
 
 const siteUrl = 'https://boxclub-gifhorn.de';
 const breadcrumb = {
@@ -48,8 +53,8 @@ const faqJsonLd =
 ---
 
 <Layout
-  title={`${data.titel} — ab 15 €/Monat | Boxclub Gifhorn e.V.`}
-  description="Mitgliedsbeiträge des Boxclub Gifhorn e.V.: 15 € Kinder/Jugendliche, 25 € Erwachsene, 50 € Familien (2 Erw. + bis zu 3 Kinder), 20 € einmalige Aufnahmegebühr. SEPA-Lastschrift, keine versteckten Kosten."
+  title={`${data.titel} | Boxclub Gifhorn e.V.`}
+  description={beitragsBeschreibung}
   jsonLd={[breadcrumb, faqJsonLd].filter(Boolean)}
 >
   <Header />
@@ -91,12 +96,12 @@ const faqJsonLd =
           <div class="grid md:grid-cols-3 gap-6 mb-10">
             {monats.map((item, i) => (
               <div
-                class={`relative bg-white dark:bg-gray-900 border ${i === 2 ? 'border-secondary shadow-lg' : 'border-stone-200 dark:border-gray-800'} p-8 flex flex-col reveal`}
+                class={`relative bg-white dark:bg-gray-900 border ${item.hervorgehoben ? 'border-secondary shadow-lg' : 'border-stone-200 dark:border-gray-800'} p-8 flex flex-col reveal`}
                 style={`transition-delay: ${i * 80}ms`}
               >
-                {i === 2 && (
+                {item.hervorgehoben && item.badge && (
                   <span class="absolute -top-3 left-8 inline-block px-3 py-1 bg-secondary text-white text-[10px] font-bold uppercase tracking-wider">
-                    Familien­tarif
+                    {item.badge}
                   </span>
                 )}
                 <h3 class="text-stone-500 dark:text-gray-500 text-xs font-bold uppercase tracking-[0.2em] mb-4">

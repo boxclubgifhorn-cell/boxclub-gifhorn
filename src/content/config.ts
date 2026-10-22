@@ -231,6 +231,8 @@ const beitraege = defineCollection({
       gruppe: z.string(),
       preis: z.string(),
       hinweis: z.string().optional(),
+      hervorgehoben: z.boolean().default(false),
+      badge: z.string().optional(),
     })).default([]),
     aufnahmegebuehr: z.object({
       label: z.string().default('Aufnahmegebühr (einmalig)'),
